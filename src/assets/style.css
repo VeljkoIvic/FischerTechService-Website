@@ -326,7 +326,7 @@ table.price-table tfoot td:last-child {
 .float-left {
   float: left;
   margin: 0 24px 16px 0;
-  max-width: 160px;
+  max-width: 280px;
 }
 
 .float-right {
