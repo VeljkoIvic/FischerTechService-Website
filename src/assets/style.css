@@ -13,6 +13,27 @@ body {
   line-height: 1.8;
 }
 
+/* Desktop: Hintergrund mit Pattern */
+@media (min-width: 765px) {
+  body {
+    background: linear-gradient(135deg, #0f4c75 0%, #3282b8 100%);
+    background-attachment: fixed;
+  }
+  
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+      repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(255,255,255,.05) 35px, rgba(255,255,255,.05) 70px);
+    pointer-events: none;
+    z-index: -1;
+  }
+}
+
 /* Header und Navigation */
 header {
   background-color: #0f4c75;
@@ -33,8 +54,30 @@ nav {
   margin-top: 12px;
 }
 
+nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+nav ul::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+nav li {
+  float: left;
+  margin-right: 16px;
+  position: relative;
+}
+
+nav li:last-child {
+  margin-right: 0;
+}
+
 nav a {
-  display: inline-block;
+  display: block;
   color: #bbe1fa;
   text-decoration: none;
   font-weight: 600;
@@ -50,11 +93,63 @@ nav a:hover {
   border-radius: 4px;
 }
 
+/* Dropdown Menü */
+nav .dropdown {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #0f4c75;
+  border: 1px solid #3282b8;
+  border-radius: 4px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  padding: 8px 0;
+  margin: 0;
+  list-style: none;
+  min-width: 200px;
+  z-index: 1000;
+}
+
+nav li:hover > .dropdown {
+  display: block;
+}
+
+nav .dropdown li {
+  float: none;
+  margin: 0;
+  padding: 0;
+}
+
+nav .dropdown li a {
+  padding: 10px 20px;
+  border-bottom: none;
+  color: #bbe1fa;
+  font-size: 0.95em;
+}
+
+nav .dropdown li a:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+  border-radius: 0;
+  color: #ffffff;
+}
+
+
 /* Main Content */
 main {
   max-width: 1000px;
   margin: 40px auto;
   padding: 0 24px;
+}
+
+/* Desktop: Weisse Content-Box mit Schatten */
+@media (min-width: 765px) {
+  main {
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    padding: 40px;
+    margin: 40px auto;
+  }
 }
 
 section {
@@ -134,13 +229,59 @@ figure {
   padding: 0;
 }
 
-figcaption {
-  text-align: center;
-  font-size: 0.9em;
-  color: #555;
-  margin-top: 8px;
-  font-style: italic;
+/* Tabellen */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 24px 0;
+  background-color: #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
+
+table thead {
+  background-color: #0f4c75;
+  color: #ffffff;
+}
+
+table th {
+  padding: 16px;
+  text-align: left;
+  font-weight: 700;
+  border-bottom: 2px solid #3282b8;
+}
+
+table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+table tbody tr:hover {
+  background-color: #f5f5f5;
+}
+
+table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+table tfoot {
+  background-color: #f0f4f8;
+  font-weight: 600;
+  color: #0f4c75;
+}
+
+table tfoot td {
+  padding: 14px 16px;
+  border-top: 2px solid #3282b8;
+  text-align: center;
+}
+
+table.price-table thead th:last-child,
+table.price-table tbody td:last-child,
+table.price-table tfoot td:last-child {
+  text-align: right;
+}
+
+
 
 /* Floating Images */
 .float-left {
@@ -264,10 +405,17 @@ footer a:hover {
 
   main {
     margin: 20px auto;
+    padding: 0 16px;
   }
   
   article {
     padding: 20px;
+  }
+  
+  /* Mobile: Kein Hintergrund-Spacing */
+  body {
+    background-color: #f0f4f8;
+    background-image: none;
   }
 }
 
@@ -311,5 +459,11 @@ footer a:hover {
   
   dd {
     margin-left: 16px;
+  }
+  
+  /* Mobile: Minimales Padding für main */
+  main {
+    padding: 0 12px;
+    margin: 10px auto;
   }
 }
