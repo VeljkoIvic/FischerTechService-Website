@@ -8,7 +8,7 @@ body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #F3F5F7;
+  background-color: #f0f4f8;
   color: #2c3e50;
   line-height: 1.8;
 }
@@ -16,7 +16,7 @@ body {
 /* Desktop: Hintergrund mit Pattern */
 @media (min-width: 765px) {
   body {
-    background: linear-gradient(135deg, #4F5B66 0%, #1BB8E3 100%);
+    background: linear-gradient(135deg, #0f4c75 0%, #3282b8 100%);
     background-attachment: fixed;
   }
   
@@ -36,8 +36,8 @@ body {
 
 /* Header und Navigation */
 header {
-  background-color: #4F5B66;
-  color: #FFFFFF;
+  background-color: #0f4c75;
+  color: #ffffff;
   padding: 30px 24px;
   text-align: center;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -94,7 +94,7 @@ nav li:last-child {
 
 nav a {
   display: block;
-  color: #1BB8E3;
+  color: #bbe1fa;
   text-decoration: none;
   font-weight: 600;
   border-bottom: 2px solid transparent;
@@ -103,8 +103,8 @@ nav a {
 }
 
 nav a:hover {
-  border-color: #FFFFFF;
-  color: #FFFFFF;
+  border-color: #ffffff;
+  color: #ffffff;
   background-color: rgba(255, 255, 255, 0.1);
   border-radius: 4px;
 }
@@ -115,8 +115,8 @@ nav .dropdown {
   position: absolute;
   top: 100%;
   left: 0;
-  background-color: #4F5B66;
-  border: 1px solid #1BB8E3;
+  background-color: #0f4c75;
+  border: 1px solid #3282b8;
   border-radius: 4px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   padding: 8px 0;
@@ -139,14 +139,14 @@ nav .dropdown li {
 nav .dropdown li a {
   padding: 10px 20px;
   border-bottom: none;
-  color: #1BB8E3;
+  color: #bbe1fa;
   font-size: 0.95em;
 }
 
 nav .dropdown li a:hover {
   background-color: rgba(255, 255, 255, 0.15);
   border-radius: 0;
-  color: #FFFFFF;
+  color: #ffffff;
 }
 
 
@@ -160,7 +160,7 @@ main {
 /* Desktop: Weisse Content-Box mit Schatten */
 @media (min-width: 765px) {
   main {
-    background-color: #FFFFFF;
+    background-color: #ffffff;
     border-radius: 12px;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
     padding: 40px;
@@ -169,7 +169,7 @@ main {
 }
 
 section {
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   border-radius: 12px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
   padding: 32px;
@@ -202,10 +202,10 @@ section:hover {
 
 /* Typography */
 h2 {
-  color: #4F5B66;
+  color: #0f4c75;
   font-size: 1.8em;
   margin: 0 0 20px 0;
-  border-bottom: 3px solid #1BB8E3;
+  border-bottom: 3px solid #3282b8;
   padding-bottom: 12px;
   font-weight: 700;
 }
@@ -220,7 +220,7 @@ p {
 .italic-text,
 em {
   font-style: italic;
-  color: #1BB8E3;
+  color: #3282b8;
   font-weight: 500;
 }
 
@@ -257,20 +257,20 @@ table {
   width: 100%;
   border-collapse: collapse;
   margin: 24px 0;
-  background-color: #FFFFFF;
+  background-color: #fff;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
 table thead {
-  background-color: #4F5B66;
-  color: #FFFFFF;
+  background-color: #0f4c75;
+  color: #fff;
 }
 
 table th {
   padding: 16px;
   text-align: left;
   font-weight: 700;
-  border-bottom: 2px solid #1BB8E3;
+  border-bottom: 2px solid #3282b8;
 }
 
 table td {
@@ -287,20 +287,20 @@ table tbody tr:last-child td {
 }
 
 table tfoot {
-  background-color: #F3F5F7;
+  background-color: #f0f4f8;
   font-weight: 600;
-  color: #4F5B66;
+  color: #0f4c75;
 }
 
 table tfoot td {
   padding: 14px 16px;
-  border-top: 2px solid #1BB8E3;
+  border-top: 2px solid #3282b8;
   text-align: center;
 }
 
 /* Preisliste Überschrift */
 h3 {
-  color: #4F5B66;
+  color: #0f4c75;
   font-size: 1.5em;
   margin: 40px 0 8px 0;
   font-weight: 700;
@@ -373,7 +373,7 @@ table.price-table tfoot td:last-child {
 
 /* Article Structure */
 article {
-  background-color: #FFFFFF;
+  background-color: #fff;
   border-radius: 12px;
   padding: 32px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
@@ -404,7 +404,7 @@ ol li {
 }
 
 ol li strong {
-  color: #4F5B66;
+  color: #0f4c75;
 }
 
 /* Definition List */
@@ -415,7 +415,7 @@ dl {
 
 dt {
   font-weight: 700;
-  color: #4F5B66;
+  color: #0f4c75;
   font-size: 1.1em;
   margin-top: 16px;
 }
@@ -431,7 +431,7 @@ dd {
   max-width: 600px;
   margin: 32px auto;
   padding: 24px;
-  background-color: #F3F5F7;
+  background-color: #f8f9fa;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
@@ -465,8 +465,8 @@ dd {
 .form-group select:focus,
 .form-group textarea:focus {
   outline: none;
-  border-color: #1BB8E3;
-  box-shadow: 0 0 0 3px rgba(27, 184, 227, 0.1);
+  border-color: #3282b8;
+  box-shadow: 0 0 0 3px rgba(50, 130, 184, 0.1);
 }
 
 .form-group textarea {
@@ -475,8 +475,8 @@ dd {
 }
 
 .submit-btn {
-  background-color: #4F5B66;
-  color: #FFFFFF;
+  background-color: #0f4c75;
+  color: #fff;
   padding: 14px 32px;
   border: none;
   border-radius: 6px;
@@ -489,7 +489,7 @@ dd {
 }
 
 .submit-btn:hover {
-  background-color: #1BB8E3;
+  background-color: #3282b8;
   transform: translateY(-2px);
 }
 
@@ -500,7 +500,7 @@ dd {
 /* Social Media Section */
 #social-media {
   padding: 40px 24px;
-  background-color: #F3F5F7;
+  background-color: #f8f9fa;
   border-radius: 8px;
   margin: 40px 0;
 }
@@ -545,7 +545,7 @@ dd {
   width: 80px;
   height: 80px;
   border-radius: 50%;
-  color: #FFFFFF;
+  color: #ffffff;
   text-decoration: none;
   font-weight: 600;
   font-size: 0.9em;
@@ -576,8 +576,8 @@ dd {
 
 /* Footer */
 footer {
-  background-color: #4F5B66;
-  color: #FFFFFF;
+  background-color: #0f4c75;
+  color: #fff;
   text-align: center;
   padding: 24px;
   margin-top: 40px;
@@ -590,13 +590,13 @@ footer p {
 }
 
 footer a {
-  color: #1BB8E3;
+  color: #bbe1fa;
   text-decoration: none;
   font-weight: 600;
 }
 
 footer a:hover {
-  color: #FFFFFF;
+  color: #fff;
   text-decoration: underline;
 }
 
@@ -637,7 +637,7 @@ footer a:hover {
   
   /* Mobile: Kein Hintergrund-Spacing */
   body {
-    background-color: #F3F5F7;
+    background-color: #f0f4f8;
     background-image: none;
   }
 }
