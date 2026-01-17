@@ -1,5 +1,4 @@
 ---
-import DIvicP4 from "../Photos/D.Ivic_P4.jpeg";
 import ServiceArbeiten2 from "../Photos/ServiceArbeiten2.jpeg";
 ---
 
@@ -15,13 +14,44 @@ import ServiceArbeiten2 from "../Photos/ServiceArbeiten2.jpeg";
   <header>
     <h1>FisherTechService</h1>
     <nav>
-      <a href="/">Zur Startseite</a>
+      <ul class="main-nav">
+        <li>
+          <a href="/">Home</a>
+          <ul class="dropdown">
+            <li><a href="/#services">Services</a></li>
+            <li><a href="/#team">Team</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="/projekt">Projektbeschrieb</a>
+          <ul class="dropdown">
+            <li><a href="/projekt#overview">Überblick</a></li>
+            <li><a href="/projekt#details">Details</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="/about">About</a>
+          <ul class="dropdown">
+            <li><a href="/about#services">Services</a></li>
+            <li><a href="/about#terms">Fachbegriffe</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="/uns">Über Uns</a>
+          <ul class="dropdown">
+            <li><a href="/uns#team">Team</a></li>
+            <li><a href="/uns#services">Services</a></li>
+            <li><a href="/uns#terms">Fachbegriffe</a></li>
+          </ul>
+        </li>
+      </ul>
     </nav>
   </header>
 
   <main>
     <article>
-      <section>
+      
+      <section id="services">
         <h2>Unsere Services &amp; Preise</h2>
         
         <figure class="float-right">
@@ -35,13 +65,47 @@ import ServiceArbeiten2 from "../Photos/ServiceArbeiten2.jpeg";
         </p>
         
         <h3>Preisliste</h3>
-        <ol>
-          <li><strong>Basis-Service</strong> (Reinigung + Inspektion) &ndash; CHF 45.-</li>
-          <li><strong>Standard-Reparatur</strong> (Ringwechsel, Griffreparatur) &ndash; CHF 85.-</li>
-          <li><strong>Premium-Tuning</strong> (komplette Ueberholung + Optimierung) &ndash; CHF 150.-</li>
-          <li><strong>Custom-Build</strong> (individuelle Rutenfertigung) &ndash; ab CHF 350.-</li>
-          <li><strong>Express-Service</strong> (48h-Bearbeitung) &ndash; Zuschlag +50%</li>
-        </ol>
+        <table class="price-table">
+          <thead>
+            <tr>
+              <th>Service</th>
+              <th>Beschreibung</th>
+              <th>Preis</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Basis-Service</strong></td>
+              <td>Reinigung + Inspektion</td>
+              <td>CHF 45.-</td>
+            </tr>
+            <tr>
+              <td><strong>Standard-Reparatur</strong></td>
+              <td>Ringwechsel, Griffreparatur</td>
+              <td>CHF 85.-</td>
+            </tr>
+            <tr>
+              <td><strong>Premium-Tuning</strong></td>
+              <td>Komplette Ueberholung + Optimierung</td>
+              <td>CHF 150.-</td>
+            </tr>
+            <tr>
+              <td><strong>Custom-Build</strong></td>
+              <td>Individuelle Rutenfertigung</td>
+              <td>ab CHF 350.-</td>
+            </tr>
+            <tr>
+              <td><strong>Express-Service</strong></td>
+              <td>48h-Bearbeitung</td>
+              <td>Zuschlag +50%</td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colspan="3">5 Services insgesamt</td>
+            </tr>
+          </tfoot>
+        </table>
         
         <p>
           Alle Preise verstehen sich zzgl. Materialkosten. Nach der Inspektion erhalten Sie einen
@@ -49,27 +113,47 @@ import ServiceArbeiten2 from "../Photos/ServiceArbeiten2.jpeg";
         </p>
       </section>
 
-      <section>
+      <section id="terms">
         <h2>Fachbegriffe</h2>
-        <dl>
-          <dt>Spinnrute</dt>
-          <dd>Leichte, flexible Rute fuer aktives Angeln mit Kunstkoedern. Ideal fuer Barsch, Hecht und Forelle.</dd>
-          
-          <dt>Baitcaster</dt>
-          <dd>Angelrolle mit liegender Spule, die praezises Werfen und hohe Kraftuebertragung ermoeglicht.</dd>
-          
-          <dt>Blank</dt>
-          <dd>Der Rutenkern aus Carbon oder Glasfaser, bevor Griff und Ringe montiert werden.</dd>
-          
-          <dt>Rutenring (Guide)</dt>
-          <dd>Oese aus Keramik oder Metall, durch die die Schnur gefuehrt wird. Entscheidend fuer Wurfweite.</dd>
-          
-          <dt>Wurfgewicht</dt>
-          <dd>Empfohlenes Koedergewicht in Gramm, das optimal mit der Rute geworfen werden kann.</dd>
-          
-          <dt>Action (Rutenaktion)</dt>
-          <dd>Biegeverhalten der Rute: Fast (Spitze), Medium (Mitte) oder Slow (ganze Rute biegt sich).</dd>
-        </dl>
+        <table class="terms-table">
+          <thead>
+            <tr>
+              <th>Begriff</th>
+              <th>Definition</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Spinnrute</strong></td>
+              <td>Leichte, flexible Rute fuer aktives Angeln mit Kunstkoedern. Ideal fuer Barsch, Hecht und Forelle.</td>
+            </tr>
+            <tr>
+              <td><strong>Baitcaster</strong></td>
+              <td>Angelrolle mit liegender Spule, die praezises Werfen und hohe Kraftuebertragung ermoeglicht.</td>
+            </tr>
+            <tr>
+              <td><strong>Blank</strong></td>
+              <td>Der Rutenkern aus Carbon oder Glasfaser, bevor Griff und Ringe montiert werden.</td>
+            </tr>
+            <tr>
+              <td><strong>Rutenring (Guide)</strong></td>
+              <td>Oese aus Keramik oder Metall, durch die die Schnur gefuehrt wird. Entscheidend fuer Wurfweite.</td>
+            </tr>
+            <tr>
+              <td><strong>Wurfgewicht</strong></td>
+              <td>Empfohlenes Koedergewicht in Gramm, das optimal mit der Rute geworfen werden kann.</td>
+            </tr>
+            <tr>
+              <td><strong>Action (Rutenaktion)</strong></td>
+              <td>Biegeverhalten der Rute: Fast (Spitze), Medium (Mitte) oder Slow (ganze Rute biegt sich).</td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colspan="2">6 Fachbegriffe insgesamt</td>
+            </tr>
+          </tfoot>
+        </table>
       </section>
     </article>
   </main>

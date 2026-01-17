@@ -5,6 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>FisherTechService</title>
   <link rel="stylesheet" href="src/assets/style.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+     crossorigin=""/>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+     crossorigin=""></script>
 </head>
 <body>
   <header>
@@ -14,8 +20,8 @@
         <li>
           <a href="/">Home</a>
           <ul class="dropdown">
-            <li><a href="/#services">Services</a></li>
-            <li><a href="/#team">Team</a></li>
+            <li><a href="/#test1">test1</a></li>
+            <li><a href="/#test2">test2</a></li>
           </ul>
         </li>
         <li>
@@ -23,6 +29,13 @@
           <ul class="dropdown">
             <li><a href="/projekt#overview">Überblick</a></li>
             <li><a href="/projekt#details">Details</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="/about">About</a>
+          <ul class="dropdown">
+            <li><a href="/about#services">Services</a></li>
+            <li><a href="/about#terms">Fachbegriffe</a></li>
           </ul>
         </li>
         <li>
@@ -56,6 +69,39 @@
         <img src="https://images.unsplash.com/photo-1580894908361-967195033215?auto=format&fit=crop&w=900&q=80" alt="Technik-Team arbeitet an Loesung">
       </figure>
     </section>
+
+    <section id="video">
+      <h2>Unser Service-Video</h2>
+      <div class="video-container">
+        <iframe 
+          width="560" 
+          height="315" 
+          src="https://www.youtube.com/embed/eGVi8PZYDYc" 
+          title="YouTube video player" 
+          frameborder="0" 
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+          allowfullscreen>
+        </iframe>
+      </div>
+    </section>
+
+    <section id="location">
+      <h2>Unsere Region - Zürichsee</h2>
+      <div id="map"></div>
+    </section>
   </main>
+
+  <script>
+    // Leaflet Karte initialisieren
+    const map = L.map('map').setView([47.2269, 8.8184], 11);
+    
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+    
+    L.marker([47.2269, 8.8184]).addTo(map)
+      .bindPopup('<b>Fischer Tech Service</b><br>Region Zürichsee')
+      .openPopup();
+  </script>
 </body>
 </html>
