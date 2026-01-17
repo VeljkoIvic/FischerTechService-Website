@@ -92,16 +92,27 @@
   </main>
 
   <script>
-    // Leaflet Karte initialisieren
-    const map = L.map('map').setView([47.2269, 8.8184], 11);
-    
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-    }).addTo(map);
-    
-    L.marker([47.2269, 8.8184]).addTo(map)
-      .bindPopup('<b>Fischer Tech Service</b><br>Region Zürichsee')
-      .openPopup();
+    // Warte bis Seite und Leaflet vollständig geladen sind
+    window.addEventListener('load', function() {
+      // @ts-ignore - Leaflet wird via CDN geladen
+      // Leaflet Karte initialisieren - Bürkliplatz Zürich
+      const map = L.map('map').setView([47.3636, 8.5391], 15);
+      
+      // @ts-ignore
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+      }).addTo(map);
+      
+      // @ts-ignore
+      L.marker([47.3636, 8.5391]).addTo(map)
+        .bindPopup('<b>Fischer Tech Service</b><br>Bürkliplatz, Zürich')
+        .openPopup();
+    });
   </script>
+
+  <footer style="clear: both;">
+    <p>&copy; 2026 Fischer Tech Service | V. Ivic &amp; D. Ivic | Schweiz</p>
+    <p><a href="mailto:info@fischertechservice.ch">info@fischertechservice.ch</a> | Tel: +41 76 567 10 07</p>
+  </footer>
 </body>
 </html>
