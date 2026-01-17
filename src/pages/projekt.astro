@@ -1,3 +1,7 @@
+---
+import FisherLogo from "../Photos/FisherTechService.jpeg";
+---
+
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -8,29 +12,25 @@
 </head>
 <body>
   <header>
-    <h1>FisherTechService</h1>
+    <div class="header-container">
+      <img src={FisherLogo.src} alt="FisherTechService Logo" class="logo">
+      <h1>FisherTechService</h1>
+    </div>
     <nav>
       <ul class="main-nav">
         <li>
           <a href="/">Home</a>
           <ul class="dropdown">
-            <li><a href="/#test1">test1</a></li>
-            <li><a href="/#kartenansicht">Kartenansicht</a></li>
+            <li><a href="/#start">Willkommen</a></li>
+            <li><a href="/#social-media">Social Media</a></li>
+            <li><a href="/#location">Karte</a></li>
           </ul>
         </li>
         <li>
-          <a href="/projekt">Projektbeschrieb</a>
-          <ul class="dropdown">
-            <li><a href="/projekt#overview">Überblick</a></li>
-            <li><a href="/projekt#details">Details</a></li>
-            <li><a href="/about#terms">Fachbegriffe</a></li>
-          </ul>
-        </li>
-        <li>
-          <a href="/about">Dienste</a>
+          <a href="/about">Services</a>
           <ul class="dropdown">
             <li><a href="/about#services">Services</a></li>
-            <li><a href="/about#kontaktformular">Kontaktformular</a></li>
+            <li><a href="/about#kontakt">Kontakt</a></li>
           </ul>
         </li>
         <li>
@@ -38,6 +38,13 @@
           <ul class="dropdown">
             <li><a href="/uns#team">Team</a></li>
             <li><a href="/uns#video">Video</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="/projekt">Projekt</a>
+          <ul class="dropdown">
+            <li><a href="/projekt#overview">Überblick</a></li>
+            <li><a href="/projekt#details">Fachbegriffe</a></li>
           </ul>
         </li>
       </ul>
@@ -49,14 +56,16 @@
       <section id="overview">
         <h2>Worum geht es?</h2>
         <p>
-          Fischer Tech Service bietet Service, Reparatur und Tuning von Angelruten an. Fokus auf präzise Technik,
-          saubere Verarbeitung und zuverlässige Performance.
+          Fischer Tech Service steht für präzisen Service, fachgerechte Reparaturen und gezieltes Tuning von Angelruten.
+          Mit Fokus auf saubere Verarbeitung, hochwertige Komponenten und zuverlässige Performance bringen wir dein Equipment wieder in Topform,
+          damit du dich voll aufs Angeln konzentrieren kannst.
         </p>
       </section>
       <section id="details">
         <h2>Weitere Details</h2>
         <p>
-          Unser Unternehmen spezialisiert sich auf individuelle Lösungen für alle Rutentypen.
+          Wir bieten individuelle Lösungen für alle Rutentypen von Spinn- und Baitcast-Ruten bis hin zu spezialisierten Custom-Builds.
+          Jede Arbeit wird sorgfältig geprüft und exakt auf Einsatzgebiet und Nutzer abgestimmt.
         </p>
       </section>
       <section id="terms">

@@ -1,3 +1,9 @@
+---
+import DIvicP3 from "../Photos/D.Ivic_P3.jpeg";
+import ServiceArbeiten1 from "../Photos/ServiceArbeiten1.jpeg";
+import FisherLogo from "../Photos/FisherTechService.jpeg";
+---
+
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -14,29 +20,25 @@
 </head>
 <body>
   <header>
-    <h1>FisherTechService</h1>
+    <div class="header-container">
+      <img src={FisherLogo.src} alt="FisherTechService Logo" class="logo">
+      <h1>FisherTechService</h1>
+    </div>
     <nav>
       <ul class="main-nav">
         <li>
           <a href="/">Home</a>
           <ul class="dropdown">
-            <li><a href="/#test1">test1</a></li>
-            <li><a href="/#kartenansicht">Kartenansicht</a></li>
+            <li><a href="/#start">Willkommen</a></li>
+            <li><a href="/#social-media">Social Media</a></li>
+            <li><a href="/#location">Karte</a></li>
           </ul>
         </li>
         <li>
-          <a href="/projekt">Projektbeschrieb</a>
-          <ul class="dropdown">
-            <li><a href="/projekt#overview">Überblick</a></li>
-            <li><a href="/projekt#details">Details</a></li>
-            <li><a href="/about#terms">Fachbegriffe</a></li>
-          </ul>
-        </li>
-        <li>
-          <a href="/about">Dienste</a>
+          <a href="/about">Services</a>
           <ul class="dropdown">
             <li><a href="/about#services">Services</a></li>
-            <li><a href="/about#kontaktformular">Kontaktformular</a></li>
+            <li><a href="/about#kontakt">Kontakt</a></li>
           </ul>
         </li>
         <li>
@@ -46,28 +48,59 @@
             <li><a href="/uns#video">Video</a></li>
           </ul>
         </li>
+        <li>
+          <a href="/projekt">Projekt</a>
+          <ul class="dropdown">
+            <li><a href="/projekt#overview">Überblick</a></li>
+            <li><a href="/projekt#details">Fachbegriffe</a></li>
+          </ul>
+        </li>
       </ul>
     </nav>
   </header>
 
   <main>
     <section class="hero">
+      <h2 class="hero-title">Willkommen bei FisherTechService</h2>
+      <figure>
+        <img src={DIvicP3.src} alt="Fischer Tech Service Team">
+      </figure>
       <div>
         <p>
-          Willkommen bei FisherTechService, deinem Partner fuer schnelle und zuverlaessige IT-Loesungen.<br>
-          Wir kombinieren praktische Erfahrung mit moderner Technologie, um digitale Infrastruktur stabil,
-          sicher und zukunftsfaehig zu halten.
-        </p>
-        <p>
-          Unsere Schwerpunkte:<br>
-          - Wartung von Netzwerken<br>
-          - Einrichtung von Cloud-Services<br>
-          - Notfall-Support rund um die Uhr
+          FisherTechService steht für präzisen Service, echte Leidenschaft und technische Kompetenz rund um Angelruten und Rollen.
+          Wir kümmern uns um Wartung, Reparatur und Optimierung, damit dein Equipment zuverlässig funktioniert, wenn es darauf ankommt.
+        </p> 
+
+        <p> 
+          Mit viel Erfahrung, hochwertigen Ersatzteilen und Liebe zum Detail sorgen wir dafür,
+          dass deine Ausrüstung in bestem Zustand bleibt, vom einfachen Service bis zur individuellen Lösung.
+        </p> 
+          Technik. Erfahrung. Leidenschaft fürs Angeln.
         </p>
       </div>
-      <figure>
-        <img src="https://images.unsplash.com/photo-1580894908361-967195033215?auto=format&fit=crop&w=900&q=80" alt="Technik-Team arbeitet an Loesung">
-      </figure>
+    </section>
+    
+    <section id="social-media">
+      <h2>Social Media</h2>
+      <div class="social-media-container">
+        <div class="social-links">
+          <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer" class="social-icon instagram">
+            <span>Instagram</span>
+          </a>
+          <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" class="social-icon facebook">
+            <span>Facebook</span>
+          </a>
+          <a href="https://www.tiktok.com" target="_blank" rel="noopener noreferrer" class="social-icon tiktok">
+            <span>TikTok</span>
+          </a>
+          <a href="https://www.youtube.com" target="_blank" rel="noopener noreferrer" class="social-icon youtube">
+            <span>YouTube</span>
+          </a>
+        </div>
+        <figure class="social-image">
+          <img src={ServiceArbeiten1.src} alt="Service Arbeiten">
+        </figure>
+      </div>
     </section>
     
     <section id="location">

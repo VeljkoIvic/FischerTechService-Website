@@ -1,5 +1,6 @@
 ---
 import ServiceArbeiten2 from "../Photos/ServiceArbeiten2.jpeg";
+import FisherLogo from "../Photos/FisherTechService.jpeg";
 ---
 
 <!DOCTYPE html>
@@ -12,29 +13,25 @@ import ServiceArbeiten2 from "../Photos/ServiceArbeiten2.jpeg";
 </head>
 <body>
   <header>
-    <h1>FisherTechService</h1>
+    <div class="header-container">
+      <img src={FisherLogo.src} alt="FisherTechService Logo" class="logo">
+      <h1>FisherTechService</h1>
+    </div>
     <nav>
       <ul class="main-nav">
         <li>
           <a href="/">Home</a>
           <ul class="dropdown">
-            <li><a href="/#test1">test1</a></li>
-            <li><a href="/#kartenansicht">Kartenansicht</a></li>
+            <li><a href="/#start">Willkommen</a></li>
+            <li><a href="/#social-media">Social Media</a></li>
+            <li><a href="/#location">Karte</a></li>
           </ul>
         </li>
         <li>
-          <a href="/projekt">Projektbeschrieb</a>
-          <ul class="dropdown">
-            <li><a href="/projekt#overview">Überblick</a></li>
-            <li><a href="/projekt#details">Details</a></li>
-            <li><a href="/about#terms">Fachbegriffe</a></li>
-          </ul>
-        </li>
-        <li>
-          <a href="/about">Dienste</a>
+          <a href="/about">Services</a>
           <ul class="dropdown">
             <li><a href="/about#services">Services</a></li>
-            <li><a href="/about#kontaktformular">Kontaktformular</a></li>
+            <li><a href="/about#kontakt">Kontakt</a></li>
           </ul>
         </li>
         <li>
@@ -42,6 +39,13 @@ import ServiceArbeiten2 from "../Photos/ServiceArbeiten2.jpeg";
           <ul class="dropdown">
             <li><a href="/uns#team">Team</a></li>
             <li><a href="/uns#video">Video</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="/projekt">Projekt</a>
+          <ul class="dropdown">
+            <li><a href="/projekt#overview">Überblick</a></li>
+            <li><a href="/projekt#details">Fachbegriffe</a></li>
           </ul>
         </li>
       </ul>
