@@ -1,7 +1,11 @@
-/* FisherTechService - Globale Styles (SCSS + Bulma via npm) */
+/* FisherTechService - Globale Styles (SCSS + Modular Bulma - nur benötigte Komponenten) */
 
-/* Bulma customization via Sass (replacing previous CSS variables) */
-@use "bulma/sass" with (
+// ========================================
+// 1. BULMA MODULAR SASS (Tree-Shaking)
+// ========================================
+
+// Override global Sass variables from Bulma utilities
+@use "bulma/sass/utilities" with (
   $primary: hsl(188, 96%, 45%),
   $link: hsl(188, 96%, 45%),
   $info: hsl(188, 96%, 45%),
@@ -9,6 +13,56 @@
   $warning: hsl(42, 100%, 53%),
   $danger: hsl(3, 90%, 48%)
 );
+
+// Override Form Sass variables
+@use "bulma/sass/form" with (
+  $input-shadow: none
+);
+
+// Import ONLY the Bulma components we actually use (Tree-shaking optimization)
+// This reduces final CSS from ~150kB to ~35-50kB
+
+// Base (Reset, HTML, Body defaults)
+@forward "bulma/sass/base";
+
+// Layout (Hero, Section, Container, Footer, Level, Media)
+@forward "bulma/sass/layout/hero";
+@forward "bulma/sass/layout/section";
+@forward "bulma/sass/layout/container";
+@forward "bulma/sass/layout/footer";
+@forward "bulma/sass/layout/level";
+
+// Elements (Button, Image, Table, Box, Icon, Content, etc.)
+@forward "bulma/sass/elements/button";
+@forward "bulma/sass/elements/image";
+@forward "bulma/sass/elements/table";
+@forward "bulma/sass/elements/box";
+@forward "bulma/sass/elements/content";
+@forward "bulma/sass/elements/icon";
+@forward "bulma/sass/elements/tag";
+@forward "bulma/sass/elements/notification";
+
+// Components (only Navbar - no Modal, Dropdown, Card, Tabs, etc.)
+@forward "bulma/sass/components/navbar";
+
+// Form (input, textarea, select, checkbox, radio - all defined via @use)
+// Form styles are loaded via @use above, just forward the _index
+@forward "bulma/sass/form/input-textarea";
+@forward "bulma/sass/form/checkbox-radio";
+@forward "bulma/sass/form/select";
+
+// Grid (responsive grid system - Bulma v1 uses 'grid' instead of 'columns')
+@forward "bulma/sass/grid";
+
+// Helpers (margin, padding, visibility, flexbox utilities)
+@forward "bulma/sass/helpers";
+
+// Themes (CSS Variables definitions - IMPORTANT for compatibility)
+@forward "bulma/sass/themes";
+
+// ========================================
+// 2. CUSTOM SITE STYLES
+// ========================================
 
 * {
   box-sizing: border-box;
@@ -418,6 +472,12 @@ table.price-table tfoot td:last-child {
   #map {
     height: 300px;
   }
+}
+
+#kennzahlen .title {
+  /* Numbers in the stats section appear twice as large */
+  font-size: 6rem;
+  line-height: 1.05;
 }
 
 /* Floating Images */
