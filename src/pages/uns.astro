@@ -2,6 +2,8 @@
 import DIvicP4 from "../Photos/D.Ivic_P4.jpeg";
 import FisherLogo from "../Photos/FisherTechService.jpeg";
 import "../assets/style.scss";
+
+const base = import.meta.env.BASE_URL;
 ---
 
 <!DOCTYPE html>
@@ -21,34 +23,34 @@ import "../assets/style.scss";
     <nav>
       <ul class="main-nav">
         <li>
-          <a href="/">Home</a>
+          <a href={base}>Home</a>
           <ul class="dropdown">
-            <li><a href="/#start">Willkommen</a></li>
-            <li><a href="/#kennzahlen">Kennzahlen</a></li>
-            <li><a href="/#social-media">Social Media</a></li>
-            <li><a href="/#location">Karte</a></li>
+            <li><a href={`${base}#start`}>Willkommen</a></li>
+            <li><a href={`${base}#kennzahlen`}>Kennzahlen</a></li>
+            <li><a href={`${base}#social-media`}>Social Media</a></li>
+            <li><a href={`${base}#location`}>Karte</a></li>
           </ul>
         </li>
         <li>
-          <a href="/about">Services</a>
+          <a href={`${base}about`}>Services</a>
           <ul class="dropdown">
-            <li><a href="/about#services">Services</a></li>
-            <li><a href="/about#kontakt">Kontakt</a></li>
+            <li><a href={`${base}about#services`}>Services</a></li>
+            <li><a href={`${base}about#kontakt`}>Kontakt</a></li>
           </ul>
         </li>
         <li>
-          <a href="/uns">Über Uns</a>
+          <a href={`${base}uns`}>Über Uns</a>
           <ul class="dropdown">
-            <li><a href="/uns#team">Team</a></li>
-            <li><a href="/uns#video">Video</a></li>
+            <li><a href={`${base}uns#team`}>Team</a></li>
+            <li><a href={`${base}uns#video`}>Video</a></li>
           </ul>
         </li>
         <li>
-          <a href="/projekt">Projekt</a>
+          <a href={`${base}projekt`}>Projekt</a>
           <ul class="dropdown">
-            <li><a href="/projekt#overview">Überblick</a></li>
-            <li><a href="/projekt#details">Fachbegriffe</a></li>
-            <li><a href="/projekt#community">Community</a></li>
+            <li><a href={`${base}projekt#overview`}>Überblick</a></li>
+            <li><a href={`${base}projekt#details`}>Fachbegriffe</a></li>
+            <li><a href={`${base}projekt#community`}>Community</a></li>
           </ul>
         </li>
       </ul>
