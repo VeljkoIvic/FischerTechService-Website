@@ -61,7 +61,21 @@
 @forward "bulma/sass/themes";
 
 // ========================================
-// 2. CUSTOM SITE STYLES
+// 2. MIXINS (Wiederverwendbare Styles)
+// ========================================
+
+// Drop Shadow Mixin mit konfigurierbarer Blur-Breite und Default-Wert
+@mixin drop-shadow($blur: 8px) {
+  box-shadow: 0 4px calc(#{$blur} * 1.5) rgba(0, 0, 0, 0.12);
+}
+
+// Hover-State für Drop Shadows (verstärkt)
+@mixin drop-shadow-hover($blur: 8px) {
+  box-shadow: 0 8px calc(#{$blur} * 2) rgba(0, 0, 0, 0.16);
+}
+
+// ========================================
+// 3. CUSTOM SITE STYLES
 // ========================================
 
 * {
@@ -104,7 +118,7 @@ header {
   color: #FFFFFF;
   padding: 30px 24px;
   text-align: center;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  @include drop-shadow(6px);
 }
 
 .header-container {
@@ -232,7 +246,7 @@ nav .dropdown {
   background-color: #4F5B66;
   border: 1px solid #1BB8E3;
   border-radius: 4px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  @include drop-shadow(8px);
   padding: 8px 0;
   margin: 0;
   list-style: none;
@@ -275,7 +289,7 @@ main {
   main {
     background-color: #FFFFFF;
     border-radius: 12px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    @include drop-shadow(32px);
     padding: 40px;
     margin: 40px auto;
   }
@@ -284,14 +298,14 @@ main {
 section {
   background-color: #FFFFFF;
   border-radius: 12px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  @include drop-shadow(24px);
   padding: 32px;
   margin-bottom: 24px;
   transition: box-shadow 0.3s ease;
 }
 
 section:hover {
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+  @include drop-shadow-hover(24px);
 }
 
 /* Hero Section - Grid Layout */
@@ -352,7 +366,7 @@ figure img {
   object-fit: cover;
   display: block;
   margin: 0;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+  @include drop-shadow(16px);
   transition: transform 0.3s ease;
 }
 
@@ -371,7 +385,7 @@ table {
   border-collapse: collapse;
   margin: 24px 0;
   background-color: #FFFFFF;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  @include drop-shadow(8px);
 }
 
 table thead {
@@ -464,7 +478,7 @@ table.price-table tfoot td:last-child {
   height: 400px;
   width: 100%;
   border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  @include drop-shadow(12px);
   margin: 20px 0;
 }
 
@@ -498,7 +512,7 @@ article {
   background-color: #FFFFFF;
   border-radius: 12px;
   padding: 32px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  @include drop-shadow(24px);
 }
 
 article section {
@@ -555,7 +569,7 @@ dd {
   padding: 24px;
   background-color: #F3F5F7;
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  @include drop-shadow(8px);
 }
 
 /* Community Frage-Textarea in hellgrau */
@@ -673,7 +687,7 @@ dd {
 .social-image {
   border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  @include drop-shadow(12px);
 }
 
 .social-image img {
@@ -694,12 +708,12 @@ dd {
   font-weight: 600;
   font-size: 0.9em;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  @include drop-shadow(12px);
 }
 
 .social-icon:hover {
   transform: translateY(-4px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  @include drop-shadow-hover(20px);
 }
 
 .social-icon.instagram {
