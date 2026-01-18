@@ -52,14 +52,14 @@ header {
 }
 
 .logo {
-  max-width: 60px;
+  max-width: 90px;
   height: auto;
   border-radius: 8px;
 }
 
 header h1 {
   margin: 0;
-  font-size: 2.2em;
+  font-size: 2.8em;
   font-weight: 700;
   letter-spacing: 1px;
 }
@@ -97,8 +97,9 @@ nav a {
   color: #1BB8E3;
   text-decoration: none;
   font-weight: 600;
+  font-size: 1.1em;
   border-bottom: 2px solid transparent;
-  padding: 8px 16px;
+  padding: 12px 20px;
   transition: all 0.3s ease;
 }
 
