@@ -1,5 +1,48 @@
 /* FisherTechService - Globale Styles */
 
+/* CSS Variables für Bulma Customization */
+:root {
+  /* Primärfarbe: #1BB8E3 (Aqua-Blau) */
+  --bulma-primary-h: 188deg;
+  --bulma-primary-s: 96%;
+  --bulma-primary-l: 45%;
+  
+  /* Link-Farbe (gleich wie Primär) */
+  --bulma-link-h: 188deg;
+  --bulma-link-s: 96%;
+  --bulma-link-l: 45%;
+  
+  /* Info-Farbe (Aqua-Blau) */
+  --bulma-info-h: 188deg;
+  --bulma-info-s: 96%;
+  --bulma-info-l: 45%;
+  
+  /* Button-Farben anpassen */
+  --bulma-button-color: #FFFFFF;
+  --bulma-button-background-color: hsl(188deg, 96%, 45%);
+  --bulma-button-border-color: hsl(188deg, 96%, 45%);
+  
+  /* Button Hover/Active States */
+  --bulma-button-focus-border-color: hsl(188deg, 96%, 35%);
+  --bulma-button-hover-background-color: hsl(188deg, 96%, 35%);
+  --bulma-button-hover-border-color: hsl(188deg, 96%, 35%);
+  
+  /* Danger Button (für Rückgängigmachen) */
+  --bulma-danger-h: 3deg;
+  --bulma-danger-s: 90%;
+  --bulma-danger-l: 48%;
+  
+  /* Success Button (für Bestätigung) */
+  --bulma-success-h: 153deg;
+  --bulma-success-s: 53%;
+  --bulma-success-l: 53%;
+  
+  /* Warning Button */
+  --bulma-warning-h: 42deg;
+  --bulma-warning-s: 100%;
+  --bulma-warning-l: 53%;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -108,6 +151,55 @@ nav a:hover {
   color: #FFFFFF;
   background-color: rgba(255, 255, 255, 0.1);
   border-radius: 4px;
+}
+
+/* WCAG 2.4.7: Focus Visible - Klare visuelle Fokus-Indikatoren */
+nav a:focus,
+button:focus,
+input:focus,
+select:focus,
+textarea:focus,
+a:focus {
+  outline: 3px solid #1BB8E3;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Tab-Navigation Focus State */
+:focus-visible {
+  outline: 3px solid #1BB8E3;
+  outline-offset: 2px;
+}
+
+/* Accessibility: Skip-to-main content link (für Tastaturbenutzung) */
+.skip-to-main {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: #1BB8E3;
+  color: white;
+  padding: 8px 16px;
+  text-decoration: none;
+  z-index: 100;
+  border-radius: 4px;
+}
+
+.skip-to-main:focus {
+  top: 0;
+  outline: 3px solid #4F5B66;
+}
+
+/* Screen Reader Only Content */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
 }
 
 /* Dropdown Menü */
