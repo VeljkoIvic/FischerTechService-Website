@@ -695,3 +695,14 @@ footer a:hover {
     margin: 10px auto;
   }
 }
+
+/* Kennzahlen Boxes - Drop-Shadow Effekt */
+.box {
+  box-shadow: 0 8px 16px rgba(31, 91, 102, 0.15);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.box:hover {
+  box-shadow: 0 12px 24px rgba(31, 91, 102, 0.25);
+  transform: translateY(-4px);
+}
