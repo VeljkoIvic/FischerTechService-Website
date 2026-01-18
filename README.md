@@ -1,46 +1,36 @@
-# Astro Starter Kit: Basics
+--Aufgabe 22--
+Betrieb und Wartung
 
-```sh
-npm create astro@latest -- --template basics
-```
+1. Betriebskonzept:
+Die Website FisherTechService wird als statische Website mit Astro, SCSS und Bulma betrieben. Inhalte und Styles werden lokal entwickelt, gebaut und anschliessend als statische Dateien ausgeliefert.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+2. Komponenten der Software
+- Astro: Static Site Generator für HTML-Ausgabe
+- SCSS + Bulma: Styling mit modularen Komponenten
+- Statische Assets: Bilder aus public/ und src/Photos/
+- Build-Output: Statische Dateien in dist/
 
-## 🚀 Project Structure
+3. Relevante Commands
+- NPM:
+   - npm install      # Abhängigkeiten installieren
+   - npm run dev      # Entwicklungsserver starten
+   - npm run build    # Produktions-Build erzeugen
+   - npm run preview  # Build lokal testen
+- Yarn:
+   - yarn install     # Abhängigkeiten installieren
+   - yarn dev         # Entwicklungsserver starten
+   - yarn build       # Produktions-Build erzeugen
+   - yarn preview     # Build lokal testen
 
-Inside of your Astro project, you'll see the following folders and files:
+4. Website aktualisieren
+- Inhalte werden in src/pages/*.astro angepasst
+- Styles werden in src/assets/style.scss geändert
+- Änderungen werden lokal getestet, danach gebaut und deployt
 
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
-```
+5. Auslieferung zum Browser
+- Die Website wird statisch aus dem dist/-Ordner ausgeliefert
+- Hosting erfolgt z. B. über GitHub Pages, Vercel, Netlify oder Nginx
+- Der Browser lädt direkt HTML, CSS und Bilder (kein Backend notwendig)
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+6. Fazit
+Der Betrieb ist einfach, wartungsarm und performant, da nur statische Dateien ausgeliefert werden. Updates erfolgen kontrolliert über den Build-Prozess und Deployment.
