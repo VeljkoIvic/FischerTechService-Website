@@ -113,6 +113,123 @@ import "../assets/style.scss";
         </table>
       </section>
     </article>
+
+    <!-- Community & Diskussionen Bereich -->
+    <section id="community" class="community-section">
+      <h2>Community & Diskussionen</h2>
+      <p class="section-intro">Tausche dich mit anderen Angelbegeisterten aus, stelle Fragen und teile deine Erfahrungen!</p>
+
+      <!-- Existierende Fragen & Antworten -->
+      <article class="media">
+        <figure class="media-left">
+          <p class="image is-64x64">
+            <img src="https://ui-avatars.com/api/?name=Thomas+Mueller&background=1BB8E3&color=fff" alt="Avatar von Thomas Müller" />
+          </p>
+        </figure>
+        <div class="media-content">
+          <div class="content">
+            <p>
+              <strong>Thomas Müller</strong>
+              <br />
+              Ich habe eine 2,70m Spinnrute und möchte sie tunen. Welche Ringe würdet ihr empfehlen für Barsch- und Hechtsangeln?
+              <br />
+              <small><a href="#like">👍 Gefällt mir</a> · <a href="#reply">Antworten</a> · vor 3 Stunden</small>
+            </p>
+          </div>
+
+          <!-- Verschachtelte Antwort 1 -->
+          <article class="media">
+            <figure class="media-left">
+              <p class="image is-48x48">
+                <img src="https://ui-avatars.com/api/?name=Viktor+Ivic&background=4F5B66&color=fff" alt="Avatar von Viktor Ivic" />
+              </p>
+            </figure>
+            <div class="media-content">
+              <div class="content">
+                <p>
+                  <strong>Viktor Ivic - FisherTechService</strong>
+                  <br />
+                  Sehr gute Frage! Für deine Länge würde ich zu hochwertigen Keramik-Ringen raten. Wir arbeiten gerne mit SiC-Ringen, die extrem verschleißfest sind.
+                  Besonders für Hecht empfehlen wir größere Ringe (z.B. K-Series), um Backlash zu minimieren.
+                  <br />
+                  <small><a href="#like">👍 Gefällt mir</a> · <a href="#reply">Antworten</a> · vor 2 Stunden</small>
+                </p>
+              </div>
+
+              <!-- Verschachtelte Antwort auf Antwort -->
+              <article class="media">
+                <figure class="media-left">
+                  <p class="image is-48x48">
+                    <img src="https://ui-avatars.com/api/?name=Sarah+Weber&background=1BB8E3&color=fff" alt="Avatar von Sarah Weber" />
+                  </p>
+                </figure>
+                <div class="media-content">
+                  <div class="content">
+                    <p>
+                      <strong>Sarah Weber</strong>
+                      <br />
+                      Danke Viktor! Das war sehr hilfreich. Kann man die Ringe selbst wechseln oder braucht man spezielles Werkzeug?
+                      <br />
+                      <small><a href="#like">👍 Gefällt mir</a> · <a href="#reply">Antworten</a> · vor 1 Stunde</small>
+                    </p>
+                  </div>
+                </article>
+              </div>
+            </article>
+          </div>
+
+          <!-- Verschachtelte Antwort 2 -->
+          <article class="media">
+            <figure class="media-left">
+              <p class="image is-48x48">
+                <img src="https://ui-avatars.com/api/?name=David+Mueller&background=153&color=fff" alt="Avatar von David Müller" />
+              </p>
+            </figure>
+            <div class="media-content">
+              <div class="content">
+                <p>
+                  <strong>David Müller</strong>
+                  <br />
+                  Ich bin auch interessiert! Wie lange dauert so ein Tausch bei euch?
+                  <br />
+                  <small><a href="#like">👍 Gefällt mir</a> · <a href="#reply">Antworten</a> · vor 1 Stunde</small>
+                </p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </article>
+
+      <!-- Neue Frage hinzufügen -->
+      <article class="media">
+        <figure class="media-left">
+          <p class="image is-64x64">
+            <img src="https://ui-avatars.com/api/?name=Deine+Frage&background=F3F5F7&color=4F5B66" alt="Dein Avatar" />
+          </p>
+        </figure>
+        <div class="media-content">
+          <div class="field">
+            <label class="label">Deine Frage stellen</label>
+            <p class="control">
+              <textarea 
+                class="textarea" 
+                placeholder="Stelle deine Frage zur Rutenwartung, zum Tuning oder zu unseren Services..."
+                rows="4">
+              </textarea>
+            </p>
+          </div>
+          <div class="field is-grouped">
+            <p class="control">
+              <button class="button is-primary">Frage posten</button>
+            </p>
+            <p class="control">
+              <button class="button">Verwerfen</button>
+            </p>
+          </div>
+        </div>
+      </article>
+    </section>
+
   </main>
 
   <footer style="clear: both;">
