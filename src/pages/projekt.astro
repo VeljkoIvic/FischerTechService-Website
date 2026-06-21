@@ -1,5 +1,5 @@
 ---
-import FisherLogo from "../Photos/FisherTechService.jpeg";
+import FisherLogo from "../Photos/FisherTechService.jpeg?url";
 import "../assets/style.scss";
 const base = '/';
 ---
@@ -15,7 +15,7 @@ const base = '/';
 <body>
   <header>
     <div class="header-container">
-      <img src={FisherLogo.src} alt="FisherTechService Logo" class="logo">
+      <img src={FisherLogo} alt="FisherTechService Logo" class="logo">
       <h1>FisherTechService</h1>
     </div>
     <nav>
@@ -72,49 +72,6 @@ const base = '/';
           Jede Arbeit wird sorgfältig geprüft und exakt auf Einsatzgebiet und Nutzer abgestimmt.
         </p>
       </section>
-      <section id="terms">
-        <h2>Fachbegriffe</h2>
-        <table class="terms-table">
-          <thead>
-            <tr>
-              <th>Begriff</th>
-              <th>Definition</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><strong>Spinnrute</strong></td>
-              <td>Leichte, flexible Rute fuer aktives Angeln mit Kunstkoedern. Ideal fuer Barsch, Hecht und Forelle.</td>
-            </tr>
-            <tr>
-              <td><strong>Baitcaster</strong></td>
-              <td>Angelrolle mit liegender Spule, die praezises Werfen und hohe Kraftuebertragung ermoeglicht.</td>
-            </tr>
-            <tr>
-              <td><strong>Blank</strong></td>
-              <td>Der Rutenkern aus Carbon oder Glasfaser, bevor Griff und Ringe montiert werden.</td>
-            </tr>
-            <tr>
-              <td><strong>Rutenring (Guide)</strong></td>
-              <td>Oese aus Keramik oder Metall, durch die die Schnur gefuehrt wird. Entscheidend fuer Wurfweite.</td>
-            </tr>
-            <tr>
-              <td><strong>Wurfgewicht</strong></td>
-              <td>Empfohlenes Koedergewicht in Gramm, das optimal mit der Rute geworfen werden kann.</td>
-            </tr>
-            <tr>
-              <td><strong>Action (Rutenaktion)</strong></td>
-              <td>Biegeverhalten der Rute: Fast (Spitze), Medium (Mitte) oder Slow (ganze Rute biegt sich).</td>
-            </tr>
-          </tbody>
-          <tfoot>
-            <tr>
-              <td colspan="2">6 Fachbegriffe insgesamt</td>
-            </tr>
-          </tfoot>
-        </table>
-      </section>
-    </article>
 
     <!-- Community & Diskussionen Bereich -->
     <section id="community" class="community-section">

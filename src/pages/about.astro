@@ -1,6 +1,6 @@
 ---
-import ServiceArbeiten2 from "../Photos/ServiceArbeiten2.jpeg";
-import FisherLogo from "../Photos/FisherTechService.jpeg";
+import ServiceArbeiten2 from "../Photos/ServiceArbeiten2.jpeg?url";
+import FisherLogo from "../Photos/FisherTechService.jpeg?url";
 import "../assets/style.scss";
 
 const base = '/';
@@ -17,7 +17,7 @@ const base = '/';
 <body>
   <header>
     <div class="header-container">
-      <img src={FisherLogo.src} alt="FisherTechService Logo" class="logo">
+      <img src={FisherLogo} alt="FisherTechService Logo" class="logo">
       <h1>FisherTechService</h1>
     </div>
     <nav>
@@ -64,8 +64,8 @@ const base = '/';
         <h2>Services</h2>
         
         <figure class="float-right">
-          <img src={ServiceArbeiten2.src} alt="Service Arbeiten">
-          <figcaption>Service Arbeiten</figcaption>
+          <img src={ServiceArbeiten2} alt="Service Arbeiten">
+          <figcaption></figcaption>
         </figure>
         
         <p>
@@ -91,57 +91,18 @@ const base = '/';
         Bei uns ist Ihre Ausrüstung in den besten Händen.
         </p>
         
-        <h3>Preisliste</h3>
-        <table class="price-table">
-          <thead>
-            <tr>
-              <th>Service</th>
-              <th>Beschreibung</th>
-              <th>Preis</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><strong>Basis-Service</strong></td>
-              <td>Reinigung + Inspektion</td>
-              <td>CHF 45.-</td>
-            </tr>
-            <tr>
-              <td><strong>Standard-Reparatur</strong></td>
-              <td>Ringwechsel, Griffreparatur</td>
-              <td>CHF 85.-</td>
-            </tr>
-            <tr>
-              <td><strong>Premium-Tuning</strong></td>
-              <td>Komplette Ueberholung + Optimierung</td>
-              <td>CHF 150.-</td>
-            </tr>
-            <tr>
-              <td><strong>Custom-Build</strong></td>
-              <td>Individuelle Rutenfertigung</td>
-              <td>ab CHF 350.-</td>
-            </tr>
-            <tr>
-              <td><strong>Express-Service</strong></td>
-              <td>48h-Bearbeitung</td>
-              <td>Zuschlag +50%</td>
-            </tr>
-          </tbody>
-          <tfoot>
-            <tr>
-              <td colspan="3">5 Services insgesamt</td>
-            </tr>
-          </tfoot>
-        </table>
-        
         <p>
           Alle Preise verstehen sich zzgl. Materialkosten und Inspektion.
         </p>
       </section>
 
+
+
+      
+      <!-- Kontaktformular  -->
       <section id="kontakt">
-        <h2>Kontaktformular</h2>
-        <p>
+        <h2 class="contact-heading">Kontaktformular</h2>
+        <p class="contact-intro">
           Haben Sie Fragen zu unseren Services oder möchten Sie einen Termin vereinbaren?
           Füllen Sie einfach das Formular aus und wir melden uns schnellstmöglich bei Ihnen.
         </p>
@@ -152,36 +113,28 @@ const base = '/';
           <input type="hidden" name="_template" value="table">
           
           <div class="form-group">
-            <label for="name">Name *</label>
-            <input type="text" id="name" name="name" required placeholder="Ihr vollständiger Name">
+            <input type="text" id="name" name="name" required placeholder="Vorname / Nachname">
           </div>
           
           <div class="form-group">
-            <label for="email">E-Mail *</label>
-            <input type="email" id="email" name="email" required placeholder="ihre.email@beispiel.ch">
+            <input type="email" id="email" name="email" required placeholder="E-Mail">
           </div>
           
           <div class="form-group">
-            <label for="phone">Telefon</label>
-            <input type="tel" id="phone" name="phone" placeholder="+41 XX XXX XX XX">
+            <input type="tel" id="phone" name="phone" placeholder="Telefon">
           </div>
           
           <div class="form-group">
-            <label for="service">Gewünschter Service</label>
             <select id="service" name="service">
-              <option value="">Bitte wählen...</option>
-              <option value="basis">Basis-Service (CHF 45.-)</option>
-              <option value="standard">Standard-Reparatur (CHF 85.-)</option>
-              <option value="premium">Premium-Tuning (CHF 150.-)</option>
-              <option value="custom">Custom-Build (ab CHF 350.-)</option>
-              <option value="express">Express-Service</option>
-              <option value="beratung">Beratung</option>
+              <option value="" selected>Service wählen</option>
+              <option value="Reparatur">Reparatur</option>
+              <option value="Tuning">Tuning</option>
+              <option value="Beratung">Beratung</option>
             </select>
           </div>
           
           <div class="form-group">
-            <label for="message">Nachricht *</label>
-            <textarea id="message" name="message" rows="6" required placeholder="Beschreiben Sie Ihr Anliegen..."></textarea>
+            <textarea id="message" name="message" rows="6" required placeholder="Bemerkungen"></textarea>
           </div>
           
           <div class="form-group">

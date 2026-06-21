@@ -564,12 +564,26 @@ dd {
 
 /* Kontaktformular */
 .contact-form {
-  max-width: 600px;
+  max-width: 700px;
   margin: 32px auto;
   padding: 24px;
   background-color: #F3F5F7;
   border-radius: 8px;
   @include drop-shadow(8px);
+}
+
+.contact-heading {
+  max-width: 700px;
+  margin: 0 auto 14px;
+  text-align: center;
+}
+
+.contact-intro {
+  max-width: 700px;
+  margin: 0 auto 24px;
+  text-align: center;
+  color: #2c3e50;
+  line-height: 1.7;
 }
 
 /* Community Frage-Textarea in hellgrau */
@@ -615,8 +629,13 @@ dd {
   border-radius: 6px;
   font-size: 1em;
   font-family: inherit;
+  color: #2c3e50;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
   box-sizing: border-box;
+}
+
+.form-group select {
+  background-color: #ffffff;
 }
 
 .form-group input:focus,
@@ -633,6 +652,7 @@ dd {
 }
 
 .submit-btn {
+  display: block;
   background-color: #4F5B66;
   color: #FFFFFF;
   padding: 14px 32px;
@@ -643,7 +663,8 @@ dd {
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.2s ease;
   width: 100%;
-  max-width: 250px;
+  max-width: 280px;
+  margin: 0 auto;
 }
 
 .submit-btn:hover {

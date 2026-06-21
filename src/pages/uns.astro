@@ -1,6 +1,6 @@
 ---
-import DIvicP4 from "../Photos/D.Ivic_P4.jpeg";
-import FisherLogo from "../Photos/FisherTechService.jpeg";
+import DIvicP4 from "../Photos/D.Ivic_P4.jpeg?url";
+import FisherLogo from "../Photos/FisherTechService.jpeg?url";
 import "../assets/style.scss";
 const base = '/';
 ---
@@ -16,7 +16,7 @@ const base = '/';
 <body>
   <header>
     <div class="header-container">
-      <img src={FisherLogo.src} alt="FisherTechService Logo" class="logo">
+      <img src={FisherLogo} alt="FisherTechService Logo" class="logo">
       <h1>FisherTechService</h1>
     </div>
     <nav>
@@ -78,21 +78,6 @@ const base = '/';
           Ausgeführt mit Leidenschaft und dem Anspruch, jede Rute und jede Rolle so zu behandeln, als wäre sie die eigene.
         </p>
       </section>
-
-      <section id="video">
-      <h2>Video</h2>
-      <div class="video-container">
-        <iframe 
-          width="560" 
-          height="315" 
-          src="https://www.youtube.com/embed/eGVi8PZYDYc" 
-          title="YouTube video player" 
-          frameborder="0" 
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-          allowfullscreen>
-        </iframe>
-      </div>
-    </section>
     </article>
   </main>
 

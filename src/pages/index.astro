@@ -1,7 +1,7 @@
 ---
-import DIvicP3 from "../Photos/D.Ivic_P3.jpeg";
-import ServiceArbeiten1 from "../Photos/ServiceArbeiten1.jpeg";
-import FisherLogo from "../Photos/FisherTechService.jpeg";
+import DIvicP3 from "../Photos/D.Ivic_P3.jpeg?url";
+import ServiceArbeiten1 from "../Photos/ServiceArbeiten1.jpeg?url";
+import FisherLogo from "../Photos/FisherTechService.jpeg?url";
 import "../assets/style.scss";
 
 const base = '/';
@@ -23,7 +23,7 @@ const base = '/';
 <body>
   <header>
     <div class="header-container">
-      <img src={FisherLogo.src} alt="FisherTechService Logo" class="logo">
+      <img src={FisherLogo} alt="FisherTechService Logo" class="logo">
       <h1>FisherTechService</h1>
     </div>
     <nav>
@@ -67,7 +67,7 @@ const base = '/';
     <section class="hero">
       <h2 class="hero-title">Willkommen bei FisherTechService</h2>
       <figure>
-        <img src={DIvicP3.src} alt="Fischer Tech Service Team">
+        <img src={DIvicP3} alt="Fischer Tech Service Team">
       </figure>
       <div>
         <p>
@@ -132,7 +132,7 @@ const base = '/';
           </a>
         </div>
         <figure class="social-image">
-          <img src={ServiceArbeiten1.src} alt="Service Arbeiten">
+          <img src={ServiceArbeiten1} alt="Service Arbeiten">
         </figure>
       </div>
     </section>
