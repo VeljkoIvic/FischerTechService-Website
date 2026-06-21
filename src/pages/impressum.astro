@@ -1,9 +1,8 @@
 ---
 import FisherLogo from "../Photos/FisherTechService.jpeg?url";
+import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import "../assets/style.scss";
-
-const base = '/';
 ---
 
 <!DOCTYPE html>
@@ -14,50 +13,10 @@ const base = '/';
   <title>Impressum | FisherTechService</title>
 </head>
 <body>
-  <header>
-    <div class="header-container">
-      <img src={FisherLogo} alt="FisherTechService Logo" class="logo">
-      <h1>FisherTechService</h1>
-    </div>
-    <nav>
-      <ul class="main-nav">
-        <li>
-          <a href={base}>Home</a>
-          <ul class="dropdown">
-            <li><a href={`${base}#start`}>Willkommen</a></li>
-            <li><a href={`${base}#kennzahlen`}>Kennzahlen</a></li>
-            <li><a href={`${base}#social-media`}>Social Media</a></li>
-            <li><a href={`${base}#location`}>Karte</a></li>
-          </ul>
-        </li>
-        <li>
-          <a href={`${base}about`}>Services</a>
-          <ul class="dropdown">
-            <li><a href={`${base}about#services`}>Services</a></li>
-            <li><a href={`${base}about#kontakt`}>Kontakt</a></li>
-          </ul>
-        </li>
-        <li>
-          <a href={`${base}uns`}>Über Uns</a>
-          <ul class="dropdown">
-            <li><a href={`${base}uns#team`}>Team</a></li>
-            <li><a href={`${base}uns#video`}>Video</a></li>
-          </ul>
-        </li>
-        <li>
-          <a href={`${base}projekt`}>Projekt</a>
-          <ul class="dropdown">
-            <li><a href={`${base}projekt#overview`}>Überblick</a></li>
-            <li><a href={`${base}projekt#details`}>Fachbegriffe</a></li>
-            <li><a href={`${base}projekt#community`}>Community</a></li>
-          </ul>
-        </li>
-      </ul>
-    </nav>
-  </header>
+  <Header />
 
-  <main>
-    <article>
+  <main class="legal-page-shell">
+    <article class="legal-page-content">
       <section class="legal-page">
         <h2>Impressum</h2>
 
@@ -68,8 +27,8 @@ const base = '/';
         <h3>Verantwortliche Stelle</h3>
         <p>
           <strong>Fischer Tech Service</strong><br>
-          Inhaber: [Vorname Nachname]<br>
-          Adresse: [Strasse, PLZ, Ort]<br>
+          Inhaber: Veljko Ivic<br>
+          <!-- Adresse: [Strasse, PLZ, Ort]<br> -->
           E-Mail: info@fishertechservice.ch<br>
           Telefon: +41 76 567 10 07
         </p>

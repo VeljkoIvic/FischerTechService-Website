@@ -1,11 +1,9 @@
 ---
 import DIvicP3 from "../Photos/D.Ivic_P3.jpeg?url";
 import ServiceArbeiten1 from "../Photos/ServiceArbeiten1.jpeg?url";
-import FisherLogo from "../Photos/FisherTechService.jpeg?url";
+import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import "../assets/style.scss";
-
-const base = '/';
 ---
 
 <!DOCTYPE html>
@@ -22,47 +20,7 @@ const base = '/';
      crossorigin=""></script>
 </head>
 <body>
-  <header>
-    <div class="header-container">
-      <img src={FisherLogo} alt="FisherTechService Logo" class="logo">
-      <h1>FisherTechService</h1>
-    </div>
-    <nav>
-      <ul class="main-nav">
-        <li>
-          <a href={base}>Home</a>
-          <ul class="dropdown">
-            <li><a href={`${base}#start`}>Willkommen</a></li>
-            <li><a href={`${base}#kennzahlen`}>Kennzahlen</a></li>
-            <li><a href={`${base}#social-media`}>Social Media</a></li>
-            <li><a href={`${base}#location`}>Karte</a></li>
-          </ul>
-        </li>
-        <li>
-          <a href={`${base}about`}>Services</a>
-          <ul class="dropdown">
-            <li><a href={`${base}about#services`}>Services</a></li>
-            <li><a href={`${base}about#kontakt`}>Kontakt</a></li>
-          </ul>
-        </li>
-        <li>
-          <a href={`${base}uns`}>Über Uns</a>
-          <ul class="dropdown">
-            <li><a href={`${base}uns#team`}>Team</a></li>
-            <li><a href={`${base}uns#video`}>Video</a></li>
-          </ul>
-        </li>
-        <li>
-          <a href={`${base}projekt`}>Projekt</a>
-          <ul class="dropdown">
-            <li><a href={`${base}projekt#overview`}>Überblick</a></li>
-            <li><a href={`${base}projekt#details`}>Fachbegriffe</a></li>
-            <li><a href={`${base}projekt#community`}>Community</a></li>
-          </ul>
-        </li>
-      </ul>
-    </nav>
-  </header>
+  <Header />
 
   <main>
     <section class="hero">

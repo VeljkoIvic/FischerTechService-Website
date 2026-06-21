@@ -1,8 +1,7 @@
 ---
-import FisherLogo from "../Photos/FisherTechService.jpeg?url";
+import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import "../assets/style.scss";
-const base = '/';
 ---
 
 <!DOCTYPE html>
@@ -14,66 +13,10 @@ const base = '/';
   
 </head>
 <body>
-  <header>
-    <div class="header-container">
-      <img src={FisherLogo} alt="FisherTechService Logo" class="logo">
-      <h1>FisherTechService</h1>
-    </div>
-    <nav>
-      <ul class="main-nav">
-        <li>
-          <a href={base}>Home</a>
-          <ul class="dropdown">
-              <li><a href={`${base}#start`}>Willkommen</a></li>
-              <li><a href={`${base}#kennzahlen`}>Kennzahlen</a></li>
-              <li><a href={`${base}#social-media`}>Social Media</a></li>
-              <li><a href={`${base}#location`}>Karte</a></li>
-          </ul>
-        </li>
-        <li>
-            <a href={`${base}about`}>Services</a>
-            <ul class="dropdown">
-              <li><a href={`${base}about#services`}>Services</a></li>
-              <li><a href={`${base}about#kontakt`}>Kontakt</a></li>
-          </ul>
-        </li>
-        <li>
-            <a href={`${base}uns`}>Über Uns</a>
-            <ul class="dropdown">
-              <li><a href={`${base}uns#team`}>Team</a></li>
-              <li><a href={`${base}uns#video`}>Video</a></li>
-          </ul>
-        </li>
-        <li>
-            <a href={`${base}projekt`}>Projekt</a>
-            <ul class="dropdown">
-              <li><a href={`${base}projekt#overview`}>Überblick</a></li>
-              <li><a href={`${base}projekt#details`}>Fachbegriffe</a></li>
-              <li><a href={`${base}projekt#community`}>Community</a></li>
-          </ul>
-        </li>
-      </ul>
-    </nav>
-  </header>
+  <Header />
 
   <main>
     <article>
-      <section id="overview">
-        <h2>Worum geht es?</h2>
-        <p>
-          Fischer Tech Service steht für präzisen Service, fachgerechte Reparaturen und gezieltes Tuning von Angelruten.
-          Mit Fokus auf saubere Verarbeitung, hochwertige Komponenten und zuverlässige Performance bringen wir dein Equipment wieder in Topform,
-          damit du dich voll aufs Angeln konzentrieren kannst.
-        </p>
-      </section>
-      <section id="details">
-        <h2>Weitere Details</h2>
-        <p>
-          Wir bieten individuelle Lösungen für alle Rutentypen von Spinn- und Baitcast-Ruten bis hin zu spezialisierten Custom-Builds.
-          Jede Arbeit wird sorgfältig geprüft und exakt auf Einsatzgebiet und Nutzer abgestimmt.
-        </p>
-      </section>
-
     <!-- Community & Diskussionen Bereich -->
     <section id="community" class="community-section">
       <h2>Community & Diskussionen</h2>

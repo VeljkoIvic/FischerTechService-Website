@@ -1,9 +1,8 @@
 ---
 import FisherLogo from "../Photos/FisherTechService.jpeg?url";
+import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import "../assets/style.scss";
-
-const base = '/';
 ---
 
 <!DOCTYPE html>
@@ -13,51 +12,14 @@ const base = '/';
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Datenschutz | FisherTechService</title>
 </head>
-<body>
-  <header>
-    <div class="header-container">
-      <img src={FisherLogo} alt="FisherTechService Logo" class="logo">
-      <h1>FisherTechService</h1>
-    </div>
-    <nav>
-      <ul class="main-nav">
-        <li>
-          <a href={base}>Home</a>
-          <ul class="dropdown">
-            <li><a href={`${base}#start`}>Willkommen</a></li>
-            <li><a href={`${base}#kennzahlen`}>Kennzahlen</a></li>
-            <li><a href={`${base}#social-media`}>Social Media</a></li>
-            <li><a href={`${base}#location`}>Karte</a></li>
-          </ul>
-        </li>
-        <li>
-          <a href={`${base}about`}>Services</a>
-          <ul class="dropdown">
-            <li><a href={`${base}about#services`}>Services</a></li>
-            <li><a href={`${base}about#kontakt`}>Kontakt</a></li>
-          </ul>
-        </li>
-        <li>
-          <a href={`${base}uns`}>Über Uns</a>
-          <ul class="dropdown">
-            <li><a href={`${base}uns#team`}>Team</a></li>
-            <li><a href={`${base}uns#video`}>Video</a></li>
-          </ul>
-        </li>
-        <li>
-          <a href={`${base}projekt`}>Projekt</a>
-          <ul class="dropdown">
-            <li><a href={`${base}projekt#overview`}>Überblick</a></li>
-            <li><a href={`${base}projekt#details`}>Fachbegriffe</a></li>
-            <li><a href={`${base}projekt#community`}>Community</a></li>
-          </ul>
-        </li>
-      </ul>
-    </nav>
-  </header>
 
-  <main>
-    <article>
+
+
+<body>
+  <Header />
+
+  <main class="legal-page-shell">
+    <article class="legal-page-content">
       <section class="legal-page">
         <h2>Datenschutzerklärung</h2>
 
@@ -72,30 +34,30 @@ const base = '/';
         <h3>2. Verantwortliche Stelle</h3>
         <p>
           <strong>Fischer Tech Service</strong><br>
-          Inhaber: [Vorname Nachname]<br>
-          Adresse: [Strasse, PLZ, Ort]<br>
-          E-Mail: [E-Mail-Adresse]<br>
-          Telefon: [Telefonnummer]
+          Inhaber: Veljko Ivic<br>
+          <!-- Adresse: [Strasse, PLZ, Ort]<br> -->
+          E-Mail: info@fishertechservice.ch<br>
+          Telefon: +41 76 567 10 07
         </p>
 
         <h3>3. Erhebung und Verarbeitung personenbezogener Daten</h3>
         <p>Beim Besuch unserer Webseite können folgende Daten verarbeitet werden:</p>
         <ul>
-          <li>Name</li>
-          <li>E-Mail-Adresse</li>
-          <li>Telefonnummer (falls angegeben)</li>
-          <li>Nachrichten über das Kontaktformular</li>
-          <li>IP-Adresse</li>
-          <li>Datum und Uhrzeit des Webseitenbesuchs</li>
-          <li>technische Informationen des verwendeten Browsers und Betriebssystems</li>
+          <li>- Name</li>
+          <li>- E-Mail-Adresse</li>
+          <li>- Telefonnummer (falls angegeben)</li>
+          <li>- Nachrichten über das Kontaktformular</li>
+          <li>- IP-Adresse</li>
+          <li>- Datum und Uhrzeit des Webseitenbesuchs</li>
+          <li>- technische Informationen des verwendeten Browsers und Betriebssystems</li>
         </ul>
         <p>
-          Diese Daten werden ausschließlich zur Bereitstellung unserer Webseite, zur Bearbeitung Ihrer Anfragen sowie zur Verbesserung unseres Angebots verwendet.
+          Diese Daten werden ausschliesslich zur Bereitstellung unserer Webseite, zur Bearbeitung Ihrer Anfragen sowie zur Verbesserung unseres Angebots verwendet.
         </p>
 
         <h3>4. Kontaktformular</h3>
         <p>
-          Wenn Sie unser Kontaktformular verwenden, werden die von Ihnen eingegebenen Daten ausschließlich zur Bearbeitung Ihrer Anfrage genutzt.
+          Wenn Sie unser Kontaktformular verwenden, werden die von Ihnen eingegebenen Daten ausschliesslich zur Bearbeitung Ihrer Anfrage genutzt.
         </p>
         <p>
           Eine Weitergabe an Dritte erfolgt nicht, sofern keine gesetzliche Verpflichtung besteht oder dies zur Bearbeitung Ihrer Anfrage erforderlich ist.
@@ -120,7 +82,7 @@ const base = '/';
           Auf unserer Webseite werden Bilder unserer Dienstleistungen sowie unserer Mitarbeiter veröffentlicht.
         </p>
         <p>
-          Die Veröffentlichung erfolgt ausschließlich mit Zustimmung der betroffenen Personen oder auf Grundlage eigener Aufnahmen.
+          Die Veröffentlichung erfolgt ausschliesslich mit Zustimmung der betroffenen Personen oder auf Grundlage eigener Aufnahmen.
         </p>
 
         <h3>7. Kartenmaterial</h3>
@@ -141,17 +103,17 @@ const base = '/';
 
         <h3>9. Datensicherheit</h3>
         <p>
-          Wir setzen angemessene technische und organisatorische Maßnahmen ein, um Ihre personenbezogenen Daten vor Verlust, Missbrauch oder unbefugtem Zugriff zu schützen.
+          Wir setzen angemessene technische und organisatorische Massnahmen ein, um Ihre personenbezogenen Daten vor Verlust, Missbrauch oder unbefugtem Zugriff zu schützen.
         </p>
 
         <h3>10. Ihre Rechte</h3>
         <p>Sie haben im Rahmen der gesetzlichen Bestimmungen insbesondere das Recht auf:</p>
         <ul>
-          <li>Auskunft über Ihre gespeicherten Daten</li>
-          <li>Berichtigung unrichtiger Daten</li>
-          <li>Löschung Ihrer personenbezogenen Daten, soweit keine gesetzlichen Aufbewahrungspflichten bestehen</li>
-          <li>Einschränkung der Verarbeitung</li>
-          <li>Widerruf einer erteilten Einwilligung für zukünftige Verarbeitungen</li>
+          <li>- Auskunft über Ihre gespeicherten Daten</li>
+          <li>- Berichtigung unrichtiger Daten</li>
+          <li>- Löschung Ihrer personenbezogenen Daten, soweit keine gesetzlichen Aufbewahrungspflichten bestehen</li>
+          <li>- Einschränkung der Verarbeitung</li>
+          <li>- Widerruf einer erteilten Einwilligung für zukünftige Verarbeitungen</li>
         </ul>
         <p>
           Zur Ausübung Ihrer Rechte können Sie uns jederzeit kontaktieren.

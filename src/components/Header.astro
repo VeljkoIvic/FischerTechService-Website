@@ -1,0 +1,50 @@
+---
+import FisherLogo from "../Photos/FisherTechService.jpeg?url";
+
+const base = '/';
+---
+
+<header>
+  <div class="header-container">
+    <img src={FisherLogo} alt="FisherTechService Logo" class="logo">
+    <h1>FisherTechService</h1>
+  </div>
+  <nav>
+    <ul class="main-nav">
+      <li>
+        <a href={base}>Home</a>
+        <ul class="dropdown">
+          <li><a href={`${base}#start`}>Willkommen</a></li>
+          <li><a href={`${base}#kennzahlen`}>Kennzahlen</a></li>
+          <li><a href={`${base}#social-media`}>Social Media</a></li>
+          <li><a href={`${base}#location`}>Karte</a></li>
+        </ul>
+      </li>
+
+
+      <li>
+        <a href={`${base}about`}>Services</a>
+        <ul class="dropdown">
+          <li><a href={`${base}about#services`}>Services</a></li>
+          <li><a href={`${base}about#kontakt`}>Kontakt</a></li>
+        </ul>
+      </li>
+
+
+      <li>
+        <a href={`${base}uns`}>Über Uns</a>
+        <ul class="dropdown">
+          <li><a href={`${base}uns#team`}>Team</a></li>
+        </ul>
+      </li>
+
+
+      <li>
+        <a href={`${base}projekt`}>Projekt</a>
+        <ul class="dropdown">
+          <li><a href={`${base}projekt#community`}>Community</a></li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+</header>

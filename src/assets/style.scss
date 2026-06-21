@@ -95,7 +95,15 @@ body {
 }
 
 main {
-  flex: 1 0 auto;
+  flex: 0 0 auto;
+}
+
+main.legal-page-shell {
+  flex: 0 0 auto;
+  background: transparent;
+  box-shadow: none;
+  border-radius: 0;
+  margin-bottom: 0;
 }
 
 /* Desktop: Hintergrund mit Pattern */
@@ -532,6 +540,10 @@ article section {
 article section:not(:last-child) {
   border-bottom: 1px solid #e0e0e0;
   margin-bottom: 32px;
+}
+
+main.legal-page-shell .legal-page-content {
+  width: 100%;
 }
 
 /* Lists */
