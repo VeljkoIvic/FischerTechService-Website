@@ -1,0 +1,175 @@
+---
+import FisherLogo from "../Photos/FisherTechService.jpeg?url";
+import Footer from "../components/Footer.astro";
+import "../assets/style.scss";
+
+const base = '/';
+---
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Datenschutz | FisherTechService</title>
+</head>
+<body>
+  <header>
+    <div class="header-container">
+      <img src={FisherLogo} alt="FisherTechService Logo" class="logo">
+      <h1>FisherTechService</h1>
+    </div>
+    <nav>
+      <ul class="main-nav">
+        <li>
+          <a href={base}>Home</a>
+          <ul class="dropdown">
+            <li><a href={`${base}#start`}>Willkommen</a></li>
+            <li><a href={`${base}#kennzahlen`}>Kennzahlen</a></li>
+            <li><a href={`${base}#social-media`}>Social Media</a></li>
+            <li><a href={`${base}#location`}>Karte</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href={`${base}about`}>Services</a>
+          <ul class="dropdown">
+            <li><a href={`${base}about#services`}>Services</a></li>
+            <li><a href={`${base}about#kontakt`}>Kontakt</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href={`${base}uns`}>Über Uns</a>
+          <ul class="dropdown">
+            <li><a href={`${base}uns#team`}>Team</a></li>
+            <li><a href={`${base}uns#video`}>Video</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href={`${base}projekt`}>Projekt</a>
+          <ul class="dropdown">
+            <li><a href={`${base}projekt#overview`}>Überblick</a></li>
+            <li><a href={`${base}projekt#details`}>Fachbegriffe</a></li>
+            <li><a href={`${base}projekt#community`}>Community</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <article>
+      <section class="legal-page">
+        <h2>Datenschutzerklärung</h2>
+
+        <h3>1. Allgemeines</h3>
+        <p>
+          Der Schutz Ihrer persönlichen Daten ist uns ein wichtiges Anliegen. In dieser Datenschutzerklärung informieren wir Sie darüber, welche personenbezogenen Daten beim Besuch der Webseite von Fischer Tech Service erhoben und zu welchem Zweck diese verarbeitet werden.
+        </p>
+        <p>
+          Die Bearbeitung personenbezogener Daten erfolgt nach den Bestimmungen des Schweizer Datenschutzgesetzes (revDSG). Sofern anwendbar, berücksichtigen wir zusätzlich die Vorgaben der Datenschutz-Grundverordnung (DSGVO).
+        </p>
+
+        <h3>2. Verantwortliche Stelle</h3>
+        <p>
+          <strong>Fischer Tech Service</strong><br>
+          Inhaber: [Vorname Nachname]<br>
+          Adresse: [Strasse, PLZ, Ort]<br>
+          E-Mail: [E-Mail-Adresse]<br>
+          Telefon: [Telefonnummer]
+        </p>
+
+        <h3>3. Erhebung und Verarbeitung personenbezogener Daten</h3>
+        <p>Beim Besuch unserer Webseite können folgende Daten verarbeitet werden:</p>
+        <ul>
+          <li>Name</li>
+          <li>E-Mail-Adresse</li>
+          <li>Telefonnummer (falls angegeben)</li>
+          <li>Nachrichten über das Kontaktformular</li>
+          <li>IP-Adresse</li>
+          <li>Datum und Uhrzeit des Webseitenbesuchs</li>
+          <li>technische Informationen des verwendeten Browsers und Betriebssystems</li>
+        </ul>
+        <p>
+          Diese Daten werden ausschließlich zur Bereitstellung unserer Webseite, zur Bearbeitung Ihrer Anfragen sowie zur Verbesserung unseres Angebots verwendet.
+        </p>
+
+        <h3>4. Kontaktformular</h3>
+        <p>
+          Wenn Sie unser Kontaktformular verwenden, werden die von Ihnen eingegebenen Daten ausschließlich zur Bearbeitung Ihrer Anfrage genutzt.
+        </p>
+        <p>
+          Eine Weitergabe an Dritte erfolgt nicht, sofern keine gesetzliche Verpflichtung besteht oder dies zur Bearbeitung Ihrer Anfrage erforderlich ist.
+        </p>
+
+        <h3>5. Community und Diskussionen</h3>
+        <p>
+          Unsere Webseite bietet die Möglichkeit, Beiträge oder Kommentare zu veröffentlichen.
+        </p>
+        <p>
+          Bitte beachten Sie, dass veröffentlichte Inhalte für andere Besucher sichtbar sein können.
+        </p>
+        <p>
+          Wir bitten Sie deshalb, keine sensiblen oder vertraulichen personenbezogenen Daten in öffentlichen Beiträgen zu veröffentlichen.
+        </p>
+        <p>
+          Wir behalten uns vor, Beiträge zu bearbeiten oder zu entfernen, sofern diese gegen geltendes Recht oder unsere Community-Regeln verstoßen.
+        </p>
+
+        <h3>6. Bilder und Inhalte</h3>
+        <p>
+          Auf unserer Webseite werden Bilder unserer Dienstleistungen sowie unserer Mitarbeiter veröffentlicht.
+        </p>
+        <p>
+          Die Veröffentlichung erfolgt ausschließlich mit Zustimmung der betroffenen Personen oder auf Grundlage eigener Aufnahmen.
+        </p>
+
+        <h3>7. Kartenmaterial</h3>
+        <p>
+          Sofern auf unserer Webseite eine Kartenansicht eingebunden ist, können beim Laden der Karte technische Daten (z. B. Ihre IP-Adresse) an den jeweiligen Kartendienst übermittelt werden.
+        </p>
+        <p>
+          Weitere Informationen finden Sie in den Datenschutzbestimmungen des jeweiligen Anbieters.
+        </p>
+
+        <h3>8. Cookies</h3>
+        <p>
+          Unsere Webseite kann Cookies verwenden, um die Benutzerfreundlichkeit und Funktionalität sicherzustellen.
+        </p>
+        <p>
+          Sie können Ihren Browser so konfigurieren, dass Cookies eingeschränkt oder vollständig deaktiviert werden.
+        </p>
+
+        <h3>9. Datensicherheit</h3>
+        <p>
+          Wir setzen angemessene technische und organisatorische Maßnahmen ein, um Ihre personenbezogenen Daten vor Verlust, Missbrauch oder unbefugtem Zugriff zu schützen.
+        </p>
+
+        <h3>10. Ihre Rechte</h3>
+        <p>Sie haben im Rahmen der gesetzlichen Bestimmungen insbesondere das Recht auf:</p>
+        <ul>
+          <li>Auskunft über Ihre gespeicherten Daten</li>
+          <li>Berichtigung unrichtiger Daten</li>
+          <li>Löschung Ihrer personenbezogenen Daten, soweit keine gesetzlichen Aufbewahrungspflichten bestehen</li>
+          <li>Einschränkung der Verarbeitung</li>
+          <li>Widerruf einer erteilten Einwilligung für zukünftige Verarbeitungen</li>
+        </ul>
+        <p>
+          Zur Ausübung Ihrer Rechte können Sie uns jederzeit kontaktieren.
+        </p>
+
+        <h3>11. Änderungen dieser Datenschutzerklärung</h3>
+        <p>
+          Wir behalten uns vor, diese Datenschutzerklärung jederzeit anzupassen, damit sie den aktuellen rechtlichen Anforderungen entspricht oder Änderungen unserer Leistungen berücksichtigt.
+        </p>
+        <p>
+          Es gilt jeweils die auf dieser Webseite veröffentlichte Version.
+        </p>
+
+        <p><strong>Stand:</strong> Juni 2026</p>
+      </section>
+    </article>
+  </main>
+
+  <Footer />
+</body>
+</html>

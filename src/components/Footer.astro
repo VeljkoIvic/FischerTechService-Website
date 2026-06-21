@@ -1,0 +1,22 @@
+---
+const legalLinks = [
+  { href: '/datenschutz', label: 'Datenschutz' },
+  { href: '/impressum', label: 'Impressum' },
+];
+---
+
+<footer class="site-footer">
+  <div class="site-footer__inner">
+    <nav aria-label="Rechtliche Links">
+      <ul class="site-footer__legal-links">
+        {legalLinks.map((link) => (
+          <li>
+            <a href={link.href}>{link.label}</a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+    <p>&copy; 2026 Fischer Tech Service | V. Ivic &amp; D. Ivic | Schweiz</p>
+    <p><a href="mailto:info@fishertechservice.ch">info@fishertechservice.ch</a> | Tel: +41 76 567 10 07</p>
+  </div>
+</footer>

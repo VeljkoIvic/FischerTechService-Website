@@ -86,9 +86,16 @@ body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0;
   padding: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
   background-color: #F3F5F7;
   color: #2c3e50;
   line-height: 1.8;
+}
+
+main {
+  flex: 1 0 auto;
 }
 
 /* Desktop: Hintergrund mit Pattern */
@@ -754,27 +761,41 @@ dd {
 }
 
 /* Footer */
-footer {
+footer.site-footer {
   background-color: #4F5B66;
   color: #FFFFFF;
   text-align: center;
   padding: 24px;
-  margin-top: 40px;
-  clear: both;
+  margin-top: auto;
 }
 
-footer p {
+.site-footer__inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.site-footer__legal-links {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  flex-wrap: wrap;
+  margin: 0 0 12px;
+  padding: 0;
+}
+
+.site-footer p {
   margin: 8px 0;
   font-size: 0.95em;
 }
 
-footer a {
+.site-footer a {
   color: #1BB8E3;
   text-decoration: none;
   font-weight: 600;
 }
 
-footer a:hover {
+.site-footer a:hover {
   color: #FFFFFF;
   text-decoration: underline;
 }
@@ -791,6 +812,10 @@ footer a:hover {
   .hero {
     grid-template-columns: 1fr;
     gap: 24px;
+  }
+
+  .site-footer__legal-links {
+    gap: 12px;
   }
 
   header h1 {
