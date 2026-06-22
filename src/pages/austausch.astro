@@ -1,0 +1,55 @@
+---
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import "../assets/style.scss";
+---
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Austausch | FisherTechService</title>
+</head>
+<body>
+  <Header />
+  <main>
+    <section class="community-section subpage-hero">
+      <span class="eyebrow">Community · Austausch</span>
+      <h2>Von Fischern für Fischer.</h2>
+      <p class="section-intro">Teile deine Erfahrungen, diskutiere Lösungen und profitiere vom Wissen der Community.</p>
+      <div class="discussion-list">
+        <article class="discussion-card">
+          <div class="discussion-card__avatar">TM</div>
+          <div>
+            <div class="discussion-card__meta"><strong>Thomas Müller</strong><span>vor 8 Stunden</span></div>
+            <p>Meine ältere Spinnrute fühlt sich beim Werfen nicht mehr sauber an. Woran könnte das liegen?</p>
+            <a href="#antwort">Antworten</a>
+          </div>
+        </article>
+        <article class="discussion-card discussion-card--answer">
+          <div class="discussion-card__avatar">VI</div>
+          <div>
+            <div class="discussion-card__meta"><strong>V. Ivic · FisherTechService</strong><span>vor 5 Stunden</span></div>
+            <p>Häufig sind abgenutzte Ringe, kleine Schäden am Blank oder eine verschmutzte Rollenhalterung die Ursache. Wir prüfen vorab, ob sich ein Service lohnt.</p>
+          </div>
+        </article>
+        <article class="discussion-card">
+          <div class="discussion-card__avatar">GE</div>
+          <div>
+            <div class="discussion-card__meta"><strong>Gabriel Eric</strong><span>vor 1 Stunde</span></div>
+            <p>Wie oft lasst ihr eure Rollen warten, auch wenn noch keine Schäden sichtbar sind?</p>
+            <a href="#antwort">Antworten</a>
+          </div>
+        </article>
+      </div>
+      <div id="antwort" class="community-compose">
+        <label for="community-message">Deinen Beitrag schreiben</label>
+        <textarea id="community-message" class="textarea" rows="5" placeholder="Teile eine Erfahrung oder starte eine Diskussion..."></textarea>
+        <button class="button is-primary" type="button">Beitrag vorbereiten</button>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</body>
+</html>

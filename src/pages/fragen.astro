@@ -1,0 +1,36 @@
+---
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import "../assets/style.scss";
+---
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fragen | FisherTechService</title>
+</head>
+<body>
+  <Header />
+  <main>
+    <section class="subpage-hero faq-page">
+      <span class="eyebrow">Community · Fragen</span>
+      <h2>Gute Fragen verdienen klare Antworten.</h2>
+      <p class="section-intro">Hier findest du die wichtigsten Informationen zu unserem Service und zur Pflege deiner Ausrüstung.</p>
+      <div class="faq-list">
+        <details open><summary>Wie oft sollte eine Angelrolle gewartet werden?</summary><p>Bei regelmäßiger Nutzung empfehlen wir eine Kontrolle einmal pro Saison. Nach Salzwassereinsätzen sollte die Rolle zeitnah gereinigt werden.</p></details>
+        <details><summary>Welche Reparaturen führt ihr durch?</summary><p>Wir übernehmen unter anderem Reinigung, Wartung, Lagerwechsel, Instandsetzung, Tuning sowie die Kontrolle von Rutenringen und Rollenhaltern.</p></details>
+        <details><summary>Wie lange dauert ein Service?</summary><p>Die Dauer hängt vom Zustand und von benötigten Ersatzteilen ab. Nach der ersten Prüfung erhältst du eine realistische Einschätzung.</p></details>
+        <details><summary>Lohnt sich die Reparatur älterer Ausrüstung?</summary><p>Oft ja. Wir prüfen Zustand, Ersatzteilverfügbarkeit und Aufwand transparent, bevor Kosten entstehen.</p></details>
+        <details><summary>Kann ich vorab ein Foto senden?</summary><p>Ja. Sende uns Bilder und eine kurze Beschreibung per E-Mail oder nutze das Kontaktformular für eine erste Einschätzung.</p></details>
+      </div>
+      <div class="faq-cta">
+        <div><strong>Deine Frage ist noch offen?</strong><p>Beschreibe uns kurz dein Anliegen – wir melden uns persönlich.</p></div>
+        <a class="button-primary" href="/about#kontakt">Frage stellen</a>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</body>
+</html>

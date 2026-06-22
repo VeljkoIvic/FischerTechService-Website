@@ -9,121 +9,34 @@ import "../assets/style.scss";
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Projektbeschrieb | FisherTechService</title>
-  
+  <title>Projekt | FisherTechService</title>
 </head>
 <body>
   <Header />
-
   <main>
-    <article>
-    <!-- Community & Diskussionen Bereich -->
-    <section id="community" class="community-section">
-      <span class="eyebrow">Gemeinsam besser am Wasser</span>
-      <h2>Community & Diskussionen</h2>
-      <p class="section-intro">Tausche dich mit anderen Angelbegeisterten aus, stelle Fragen und teile deine Erfahrungen!</p>
-
-      <!-- Existierende Fragen & Antworten -->
-      <article class="media">
-
-        <div class="media-content">
-          <div class="content">
-            <p>
-              <strong>Thomas Müller</strong>
-              <br />
-              Ich habe eine ältere Spinnrute, die sich beim Werfen nicht mehr sauber anfühlt. Woran kann das liegen und lohnt sich ein Service noch?
-              <br />
-              <small><a href="#like">👍 Gefällt mir</a> · <a href="#reply">Antworten</a> · vor 8 Stunden</small>
-            </p>
-          </div>
-
-          <!-- Verschachtelte Frage 1 -->
-          <article class="media">
-            <div class="media-content">
-              <div class="content">
-                <p>
-                  <strong>V.Ivic</strong>
-                  <br />
-                   Das liegt oft an abgenutzten Ringen, kleinen Beschädigungen am Blank oder einer verschmutzten Rollenhalterung. In vielen Fällen lohnt sich ein Service definitiv, da schon kleine Reparaturen die Performance deutlich verbessern können. Vorab prüfen wir immer, ob sich der Aufwand sinnvoll lohnt.
-                  <br />
-                  <small><a href="#like">👍 Gefällt mir</a> · <a href="#reply">Antworten</a> · vor 5 Stunden</small>
-                </p>
-              </div>
-
-              <!-- Verschachtelte Antwort von Antwort 1 -->
-              <!--
-              <article class="media">
-                <div class="media-content">
-                  <div class="content">
-                    <p>
-                      <strong>Name</strong>
-                      <br />
-                      Text
-                      <br />
-                      <small><a href="#like">👍 Gefällt mir</a> · <a href="#reply">Antworten</a> · vor 1 Stunde</small>
-                    </p>
-                  </div>
-                </article>
-              -->
-              </div>
-            </article>
-          </div>
-
-          <!-- Verschachtelte Antwort 2 -->
-          <!--
-          <article class="media">
-            <div class="media-content">
-              <div class="content">
-                <p>
-                  <strong>David Müller</strong>
-                  <br />
-                  Ich bin auch interessiert! Wie lange dauert so ein Tausch bei euch?
-                  <br />
-                  <small><a href="#like">👍 Gefällt mir</a> · <a href="#reply">Antworten</a> · vor 1 Stunde</small>
-                </p>
-              </div>
-            </article>
-            -->
-
-        <!-- Verschachtelte Frage 2 -->
-        <div class="media-content">
-          <div class="content">
-            <p>
-              <strong>Gabriel Eric</strong>
-              <br />
-              Wie oft sollte man Angelruten und Rollen grundsätzlich warten lassen, auch wenn keine sichtbaren Schäden vorhanden sind?
-              <br />
-              <small><a href="#like">👍 Gefällt mir</a> · <a href="#reply">Antworten</a> · vor 1 Stunden</small>
-            </p>
-          </div>
-          </div>
-        </div>
-      </article>
-      
-
-      <!-- Neue Frage hinzufügen -->
-      <article class="media">
-        <div class="media-content">
-          <div class="field">
-            <label class="label">Deine Frage stellen</label>
-            <p class="control">
-              <textarea class="textarea" placeholder="Stelle deine Frage zur Rutenwartung, zum Tuning oder zu unseren Services..." rows="0"></textarea>
-            </p>
-          </div>
-          <div class="field is-grouped">
-            <p class="control">
-              <button class="button is-primary">Frage posten</button>
-            </p>
-            <p class="control">
-              <button class="button">Verwerfen</button>
-            </p>
-          </div>
-        </div>
-      </article>
+    <section class="project-intro">
+      <span class="eyebrow">Unsere Community</span>
+      <h2>Wissen, Erfahrungen und besondere Momente teilen.</h2>
+      <p class="section-intro">Wähle den Bereich, der dich interessiert. Tausche dich mit anderen Fischern aus, finde Antworten auf häufige Fragen oder entdecke Bilder aus unserer Werkstatt und vom Wasser.</p>
+      <div class="project-grid">
+        <a class="project-card" href="/austausch">
+          <span class="project-card__icon" aria-hidden="true">↔</span><span class="project-card__number">01</span>
+          <h3>Austausch</h3><p>Erfahrungen teilen, diskutieren und voneinander lernen.</p>
+          <span class="project-card__link">Zum Austausch →</span>
+        </a>
+        <a class="project-card" href="/fragen">
+          <span class="project-card__icon" aria-hidden="true">?</span><span class="project-card__number">02</span>
+          <h3>Fragen</h3><p>Antworten rund um Wartung, Reparatur und Tuning finden.</p>
+          <span class="project-card__link">Zu den Fragen →</span>
+        </a>
+        <a class="project-card project-card--accent" href="/galerie">
+          <span class="project-card__icon" aria-hidden="true">◇</span><span class="project-card__number">03</span>
+          <h3>Galerie</h3><p>Einblicke in unsere Arbeit, Projekte und Erlebnisse am Wasser.</p>
+          <span class="project-card__link">Zur Galerie →</span>
+        </a>
+      </div>
     </section>
-
   </main>
-
   <Footer />
 </body>
 </html>

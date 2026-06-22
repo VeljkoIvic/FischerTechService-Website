@@ -44,10 +44,15 @@ const base = '/';
 
 
       <li>
-        <a href={`${base}projekt`}>Projekt</a>
-        <ul class="dropdown">
-          <li><a href={`${base}projekt#community`}>Community</a></li>
-        </ul>
+        <details class="nav-more">
+          <summary>Mehr</summary>
+          <ul class="dropdown">
+            <li><a href={`${base}projekt`}>Übersicht</a></li>
+            <li><a href={`${base}austausch`}>Austausch</a></li>
+            <li><a href={`${base}fragen`}>Fragen</a></li>
+            <li><a href={`${base}galerie`}>Galerie</a></li>
+          </ul>
+        </details>
       </li>
     </ul>
   </nav>
