@@ -1,5 +1,6 @@
 ---
 import DIvicP3 from "../Photos/D.Ivic_P3.jpeg?url";
+import ServiceArbeiten2 from "../Photos/ServiceArbeiten2.jpeg?url";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import "../assets/style.scss";
@@ -27,10 +28,78 @@ import "../assets/style.scss";
           Wartung, Reparatur und Optimierung für Angelruten und Rollen – präzise ausgeführt und persönlich betreut.
         </p>
         <div class="hero__actions">
-          <a class="button-primary" href="/about#kontakt">Service anfragen</a>
-          <a class="button-secondary" href="/about#services">Leistungen entdecken</a>
+          <a class="button-primary" href="#kontakt">Service anfragen</a>
+          <a class="button-secondary" href="#services">Leistungen entdecken</a>
         </div>
       </div>
+    </section>
+
+    <section id="services" class="services-section">
+      <span class="eyebrow">Werkstatt &amp; Know-how</span>
+      <h2>Services</h2>
+
+      <figure class="float-right">
+        <img src={ServiceArbeiten2} alt="Servicearbeiten an Angelausrüstung">
+      </figure>
+
+      <p>
+        Bei Fisher Tech Service dreht sich alles um Präzision, Qualität und Leidenschaft fürs Angeln.
+        Wir bieten einen umfassenden Service für Wartung, Reparatur, Tuning und Individualisierung
+        von Angelruten und Rollen.
+      </p>
+      <p>
+        Jede Rute und jede Rolle wird sorgfältig geprüft, fachgerecht instand gesetzt und bei Bedarf
+        optimiert. Ob regelmässiger Service, gezielte Reparatur oder individuelles Custom-Build:
+        Wir behandeln deine Ausrüstung, als wäre es unsere eigene.
+      </p>
+      <p>
+        Von der einfachen Reinigung bis zur kompletten Überholung ist deine Ausrüstung bei uns in
+        den besten Händen. Alle Preise verstehen sich zuzüglich Materialkosten und Inspektion.
+      </p>
+    </section>
+
+    <section id="kontakt" class="contact-section">
+      <span class="eyebrow contact-heading">Persönlich für dich da</span>
+      <h2 class="contact-heading">Kontakt</h2>
+      <p class="contact-intro">
+        Hast du Fragen zu unseren Services oder möchtest du einen Termin vereinbaren?
+        Fülle das Formular aus und wir melden uns schnellstmöglich bei dir.
+      </p>
+
+      <form action="https://formsubmit.co/info@fishertechservice.ch" method="POST" class="contact-form">
+        <input type="hidden" name="_subject" value="Neue Kontaktanfrage von FisherTechService">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_template" value="table">
+
+        <div class="form-group">
+          <label class="sr-only" for="name">Vorname und Nachname</label>
+          <input type="text" id="name" name="name" required placeholder="Vorname / Nachname">
+        </div>
+        <div class="form-group">
+          <label class="sr-only" for="email">E-Mail</label>
+          <input type="email" id="email" name="email" required placeholder="E-Mail">
+        </div>
+        <div class="form-group">
+          <label class="sr-only" for="phone">Telefon</label>
+          <input type="tel" id="phone" name="phone" placeholder="Telefon">
+        </div>
+        <div class="form-group">
+          <label class="sr-only" for="service">Service wählen</label>
+          <select id="service" name="service">
+            <option value="" selected>Service wählen</option>
+            <option value="Reparatur">Reparatur</option>
+            <option value="Tuning">Tuning</option>
+            <option value="Beratung">Beratung</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="sr-only" for="message">Bemerkungen</label>
+          <textarea id="message" name="message" rows="6" required placeholder="Bemerkungen"></textarea>
+        </div>
+        <div class="form-group">
+          <button type="submit" class="submit-btn">Anfrage senden</button>
+        </div>
+      </form>
     </section>
 
     <section class="partner-section" aria-labelledby="partner-title">
