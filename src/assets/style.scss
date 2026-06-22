@@ -1934,3 +1934,98 @@ footer.site-footer {
     grid-column: span 1;
   }
 }
+
+// Ruhiges Layout fuer Fragen und Austausch
+.subpage-hero {
+  width: 100%;
+  max-width: 1180px;
+  min-height: auto;
+  margin: 0 auto;
+  padding: clamp(18px, 3vw, 36px) 0;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.subpage-hero:hover {
+  box-shadow: none;
+}
+
+.subpage-hero > h2 {
+  max-width: 760px;
+  margin-bottom: 20px;
+  font-size: clamp(2.35rem, 4vw, 4.25rem);
+}
+
+.subpage-hero > .section-intro {
+  max-width: 720px;
+  margin-top: 0;
+  margin-bottom: 42px;
+}
+
+.faq-list,
+.discussion-list,
+.community-compose,
+.faq-cta {
+  width: 100%;
+  max-width: none;
+}
+
+.faq-list {
+  gap: 14px;
+}
+
+.faq-list details {
+  background: var(--surface);
+  border-color: var(--line);
+  box-shadow: 0 10px 28px rgba(9, 42, 52, 0.06);
+}
+
+.faq-list summary {
+  padding: 23px 64px 23px 26px;
+  font-size: 1.05rem;
+}
+
+.faq-list details p {
+  max-width: 850px;
+  padding: 0 26px 24px;
+}
+
+.community-section article.discussion-card {
+  padding: clamp(20px, 3vw, 28px);
+  background: var(--surface);
+  box-shadow: 0 10px 28px rgba(9, 42, 52, 0.06);
+}
+
+.community-section article.discussion-card--answer {
+  margin-left: clamp(24px, 6vw, 80px);
+  background: var(--aqua-soft);
+  box-shadow: none;
+}
+
+.community-compose {
+  margin-top: 26px;
+}
+
+@media (max-width: 600px) {
+  .subpage-hero {
+    padding: 10px 0 24px;
+  }
+
+  .subpage-hero > h2 {
+    font-size: 2.35rem;
+  }
+
+  .subpage-hero > .section-intro {
+    margin-bottom: 28px;
+  }
+
+  .faq-list summary {
+    padding: 20px 46px 20px 20px;
+  }
+
+  .community-section article.discussion-card--answer {
+    margin-left: 14px;
+  }
+}
