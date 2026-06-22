@@ -1,36 +1,43 @@
---Aufgabe 22--
-Betrieb und Wartung
+# Fischer Tech Service
 
-1. Betriebskonzept:
-Die Website FisherTechService wird als statische Website mit Astro, SCSS und Bulma betrieben. Inhalte und Styles werden lokal entwickelt, gebaut und anschliessend als statische Dateien ausgeliefert.
+Diese Website präsentiert Fischer Tech Service als modernen und persönlichen Ansprechpartner für Servicearbeiten rund um Angelruten und Rollen. Im Mittelpunkt stehen Qualität, Präzision und ein direkter Draht zu den Kundinnen und Kunden. Die Seite stellt die wichtigsten Leistungen übersichtlich vor, erklärt den Ablauf des Services und macht es einfach, über das Kontaktformular eine Anfrage zu senden.
 
-2. Komponenten der Software
-- Astro: Static Site Generator für HTML-Ausgabe
-- SCSS + Bulma: Styling mit modularen Komponenten
-- Statische Assets: Bilder aus public/ und src/Photos/
-- Build-Output: Statische Dateien in dist/
+Das Projekt wurde mit Astro umgesetzt und mit Bulma sowie Sass gestaltet. Dadurch entsteht eine schnelle, responsive und saubere Website, die auf Desktop und mobilen Geräten gut funktioniert. Neben der Startseite umfasst das Projekt weitere Informationsseiten wie Impressum, Datenschutz, Über uns, Galerie, Austausch und Fragen.
 
-3. Relevante Commands
-- NPM:
-   - npm install      # Abhängigkeiten installieren
-   - npm run dev      # Entwicklungsserver starten
-   - npm run build    # Produktions-Build erzeugen
-   - npm run preview  # Build lokal testen
-- Yarn:
-   - yarn install     # Abhängigkeiten installieren
-   - yarn dev         # Entwicklungsserver starten
-   - yarn build       # Produktions-Build erzeugen
-   - yarn preview     # Build lokal testen
+Besonders wichtig war bei der Umsetzung ein klarer und vertrauenswürdiger Auftritt. Die Inhalte sind bewusst auf das Unternehmen zugeschnitten und verbinden handwerkliche Kompetenz mit einer einfachen, benutzerfreundlichen Struktur. So entsteht eine Website, die nicht nur informiert, sondern auch professionell zum Projekt und zum Angebot von Fischer Tech Service passt.
 
-4. Website aktualisieren
-- Inhalte werden in src/pages/*.astro angepasst
-- Styles werden in src/assets/style.scss geändert
-- Änderungen werden lokal getestet, danach gebaut und deployt
+## Projekt
 
-5. Auslieferung zum Browser
-- Die Website wird statisch aus dem dist/-Ordner ausgeliefert
-- Hosting erfolgt z. B. über GitHub Pages, Vercel, Netlify oder Nginx
-- Der Browser lädt direkt HTML, CSS und Bilder (kein Backend notwendig)
+- Website für Fischer Tech Service
+- Fokus auf Service, Reparatur, Tuning und Beratung für Angelausrüstung
+- Kontaktaufnahme direkt über ein Formular
+- Moderne, einfache und mobile Darstellung
 
-6. Fazit
-Der Betrieb ist einfach, wartungsarm und performant, da nur statische Dateien ausgeliefert werden. Updates erfolgen kontrolliert über den Build-Prozess und Deployment.
+## Technische Basis
+
+- Astro
+- Bulma
+- Sass
+
+## Seiten im Projekt
+
+- Startseite
+- Über uns
+- Leistungen / Austausch
+- Galerie
+- Fragen
+- Impressum
+- Datenschutz
+
+## Lokale Entwicklung
+
+```bash
+npm.cmd install
+npm.cmd run dev
+```
+
+Für den Produktions-Build:
+
+```bash
+npm.cmd run build
+```
