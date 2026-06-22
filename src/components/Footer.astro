@@ -7,7 +7,17 @@ const legalLinks = [
 
 <footer class="site-footer">
   <div class="site-footer__inner">
-    <nav aria-label="Rechtliche Links">
+    <div class="site-footer__brand">
+      <strong>FisherTechService</strong>
+      <p>Technischer Service für Angelruten und Rollen – sorgfältig, persönlich und zuverlässig.</p>
+    </div>
+    <div class="site-footer__contact">
+      <span>Kontakt</span>
+      <a href="mailto:info@fishertechservice.ch">info@fishertechservice.ch</a>
+      <a href="tel:+41765671007">+41 76 567 10 07</a>
+    </div>
+    <nav class="site-footer__nav" aria-label="Rechtliche Links">
+      <span>Informationen</span>
       <ul class="site-footer__legal-links">
         {legalLinks.map((link) => (
           <li>
@@ -16,7 +26,6 @@ const legalLinks = [
         ))}
       </ul>
     </nav>
-    <p>&copy; 2026 Fischer Tech Service | V. Ivic &amp; D. Ivic</p>
-    <p><a href="mailto:info@fishertechservice.ch">info@fishertechservice.ch</a> | Tel: +41 76 567 10 07</p>
   </div>
+  <div class="site-footer__bottom">&copy; 2026 Fischer Tech Service · V. Ivic &amp; D. Ivic</div>
 </footer>

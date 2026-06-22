@@ -24,27 +24,25 @@ import "../assets/style.scss";
 
   <main>
     <section class="hero">
-      <h2 class="hero-title">Willkommen bei FisherTechService</h2>
-      <figure>
+      <span class="eyebrow">Schweizer Familienunternehmen</span>
+      <h2 class="hero-title">Service, auf den du dich verlassen kannst.</h2>
+      <figure class="hero__visual">
         <img src={DIvicP3} alt="Fischer Tech Service Team">
       </figure>
-      <div>
-        <p>
-          FisherTechService steht für präzisen Service, echte Leidenschaft und technische Kompetenz rund um Angelruten und Rollen.
-          Wir kümmern uns um Wartung, Reparatur und Optimierung, damit dein Equipment zuverlässig funktioniert, wenn es darauf ankommt.
-        </p> 
-
-        <p> 
-          Mit viel Erfahrung, hochwertigen Ersatzteilen und Liebe zum Detail sorgen wir dafür,
-          dass deine Ausrüstung in bestem Zustand bleibt, vom einfachen Service bis zur individuellen Lösung.
-        </p> 
-          Technik. Erfahrung. Leidenschaft fürs Angeln.
+      <div class="hero__content">
+        <p class="hero__lead">
+          Wartung, Reparatur und Optimierung für Angelruten und Rollen – präzise ausgeführt und persönlich betreut.
         </p>
+        <div class="hero__actions">
+          <a class="button-primary" href="/about#kontakt">Service anfragen</a>
+          <a class="button-secondary" href="/about#services">Leistungen entdecken</a>
+        </div>
       </div>
     </section>
 
     <section id="kennzahlen" class="section">
-      <h2>Kennzahlen</h2>
+      <span class="eyebrow">Was uns auszeichnet</span>
+      <h2>Erfahrung, die man spürt</h2>
       <div class="columns is-multiline is-centered">
         <div class="column is-3">
           <div class="box has-text-centered">
@@ -74,7 +72,8 @@ import "../assets/style.scss";
     </section>
     
     <section id="social-media">
-      <h2>Social Media</h2>
+      <span class="eyebrow">Einblicke in unsere Arbeit</span>
+      <h2>Folge uns am Wasser und in der Werkstatt</h2>
       <div class="social-media-container">
         <div class="social-links">
           <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer" class="social-icon instagram">
@@ -97,7 +96,8 @@ import "../assets/style.scss";
     </section>
     
     <section id="location">
-      <h2>Kartenansicht</h2>
+      <span class="eyebrow">Direkt vor Ort</span>
+      <h2>Du findest uns in Zürich</h2>
       <div id="map"></div>
     </section>
   </main>

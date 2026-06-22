@@ -5,11 +5,15 @@ const base = '/';
 ---
 
 <header>
-  <div class="header-container">
-    <img src={FisherLogo} alt="FisherTechService Logo" class="logo">
-    <h1>FisherTechService</h1>
-  </div>
-  <nav>
+  <div class="site-header__inner">
+    <a class="brand" href={base} aria-label="FisherTechService Startseite">
+      <img src={FisherLogo} alt="" class="logo">
+      <span class="brand__text">
+        <strong>FisherTechService</strong>
+        <small>Service. Präzision. Leidenschaft.</small>
+      </span>
+    </a>
+  <nav aria-label="Hauptnavigation">
     <ul class="main-nav">
       <li>
         <a href={base}>Home</a>
@@ -47,4 +51,6 @@ const base = '/';
       </li>
     </ul>
   </nav>
+    <a class="header-cta" href={`${base}about#kontakt`}>Service anfragen</a>
+  </div>
 </header>
