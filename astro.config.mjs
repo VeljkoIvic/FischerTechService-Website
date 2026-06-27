@@ -3,6 +3,8 @@ import { defineConfig } from 'astro/config';
 
 // https://astro.build/config
 export default defineConfig({
+  // Produktions-Domain (für korrekte Canonical-URLs / Sitemap).
+  site: 'https://www.fishertechservice.ch',
   redirects: {
     '/about': '/#services',
   },
@@ -10,11 +12,12 @@ export default defineConfig({
     css: {
       preprocessorOptions: {
         scss: {
-          api: 'legacy',
-          // Enable SCSS minification in production builds
-          // Development: 'expanded' for readability
-          // Production: 'compressed' for minimal file size
-          outputStyle: 'compressed',
+          // Moderne Sass-API (sass-embedded) statt der veralteten Legacy-JS-API.
+          api: 'modern-compiler',
+          // Bulma nutzt intern noch veraltetes if()-Syntax; quietDeps blendet
+          // Deprecation-Warnungen aus node_modules aus, ohne eigene Styles
+          // stummzuschalten. Die finale CSS-Minifizierung übernimmt Astro.
+          quietDeps: true,
         },
       },
     },

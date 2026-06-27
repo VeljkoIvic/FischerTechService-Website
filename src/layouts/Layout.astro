@@ -1,25 +1,51 @@
+---
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import "../assets/style.scss";
+
+/**
+ * Seitenweites Layout: rendert das HTML-Grundgerüst (head inkl. Favicons,
+ * Header und Footer) einmal zentral. Seiten liefern nur ihren <main>-Inhalt
+ * über den <slot>. So bleiben Favicons, Sprache und Meta-Tags konsistent.
+ */
+interface Props {
+  /** Inhalt des <title>; wird mit dem Markennamen kombiniert. */
+  title: string;
+  /** Meta-Description für Suchmaschinen/Vorschau. */
+  description?: string;
+}
+
+const {
+  title,
+  description = "Technischer Service für Angelruten und Rollen – Wartung, Reparatur und Tuning, sorgfältig und persönlich.",
+} = Astro.props;
+
+const fullTitle = `${title} | FisherTechService`;
+---
+
 <!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=3" />
-		<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=3" />
-		<link rel="icon" type="image/png" href="/favicon.png?v=3" />
-		<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=3" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body>
-		<slot />
-	</body>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=3" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=3" />
+    <link rel="icon" type="image/png" href="/favicon.png?v=3" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=3" />
+    <title>{fullTitle}</title>
+  </head>
+  <body>
+    <Header />
+    <slot />
+    <Footer />
+  </body>
 </html>
 
 <style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
+  html,
+  body {
+    margin: 0;
+    width: 100%;
+  }
 </style>

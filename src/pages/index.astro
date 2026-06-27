@@ -1,26 +1,10 @@
 ---
+import Layout from "../layouts/Layout.astro";
 import RollenBild3 from "../Photos/RollenBild3.png?url";
 import RollenBild2 from "../Photos/RollenBild2.png?url";
-import MickeysTackleLogo from "../Photos/Mickeys_Tackle_Blau_170.png?url";
-import Header from "../components/Header.astro";
-import Footer from "../components/Footer.astro";
-import "../assets/style.scss";
 ---
 
-<!DOCTYPE html>
-<html lang="de">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=3" />
-  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=3" />
-  <link rel="icon" type="image/png" href="/favicon.png?v=3" />
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=3" />
-  <title>FisherTechService</title>
-</head>
-<body>
-  <Header />
-
+<Layout title="Service für Angelruten & Rollen">
   <main>
     <section id="start" class="hero">
       <span class="eyebrow">Schweizer Familienunternehmen</span>
@@ -41,26 +25,30 @@ import "../assets/style.scss";
 
     <section id="services" class="services-section">
       <span class="eyebrow">Werkstatt &amp; Know-how</span>
-      <h2>Services</h2>
 
-      <figure class="float-right">
-        <img src={RollenBild2} alt="Servicearbeiten an Angelrollen" />
-      </figure>
+      <div class="services-layout">
+        <div class="services-text">
+          <h2>Services</h2>
+          <p>
+            Bei Fischer Tech Service dreht sich alles um Präzision, Qualität und die Leidenschaft fürs Angeln.
+            Wir bieten einen umfassenden Service rund um Wartung, Reparatur, Tuning und Individualisierung
+            deiner Angelruten und Rollen.
+          </p>
+          <p>
+            Jede Rute und jede Rolle wird sorgfältig geprüft, fachgerecht instand gesetzt und bei Bedarf
+            gezielt optimiert. Ob regelmässiger Service, präzise Reparatur oder individuelles Custom-Build –
+            wir behandeln deine Ausrüstung, als wäre es unsere eigene.
+          </p>
+          <p>
+            Von der einfachen Reinigung bis zur kompletten Überholung ist deine Ausrüstung bei uns in
+            besten Händen. Alle Preise verstehen sich zuzüglich Materialkosten und Inspektion.
+          </p>
+        </div>
 
-      <p>
-        Bei Fischer Tech Service dreht sich alles um Präzision, Qualität und Leidenschaft fürs Angeln.
-        Wir bieten einen umfassenden Service für Wartung, Reparatur, Tuning und Individualisierung
-        von Angelruten und Rollen.
-      </p>
-      <p>
-        Jede Rute und jede Rolle wird sorgfältig geprüft, fachgerecht instand gesetzt und bei Bedarf
-        optimiert. Ob regelmässiger Service, gezielte Reparatur oder individuelles Custom-Build:
-        Wir behandeln deine Ausrüstung, als wäre es unsere eigene.
-      </p>
-      <p>
-        Von der einfachen Reinigung bis zur kompletten Überholung ist deine Ausrüstung bei uns in
-        den besten Händen. Alle Preise verstehen sich zuzüglich Materialkosten und Inspektion.
-      </p>
+        <figure class="services-image">
+          <img src={RollenBild2} alt="Servicearbeiten an Angelrollen" />
+        </figure>
+      </div>
     </section>
 
     <section id="kontakt" class="contact-section">
@@ -112,23 +100,5 @@ import "../assets/style.scss";
         </div>
       </form>
     </section>
-
-    <section id="partner" class="partner-section" aria-labelledby="partner-title">
-      <span class="eyebrow">Gemeinsam stark</span>
-      <h2 id="partner-title">Partner</h2>
-      <a class="partner-card" href="https://www.mickeys-tackle.ch/de/home.html" target="_blank" rel="noopener noreferrer">
-        <span class="partner-card__info">
-          <img class="partner-card__logo" src={MickeysTackleLogo} alt="Mickey's Tackle Logo" width="64" height="64" loading="lazy" />
-          <span>
-            <strong>Mickey's Tackle</strong>
-            <small>Angelgeräte, Zubehör und Beratung</small>
-          </span>
-        </span>
-        <span class="partner-card__link">Partnerseite besuchen →</span>
-      </a>
-    </section>
   </main>
-
-  <Footer />
-</body>
-</html>
+</Layout>

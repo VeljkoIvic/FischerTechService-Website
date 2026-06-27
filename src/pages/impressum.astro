@@ -1,20 +1,8 @@
 ---
-import FisherLogo from "../Photos/FisherTechService.jpeg?url";
-import Header from "../components/Header.astro";
-import Footer from "../components/Footer.astro";
-import "../assets/style.scss";
+import Layout from "../layouts/Layout.astro";
 ---
 
-<!DOCTYPE html>
-<html lang="de">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Impressum | FisherTechService</title>
-</head>
-<body>
-  <Header />
-
+<Layout title="Impressum">
   <main class="legal-page-shell">
     <article class="legal-page-content">
       <section class="legal-page">
@@ -50,7 +38,4 @@ import "../assets/style.scss";
       </section>
     </article>
   </main>
-
-  <Footer />
-</body>
-</html>
+</Layout>

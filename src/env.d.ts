@@ -1,5 +1,16 @@
 /// <reference types="astro/client" />
 
+interface ImportMetaEnv {
+  /** Supabase Projekt-URL (öffentlich). */
+  readonly PUBLIC_SUPABASE_URL?: string;
+  /** Supabase Anon/Publishable-Key (öffentlich, RLS sichert den Zugriff ab). */
+  readonly PUBLIC_SUPABASE_ANON_KEY?: string;
+}
+
+interface ImportMeta {
+  readonly env: ImportMetaEnv;
+}
+
 declare module '*.scss' {
   const content: string;
   export default content;

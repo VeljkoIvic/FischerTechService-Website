@@ -248,13 +248,9 @@ CREATE POLICY "conv_messages_hart_loeschen"
 -- ============================================================
 -- Schutz der 'rolle'-Spalte gegen unbefugte Änderungen
 -- ============================================================
--- Normale Nutzer (authenticated) dürfen 'rolle' nicht ändern.
--- Nur die Supabase Service-Role (Backend-Prozesse) oder Admins über
--- is_moderator()-geprüfte Pfade dürfen die Rolle anpassen.
--- Umsetzung: Column-Level REVOKE für die authenticated-Rolle.
--- HINWEIS: Dies blockiert auch legitime Profile-Updates wenn nicht
--- sorgfältig implementiert – im Frontend explizit nur erlaubte Felder senden.
+-- WICHTIG: RLS-Policies können nur ZEILEN, nicht einzelne SPALTEN einschränken.
+-- Da die obige UPDATE-Policy Nutzern das Bearbeiten ihrer eigenen Profilzeile
+-- erlaubt, könnten sie ohne zusätzlichen Schutz ihre eigene 'rolle' ändern.
 --
--- Optional aktivieren (auskommentiert, da Applikationsebene oft ausreicht):
--- REVOKE UPDATE (rolle) ON public.profiles FROM authenticated;
--- GRANT  UPDATE (username, display_name, avatar_url, bio) ON public.profiles TO authenticated;
+-- Der verbindliche Spalten-Schutz für 'rolle' (und posts.is_hidden) ist in
+-- Migration 005 (column_guards) per BEFORE-UPDATE-Trigger umgesetzt.

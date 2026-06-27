@@ -1,32 +1,23 @@
 ---
-import Header from "../components/Header.astro";
-import Footer from "../components/Footer.astro";
+import Layout from "../layouts/Layout.astro";
 import RollenBild1 from "../Photos/RollenBild1.png?url";
-import "../assets/style.scss";
 ---
 
-<!DOCTYPE html>
-<html lang="de">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=3" />
-  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=3" />
-  <link rel="icon" type="image/png" href="/favicon.png?v=3" />
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=3" />
-  <title>Projekt | FisherTechService</title>
-</head>
-<body>
-  <Header />
+<Layout title="Projekt">
   <main>
-    <section class="subpage-hero project-page">
+    <section class="project-intro">
       <span class="eyebrow">Community · Übersicht</span>
-      <h2>Wissen, Erfahrungen und besondere Momente teilen.</h2>
-      <p class="section-intro">Wähle den Bereich, der dich interessiert. Finde Antworten auf häufige Fragen rund um Wartung, Reparatur und Tuning oder entdecke Bilder aus unserer Werkstatt und vom Wasser.</p>
 
-      <figure class="project-visual">
-        <img src={RollenBild1} alt="Servicearbeiten an einer Angelrolle" loading="lazy" />
-      </figure>
+      <div class="project-split">
+        <div class="project-split__text">
+          <h2>Wissen, Erfahrungen und besondere Momente teilen.</h2>
+          <p class="section-intro">Wähle den Bereich, der dich interessiert. Finde Antworten auf häufige Fragen rund um Wartung, Reparatur und Tuning oder entdecke Bilder aus unserer Werkstatt und vom Wasser.</p>
+        </div>
+
+        <figure class="project-visual">
+          <img src={RollenBild1} alt="Servicearbeiten an einer Angelrolle" loading="lazy" />
+        </figure>
+      </div>
 
       <div class="project-grid">
         {/* Austausch-Seite vorerst ausgeblendet
@@ -49,6 +40,4 @@ import "../assets/style.scss";
       </div>
     </section>
   </main>
-  <Footer />
-</body>
-</html>
+</Layout>

@@ -1,23 +1,8 @@
 ---
-import FisherLogo from "../Photos/FisherTechService.jpeg?url";
-import Header from "../components/Header.astro";
-import Footer from "../components/Footer.astro";
-import "../assets/style.scss";
+import Layout from "../layouts/Layout.astro";
 ---
 
-<!DOCTYPE html>
-<html lang="de">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Datenschutz | FisherTechService</title>
-</head>
-
-
-
-<body>
-  <Header />
-
+<Layout title="Datenschutz">
   <main class="legal-page-shell">
     <article class="legal-page-content">
       <section class="legal-page">
@@ -43,13 +28,13 @@ import "../assets/style.scss";
         <h3>3. Erhebung und Verarbeitung personenbezogener Daten</h3>
         <p>Beim Besuch unserer Webseite können folgende Daten verarbeitet werden:</p>
         <ul>
-          <li>- Name</li>
-          <li>- E-Mail-Adresse</li>
-          <li>- Telefonnummer (falls angegeben)</li>
-          <li>- Nachrichten über das Kontaktformular</li>
-          <li>- IP-Adresse</li>
-          <li>- Datum und Uhrzeit des Webseitenbesuchs</li>
-          <li>- technische Informationen des verwendeten Browsers und Betriebssystems</li>
+          <li>Name</li>
+          <li>E-Mail-Adresse</li>
+          <li>Telefonnummer (falls angegeben)</li>
+          <li>Nachrichten über das Kontaktformular</li>
+          <li>IP-Adresse</li>
+          <li>Datum und Uhrzeit des Webseitenbesuchs</li>
+          <li>technische Informationen des verwendeten Browsers und Betriebssystems</li>
         </ul>
         <p>
           Diese Daten werden ausschliesslich zur Bereitstellung unserer Webseite, zur Bearbeitung Ihrer Anfragen sowie zur Verbesserung unseres Angebots verwendet.
@@ -109,11 +94,11 @@ import "../assets/style.scss";
         <h3>10. Ihre Rechte</h3>
         <p>Sie haben im Rahmen der gesetzlichen Bestimmungen insbesondere das Recht auf:</p>
         <ul>
-          <li>- Auskunft über Ihre gespeicherten Daten</li>
-          <li>- Berichtigung unrichtiger Daten</li>
-          <li>- Löschung Ihrer personenbezogenen Daten, soweit keine gesetzlichen Aufbewahrungspflichten bestehen</li>
-          <li>- Einschränkung der Verarbeitung</li>
-          <li>- Widerruf einer erteilten Einwilligung für zukünftige Verarbeitungen</li>
+          <li>Auskunft über Ihre gespeicherten Daten</li>
+          <li>Berichtigung unrichtiger Daten</li>
+          <li>Löschung Ihrer personenbezogenen Daten, soweit keine gesetzlichen Aufbewahrungspflichten bestehen</li>
+          <li>Einschränkung der Verarbeitung</li>
+          <li>Widerruf einer erteilten Einwilligung für zukünftige Verarbeitungen</li>
         </ul>
         <p>
           Zur Ausübung Ihrer Rechte können Sie uns jederzeit kontaktieren.
@@ -131,7 +116,4 @@ import "../assets/style.scss";
       </section>
     </article>
   </main>
-
-  <Footer />
-</body>
-</html>
+</Layout>

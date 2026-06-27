@@ -13,10 +13,15 @@
 
 import { createClient, type SupabaseClient } from '@supabase/supabase-js';
 
-const supabaseUrl = import.meta.env.PUBLIC_SUPABASE_URL || 'https://ozvinlcazergclqxfjhu.supabase.co';
-const supabaseAnonKey = import.meta.env.PUBLIC_SUPABASE_ANON_KEY || 'sb_publishable_6s8d98Bho_jZevjJrW54xQ_qZOlC2C0';
+const supabaseUrl = import.meta.env.PUBLIC_SUPABASE_URL;
+const supabaseAnonKey = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
 
-/** TRUE wenn die Supabase-Zugangsdaten konfiguriert sind. */
+/**
+ * TRUE wenn die Supabase-Zugangsdaten konfiguriert sind.
+ * Bewusst OHNE hardcodierte Fallback-Werte: Fehlen die Variablen beim Build,
+ * bleibt `supabase` null und das Frontend zeigt den Konfigurations-Hinweis –
+ * statt still gegen die Produktions-Datenbank zu laufen.
+ */
 export const isSupabaseConfigured = Boolean(supabaseUrl && supabaseAnonKey);
 
 /**

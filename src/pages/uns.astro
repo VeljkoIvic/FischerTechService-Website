@@ -1,21 +1,10 @@
 ---
+import Layout from "../layouts/Layout.astro";
 import DIvicP4 from "../Photos/D.Ivic_P4.jpeg?url";
-import Header from "../components/Header.astro";
-import Footer from "../components/Footer.astro";
-import "../assets/style.scss";
+import MickeysTackleLogo from "../Photos/Mickeys_Tackle_Blau_170.png?url";
 ---
 
-<!DOCTYPE html>
-<html lang="de">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Über Uns | FisherTechService</title>
-  
-</head>
-<body>
-  <Header />
-
+<Layout title="Über Uns">
   <main>
     <article>
       <section id="team">
@@ -46,9 +35,21 @@ import "../assets/style.scss";
           </figure>
         </div>
       </section>
+
+      <section id="partner" class="partner-section" aria-labelledby="partner-title">
+        <span class="eyebrow">Gemeinsam stark</span>
+        <h2 id="partner-title">Partner</h2>
+        <a class="partner-card" href="https://www.mickeys-tackle.ch/de/home.html" target="_blank" rel="noopener noreferrer">
+          <span class="partner-card__info">
+            <img class="partner-card__logo" src={MickeysTackleLogo} alt="Mickey's Tackle Logo" width="64" height="64" loading="lazy" />
+            <span>
+              <strong>Mickey's Tackle</strong>
+              <small>Angelgeräte, Zubehör und Beratung</small>
+            </span>
+          </span>
+          <span class="partner-card__link">Partnerseite besuchen →</span>
+        </a>
+      </section>
     </article>
   </main>
-
-  <Footer />
-</body>
-</html>
+</Layout>
