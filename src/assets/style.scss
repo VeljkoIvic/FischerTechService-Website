@@ -1417,6 +1417,25 @@ p {
   padding-left: 22px;
 }
 
+/* Lesbarkeit der Rechtstexte sicherstellen (dunkle Schrift auf hellem Grund) */
+.legal-page,
+.legal-page p,
+.legal-page li,
+.legal-page ul,
+.legal-page dd,
+.legal-page strong {
+  color: var(--ink-soft);
+}
+
+.legal-page h2,
+.legal-page h3,
+.legal-page h2 strong,
+.legal-page h3 strong,
+.legal-page p strong,
+.legal-page li strong {
+  color: var(--ink);
+}
+
 footer.site-footer {
   padding: 54px clamp(20px, 5vw, 76px) 22px;
   background: var(--night);
