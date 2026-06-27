@@ -13,8 +13,8 @@
 
 import { createClient, type SupabaseClient } from '@supabase/supabase-js';
 
-const supabaseUrl = import.meta.env.PUBLIC_SUPABASE_URL as string | undefined;
-const supabaseAnonKey = import.meta.env.PUBLIC_SUPABASE_ANON_KEY as string | undefined;
+const supabaseUrl = import.meta.env.PUBLIC_SUPABASE_URL || 'https://ozvinlcazergclqxfjhu.supabase.co';
+const supabaseAnonKey = import.meta.env.PUBLIC_SUPABASE_ANON_KEY || 'sb_publishable_6s8d98Bho_jZevjJrW54xQ_qZOlC2C0';
 
 /** TRUE wenn die Supabase-Zugangsdaten konfiguriert sind. */
 export const isSupabaseConfigured = Boolean(supabaseUrl && supabaseAnonKey);
