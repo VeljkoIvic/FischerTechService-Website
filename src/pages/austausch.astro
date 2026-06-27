@@ -19,33 +19,6 @@ import "../assets/style.scss";
       <h2>Von Fischern für Fischer.</h2>
       <p class="section-intro">Teile deine Erfahrungen, diskutiere Lösungen und profitiere vom Wissen der Community.</p>
 
-      <!-- ===================================================================
-           Auth-Leiste: zeigt Login/Registrierung oder den angemeldeten Nutzer.
-           Wird vom Client-Script (unten) gefüllt und umgeschaltet.
-      ==================================================================== -->
-      <div id="auth-bar" class="auth-bar" data-state="loading" hidden>
-        <!-- Angemeldeter Zustand -->
-        <div class="auth-bar__signed-in" hidden>
-          <span class="auth-bar__greeting">Angemeldet als <strong id="auth-username">…</strong></span>
-          <button type="button" id="auth-signout" class="auth-link">Abmelden</button>
-        </div>
-
-        <!-- Abgemeldeter Zustand: kompaktes Login/Registrieren-Formular -->
-        <form class="auth-bar__form" id="auth-form" hidden>
-          <p class="auth-bar__hint">Melde dich an, um Beiträge zu schreiben.</p>
-          <div class="auth-bar__fields">
-            <input type="text" id="auth-username" class="auth-input" placeholder="Benutzername" autocomplete="username" minlength="2" maxlength="30" hidden>
-            <input type="email" id="auth-email" class="auth-input" placeholder="E-Mail" autocomplete="email" required>
-            <input type="password" id="auth-password" class="auth-input" placeholder="Passwort (min. 6 Zeichen)" autocomplete="current-password" minlength="6" required>
-          </div>
-          <div class="auth-bar__actions">
-            <button type="submit" id="auth-login-btn" class="auth-btn auth-btn--primary">Anmelden</button>
-            <button type="button" id="auth-register-btn" class="auth-btn">Registrieren</button>
-          </div>
-          <p class="auth-bar__feedback" id="auth-feedback" role="status" aria-live="polite"></p>
-        </form>
-      </div>
-
       <!-- Konfigurations-Hinweis, falls Supabase-Keys fehlen (nur Entwicklung) -->
       <div id="config-notice" class="config-notice" hidden>
         <strong>Datenbank nicht konfiguriert.</strong>
@@ -106,18 +79,6 @@ import "../assets/style.scss";
     // ---- DOM-Referenzen -------------------------------------------------
     const $ = <T extends Element = HTMLElement>(sel: string) =>
       document.querySelector(sel) as T | null;
-
-    const authBar       = $("#auth-bar");
-    const signedInBox   = $<HTMLElement>(".auth-bar__signed-in");
-    const authForm      = $<HTMLFormElement>("#auth-form");
-    const usernameEl    = $("#auth-username");
-    const usernameInput = $<HTMLInputElement>("#auth-username");
-    const emailInput    = $<HTMLInputElement>("#auth-email");
-    const passwordInput = $<HTMLInputElement>("#auth-password");
-    const registerBtn   = $<HTMLButtonElement>("#auth-register-btn");
-    let isRegisterMode  = false;
-    const signoutBtn    = $<HTMLButtonElement>("#auth-signout");
-    const authFeedback  = $("#auth-feedback");
 
     const configNotice  = $("#config-notice");
     const list          = $("#discussion-list");
@@ -285,8 +246,7 @@ import "../assets/style.scss";
         return;
       }
       if (!currentUser) {
-        setFeedback(authFeedback, "Bitte melde dich an, um zu antworten.", true);
-        authBar?.scrollIntoView({ behavior: "smooth", block: "center" });
+        setFeedback(composeFeed, "Bitte melde dich an, um zu antworten.", true);
         return;
       }
 
@@ -294,7 +254,7 @@ import "../assets/style.scss";
       box.className = "reply-box";
       box.innerHTML = `
         <textarea class="textarea reply-input" rows="3" placeholder="Deine Antwort..."></textarea>
-        <button type="button" class="auth-btn auth-btn--primary reply-send">Antwort senden</button>
+        <button type="button" class="discussion-card__action reply-send">Antwort senden</button>
         <span class="reply-feedback" role="status" aria-live="polite"></span>
       `;
       card.querySelector("div:nth-child(2)")?.appendChild(box);
@@ -323,7 +283,7 @@ import "../assets/style.scss";
         parent_post_id: parentId,
       });
       if (error) {
-        const fb = parentId ? authFeedback : composeFeed;
+        const fb = composeFeed;
         setFeedback(fb, "Senden fehlgeschlagen: " + error.message, true);
         return false;
       }
@@ -346,9 +306,8 @@ import "../assets/style.scss";
       await loadThreads();
     }
 
-    // ---- Auth -----------------------------------------------------------
+    // ---- Auth (Hintergrund-Session) -------------------------------------
 
-    /** Lädt das Profil des angemeldeten Nutzers und schaltet die UI um. */
     async function refreshSession() {
       if (!supabase) return;
       const { data: { session } } = await supabase.auth.getSession();
@@ -365,84 +324,6 @@ import "../assets/style.scss";
       } else {
         currentUser = null;
       }
-      renderAuthState();
-    }
-
-    /** Schaltet zwischen angemeldetem und abgemeldetem UI-Zustand um. */
-    function renderAuthState() {
-      const signedIn = Boolean(currentUser);
-      if (signedInBox) signedInBox.hidden = !signedIn;
-      if (authForm) authForm.hidden = signedIn;
-      if (signedIn && usernameEl) usernameEl.textContent = currentUser!.display_name;
-
-      // Compose nur für Angemeldete aktiv
-      if (composeArea) composeArea.disabled = !signedIn;
-      if (composeBtn) composeBtn.disabled = !signedIn;
-      if (composeArea) {
-        composeArea.placeholder = signedIn
-          ? "Teile eine Erfahrung oder starte eine Diskussion..."
-          : "Bitte melde dich oben an, um einen Beitrag zu schreiben.";
-      }
-    }
-
-    async function handleLogin() {
-      if (!supabase) return;
-      const email = emailInput?.value.trim() ?? "";
-      const password = passwordInput?.value ?? "";
-      if (!email || !password) { setFeedback(authFeedback, "E-Mail und Passwort eingeben.", true); return; }
-      setFeedback(authFeedback, "Anmeldung läuft…");
-      const { error } = await supabase.auth.signInWithPassword({ email, password });
-      if (error) { setFeedback(authFeedback, "Anmeldung fehlgeschlagen: " + error.message, true); return; }
-      setFeedback(authFeedback, "");
-      await refreshSession();
-    }
-
-    function toggleRegisterMode() {
-      isRegisterMode = !isRegisterMode;
-      if (usernameInput) usernameInput.hidden = !isRegisterMode;
-      if (registerBtn) registerBtn.textContent = isRegisterMode ? "Zurück zur Anmeldung" : "Registrieren";
-      if (usernameInput && isRegisterMode) usernameInput.focus();
-      setFeedback(authFeedback, "");
-    }
-
-    async function handleRegister() {
-      if (!isRegisterMode) { toggleRegisterMode(); return; }
-      if (!supabase) return;
-      const username = usernameInput?.value.trim() ?? "";
-      const email = emailInput?.value.trim() ?? "";
-      const password = passwordInput?.value ?? "";
-      if (!username || username.length < 2) {
-        setFeedback(authFeedback, "Bitte wähle einen Benutzernamen (min. 2 Zeichen).", true);
-        return;
-      }
-      if (!email || password.length < 6) {
-        setFeedback(authFeedback, "E-Mail und Passwort (min. 6 Zeichen) eingeben.", true);
-        return;
-      }
-      setFeedback(authFeedback, "Registrierung läuft…");
-      const { data, error } = await supabase.auth.signUp({
-        email,
-        password,
-        options: { data: { display_name: username } },
-      });
-      if (error) { setFeedback(authFeedback, "Registrierung fehlgeschlagen: " + error.message, true); return; }
-      if (data.session && data.user) {
-        await supabase.from("profiles").upsert({
-          id: data.user.id,
-          display_name: username,
-        });
-        setFeedback(authFeedback, "");
-        await refreshSession();
-      } else {
-        setFeedback(authFeedback, "Fast geschafft! Bitte bestätige deine E-Mail-Adresse, dann kannst du dich anmelden.");
-      }
-    }
-
-    async function handleSignout() {
-      if (!supabase) return;
-      await supabase.auth.signOut();
-      currentUser = null;
-      renderAuthState();
     }
 
     // ---- Compose (neuer Haupt-Beitrag) ---------------------------------
@@ -459,32 +340,19 @@ import "../assets/style.scss";
     // ---- Initialisierung -----------------------------------------------
     async function init() {
       if (!isSupabaseConfigured || !supabase) {
-        // Keine DB konfiguriert: Hinweis zeigen, statische Vorschau belassen.
         if (configNotice) configNotice.hidden = false;
         if (composeArea) composeArea.disabled = true;
         if (composeBtn) composeBtn.disabled = true;
         return;
       }
 
-      if (authBar) authBar.hidden = false;
-
-      // Event-Listener
-      authForm?.addEventListener("submit", (e) => {
-        e.preventDefault();
-        if (isRegisterMode) handleRegister();
-        else handleLogin();
-      });
-      registerBtn?.addEventListener("click", handleRegister);
-      signoutBtn?.addEventListener("click", handleSignout);
       composeBtn?.addEventListener("click", handleCompose);
 
-      // Auth-Statusänderungen (Login, Logout, Token-Refresh, Magic-Link)
       supabase.auth.onAuthStateChange(() => { refreshSession(); });
 
       await refreshSession();
       await loadThreads();
 
-      // Echtzeit: neue/aktualisierte Posts live übernehmen
       supabase
         .channel("posts-changes")
         .on("postgres_changes", { event: "*", schema: "public", table: "posts" }, () => {
@@ -497,69 +365,15 @@ import "../assets/style.scss";
   </script>
 
   <style>
-    /* --- Auth-Leiste ----------------------------------------------------- */
-    .auth-bar {
-      max-width: 900px;
-      margin: 0 0 28px;
-      padding: 18px 22px;
-      background: #f5f9f9;
-      border: 1px solid var(--line);
-      border-radius: 18px;
-    }
-    .auth-bar__signed-in {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      flex-wrap: wrap;
-    }
-    .auth-bar__greeting { color: var(--ink); }
-    .auth-bar__greeting strong { color: var(--aqua-dark); }
-    .auth-bar__hint { margin: 0 0 12px; color: #5b6b70; font-weight: 600; }
-    .auth-bar__fields { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 12px; }
-    .auth-input {
-      flex: 1 1 220px;
-      min-height: 44px;
-      padding: 10px 14px;
-      color: #1f2933;
-      background: #fff;
-      border: 1px solid #d5d9de;
-      border-radius: 10px;
-      font-size: 0.98rem;
-    }
-    .auth-input:focus-visible { outline: 2px solid var(--aqua); border-color: var(--aqua); }
-    .auth-input[hidden] { display: none; }
-    .auth-bar__actions { display: flex; flex-wrap: wrap; gap: 10px; }
-    .auth-btn, .auth-link {
-      min-height: 44px;
-      padding: 10px 22px;
-      color: var(--ink);
-      background: #e7eef0;
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: background 0.2s ease, color 0.2s ease;
-    }
-    .auth-btn:hover, .auth-link:hover { background: #dce6e8; }
-    .auth-btn--primary {
-      color: #062a31;
-      background: var(--aqua);
-      border-color: var(--aqua);
-    }
-    .auth-btn--primary:hover { background: #40d1db; }
-    .auth-link { background: transparent; }
-    .auth-bar__feedback, .community-compose__feedback, .reply-feedback {
+    /* --- Feedback -------------------------------------------------------- */
+    .community-compose__feedback, .reply-feedback {
       margin: 10px 0 0;
-      color: #2c7a3f;
+      color: #cfeff3;
       font-weight: 600;
       font-size: 0.92rem;
     }
-    .auth-bar__feedback.is-error,
     .community-compose__feedback.is-error,
-    .reply-feedback.is-error { color: #c0392b; }
-    .community-compose__feedback { color: #cfeff3; }
-    .community-compose__feedback.is-error { color: #ffb4a8; }
+    .reply-feedback.is-error { color: #ffb4a8; }
 
     /* --- Konfigurations-Hinweis ----------------------------------------- */
     .config-notice {

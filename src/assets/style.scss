@@ -1066,6 +1066,29 @@ header nav .dropdown a {
   box-shadow: 0 10px 24px rgba(22, 184, 200, 0.25);
 }
 
+.header-auth {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 10px 18px;
+  border-radius: 999px;
+  border: 1.5px solid var(--aqua);
+  background: transparent;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 700;
+  white-space: nowrap;
+  transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.header-auth:hover {
+  color: #062a31;
+  background: var(--aqua);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(22, 184, 200, 0.25);
+}
+
 main,
 main.legal-page-shell {
   width: 100%;
