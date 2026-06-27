@@ -28,34 +28,13 @@ import "../assets/style.scss";
       </div>
 
       <!-- ===================================================================
-           Diskussions-Liste. Der statische Inhalt dient als Fallback
-           (kein JS / keine DB). Sobald Daten geladen sind, ersetzt das
-           Script den Inhalt durch die echten Beiträge.
+           Diskussions-Liste. Beim Laden ist nur ein dezenter Lade-Zustand
+           sichtbar; sobald die echten Beiträge aus der Datenbank geladen
+           sind, ersetzt das Script den Inhalt. So sieht der Nutzer keine
+           statischen Platzhalter-Beiträge mehr aufblitzen.
       ==================================================================== -->
-      <div class="discussion-list" id="discussion-list" aria-live="polite">
-        <article class="discussion-card">
-          <div class="discussion-card__avatar">TM</div>
-          <div>
-            <div class="discussion-card__meta"><strong>Thomas Müller</strong><span>vor 8 Stunden</span></div>
-            <p>Meine ältere Spinnrute fühlt sich beim Werfen nicht mehr sauber an. Woran könnte das liegen?</p>
-            <a href="#antwort">Antworten</a>
-          </div>
-        </article>
-        <article class="discussion-card discussion-card--answer">
-          <div class="discussion-card__avatar">VI</div>
-          <div>
-            <div class="discussion-card__meta"><strong>V. Ivic · FisherTechService</strong><span>vor 5 Stunden</span></div>
-            <p>Häufig sind abgenutzte Ringe, kleine Schäden am Blank oder eine verschmutzte Rollenhalterung die Ursache. Wir prüfen vorab, ob sich ein Service lohnt.</p>
-          </div>
-        </article>
-        <article class="discussion-card">
-          <div class="discussion-card__avatar">GE</div>
-          <div>
-            <div class="discussion-card__meta"><strong>Gabriel Eric</strong><span>vor 1 Stunde</span></div>
-            <p>Wie oft lasst ihr eure Rollen warten, auch wenn noch keine Schäden sichtbar sind?</p>
-            <a href="#antwort">Antworten</a>
-          </div>
-        </article>
+      <div class="discussion-list" id="discussion-list" aria-live="polite" aria-busy="true">
+        <p class="discussion-loading">Beiträge werden geladen…</p>
       </div>
 
       <!-- Compose: neuen Haupt-Beitrag schreiben -->
@@ -207,6 +186,7 @@ import "../assets/style.scss";
         return;
       }
 
+      list.setAttribute("aria-busy", "false");
       const posts = (data ?? []) as unknown as PostRow[];
       const tops = posts.filter((p) => !p.parent_post_id);
       const repliesByParent = new Map<string, PostRow[]>();
@@ -343,6 +323,10 @@ import "../assets/style.scss";
         if (configNotice) configNotice.hidden = false;
         if (composeArea) composeArea.disabled = true;
         if (composeBtn) composeBtn.disabled = true;
+        if (list) {
+          list.setAttribute("aria-busy", "false");
+          list.innerHTML = "";
+        }
         return;
       }
 
@@ -429,6 +413,7 @@ import "../assets/style.scss";
     }
     .discussion-card p.is-deleted { color: #8a9aa0; font-style: italic; }
     .discussion-empty { max-width: 900px; color: #5b6b70; }
+    .discussion-loading { max-width: 900px; color: #5b6b70; opacity: 0.8; }
 
     .reply-box { display: grid; gap: 10px; margin-top: 14px; }
     .reply-box .reply-input {
