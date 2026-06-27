@@ -11,6 +11,10 @@ import "../assets/style.scss";
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=3" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=3" />
+  <link rel="icon" type="image/png" href="/favicon.png?v=3" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=3" />
   <title>FisherTechService</title>
 </head>
 <body>
@@ -95,6 +99,12 @@ import "../assets/style.scss";
         <div class="form-group">
           <label class="sr-only" for="message">Bemerkungen</label>
           <textarea id="message" name="message" rows="6" required placeholder="Bemerkungen"></textarea>
+        </div>
+        <div class="form-group privacy-group">
+          <input type="checkbox" id="privacy" name="privacy" value="akzeptiert" required>
+          <label for="privacy">
+            Ich habe die <a href="/datenschutz" target="_blank" rel="noopener noreferrer">Datenschutzbestimmungen</a> gelesen und akzeptiere sie.
+          </label>
         </div>
         <div class="form-group">
           <button type="submit" class="submit-btn">Anfrage senden</button>

@@ -672,6 +672,32 @@ dd {
   min-height: 120px;
 }
 
+.privacy-group {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.privacy-group input[type="checkbox"] {
+  width: auto;
+  margin-top: 3px;
+  flex-shrink: 0;
+  accent-color: #1BB8E3;
+  cursor: pointer;
+}
+
+.privacy-group label {
+  margin-bottom: 0;
+  font-weight: 400;
+  line-height: 1.5;
+  cursor: pointer;
+}
+
+.privacy-group label a {
+  color: #1BB8E3;
+  text-decoration: underline;
+}
+
 .submit-btn {
   display: block;
   background-color: #4F5B66;
