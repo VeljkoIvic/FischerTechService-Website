@@ -51,4 +51,4 @@ npm run build
 ## Vorschau
 
 > Die Website ist erreichbar unter:  
-> [http://veljkoivic.github.io/FischerTechService-Website/](http://veljkoivic.github.io/FischerTechService-Website/)
+> [https://www.fishertechservice.ch/](https://www.fishertechservice.ch/)
