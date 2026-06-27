@@ -40,8 +40,8 @@ jobs:
       - name: Build
         run: npm run build
         env:
-          PUBLIC_SUPABASE_URL: ${{ secrets.PUBLIC_SUPABASE_URL }}
-          PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.PUBLIC_SUPABASE_ANON_KEY }}
+          PUBLIC_SUPABASE_URL: https://ozvinlcazergclqxfjhu.supabase.co
+          PUBLIC_SUPABASE_ANON_KEY: sb_publishable_6s8d98Bho_jZevjJrW54xQ_qZOlC2C0
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
