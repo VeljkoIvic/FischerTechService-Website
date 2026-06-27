@@ -1757,10 +1757,27 @@ footer.site-footer {
   font-size: clamp(1.05rem, 1.5vw, 1.2rem);
 }
 
+.project-visual {
+  margin: 0 0 28px;
+  max-width: 860px;
+  overflow: hidden;
+  border-radius: 22px;
+  border: 1px solid var(--line);
+  box-shadow: 0 22px 45px rgba(9, 42, 52, 0.12);
+}
+
+.project-visual img {
+  display: block;
+  width: 100%;
+  height: clamp(220px, 32vw, 360px);
+  object-fit: cover;
+}
+
 .project-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 20px;
+  max-width: 860px;
 }
 
 .project-card {
@@ -2119,10 +2136,23 @@ footer.site-footer {
   box-shadow: 0 16px 34px rgba(9, 42, 52, 0.1);
 }
 
-.partner-card > span:first-child {
+.partner-card__info {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.partner-card__info > span {
   display: flex;
   flex-direction: column;
   gap: 4px;
+}
+
+.partner-card__logo {
+  flex-shrink: 0;
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
 }
 
 .partner-card strong {

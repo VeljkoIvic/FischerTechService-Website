@@ -1,6 +1,7 @@
 ---
 import RollenBild3 from "../Photos/RollenBild3.png?url";
 import RollenBild2 from "../Photos/RollenBild2.png?url";
+import MickeysTackleLogo from "../Photos/Mickeys_Tackle_Blau_170.png?url";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import "../assets/style.scss";
@@ -116,9 +117,12 @@ import "../assets/style.scss";
       <span class="eyebrow">Gemeinsam stark</span>
       <h2 id="partner-title">Partner</h2>
       <a class="partner-card" href="https://www.mickeys-tackle.ch/de/home.html" target="_blank" rel="noopener noreferrer">
-        <span>
-          <strong>Mickey's Tackle</strong>
-          <small>Angelgeräte, Zubehör und Beratung</small>
+        <span class="partner-card__info">
+          <img class="partner-card__logo" src={MickeysTackleLogo} alt="Mickey's Tackle Logo" width="64" height="64" loading="lazy" />
+          <span>
+            <strong>Mickey's Tackle</strong>
+            <small>Angelgeräte, Zubehör und Beratung</small>
+          </span>
         </span>
         <span class="partner-card__link">Partnerseite besuchen →</span>
       </a>

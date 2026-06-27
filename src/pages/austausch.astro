@@ -69,8 +69,8 @@ import "../assets/style.scss";
     const composeBtn    = $<HTMLButtonElement>("#community-submit");
     const composeFeed   = $("#compose-feedback");
 
-    // Profil-Cache des aktuell angemeldeten Nutzers (id, display_name, rolle)
-    let currentUser: { id: string; display_name: string; rolle: string } | null = null;
+    // Profil-Cache des aktuell angemeldeten Nutzers
+    let currentUser: { id: string; display_name: string } | null = null;
 
     // ---- Hilfsfunktionen ------------------------------------------------
 
@@ -122,7 +122,7 @@ import "../assets/style.scss";
       deleted_at: string | null;
       author_id: string | null;
       parent_post_id: string | null;
-      profiles: { display_name: string; avatar_url: string | null } | null;
+      profiles: { display_name: string } | null;
     };
 
     /** Baut eine einzelne Diskussions-Karte (Haupt-Beitrag oder Antwort). */
@@ -140,6 +140,7 @@ import "../assets/style.scss";
       avatar.textContent = initials(name);
 
       const body = document.createElement("div");
+      body.className = "discussion-card__body";
       const text = deleted ? "(Beitrag gelöscht)" : post.content;
 
       body.innerHTML = `
@@ -180,7 +181,7 @@ import "../assets/style.scss";
 
       const { data, error } = await supabase
         .from("posts")
-        .select("id, content, created_at, deleted_at, author_id, parent_post_id, profiles ( display_name, avatar_url )")
+        .select("id, content, created_at, deleted_at, author_id, parent_post_id, profiles ( display_name )")
         .is("deleted_at", null)
         .order("created_at", { ascending: true })
         .limit(500);
@@ -241,7 +242,7 @@ import "../assets/style.scss";
         <button type="button" class="discussion-card__action reply-send">Antwort senden</button>
         <span class="reply-feedback" role="status" aria-live="polite"></span>
       `;
-      card.querySelector("div:nth-child(2)")?.appendChild(box);
+      card.querySelector(".discussion-card__body")?.appendChild(box);
 
       const input = box.querySelector<HTMLTextAreaElement>(".reply-input");
       const send = box.querySelector<HTMLButtonElement>(".reply-send");
@@ -267,8 +268,7 @@ import "../assets/style.scss";
         parent_post_id: parentId,
       });
       if (error) {
-        const fb = composeFeed;
-        setFeedback(fb, "Senden fehlgeschlagen: " + error.message, true);
+        setFeedback(composeFeed, "Senden fehlgeschlagen: " + error.message, true);
         return false;
       }
       await loadThreads();
@@ -299,12 +299,12 @@ import "../assets/style.scss";
       if (session?.user) {
         const { data: profile } = await supabase
           .from("profiles")
-          .select("id, display_name, rolle")
+          .select("id, display_name")
           .eq("id", session.user.id)
           .single();
         currentUser = profile
-          ? { id: profile.id, display_name: profile.display_name, rolle: profile.rolle }
-          : { id: session.user.id, display_name: session.user.email ?? "Nutzer", rolle: "member" };
+          ? { id: profile.id, display_name: profile.display_name }
+          : { id: session.user.id, display_name: session.user.email ?? "Nutzer" };
       } else {
         currentUser = null;
       }
