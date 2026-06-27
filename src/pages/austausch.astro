@@ -18,7 +18,47 @@ import "../assets/style.scss";
       <span class="eyebrow">Community · Austausch</span>
       <h2>Von Fischern für Fischer.</h2>
       <p class="section-intro">Teile deine Erfahrungen, diskutiere Lösungen und profitiere vom Wissen der Community.</p>
-      <div class="discussion-list">
+
+      <!-- ===================================================================
+           Auth-Leiste: zeigt Login/Registrierung oder den angemeldeten Nutzer.
+           Wird vom Client-Script (unten) gefüllt und umgeschaltet.
+      ==================================================================== -->
+      <div id="auth-bar" class="auth-bar" data-state="loading" hidden>
+        <!-- Angemeldeter Zustand -->
+        <div class="auth-bar__signed-in" hidden>
+          <span class="auth-bar__greeting">Angemeldet als <strong id="auth-username">…</strong></span>
+          <button type="button" id="auth-signout" class="auth-link">Abmelden</button>
+        </div>
+
+        <!-- Abgemeldeter Zustand: kompaktes Login/Registrieren-Formular -->
+        <form class="auth-bar__form" id="auth-form" hidden>
+          <p class="auth-bar__hint">Melde dich an, um Beiträge zu schreiben.</p>
+          <div class="auth-bar__fields">
+            <input type="email" id="auth-email" class="auth-input" placeholder="E-Mail" autocomplete="email" required>
+            <input type="password" id="auth-password" class="auth-input" placeholder="Passwort (min. 6 Zeichen)" autocomplete="current-password" minlength="6" required>
+          </div>
+          <div class="auth-bar__actions">
+            <button type="submit" id="auth-login-btn" class="auth-btn auth-btn--primary">Anmelden</button>
+            <button type="button" id="auth-register-btn" class="auth-btn">Registrieren</button>
+          </div>
+          <p class="auth-bar__feedback" id="auth-feedback" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+
+      <!-- Konfigurations-Hinweis, falls Supabase-Keys fehlen (nur Entwicklung) -->
+      <div id="config-notice" class="config-notice" hidden>
+        <strong>Datenbank nicht konfiguriert.</strong>
+        Setze <code>PUBLIC_SUPABASE_URL</code> und <code>PUBLIC_SUPABASE_ANON_KEY</code>
+        (siehe <code>.env.example</code> bzw. <code>docs/datenbank.md</code>).
+        Unten siehst du eine statische Vorschau.
+      </div>
+
+      <!-- ===================================================================
+           Diskussions-Liste. Der statische Inhalt dient als Fallback
+           (kein JS / keine DB). Sobald Daten geladen sind, ersetzt das
+           Script den Inhalt durch die echten Beiträge.
+      ==================================================================== -->
+      <div class="discussion-list" id="discussion-list" aria-live="polite">
         <article class="discussion-card">
           <div class="discussion-card__avatar">TM</div>
           <div>
@@ -43,13 +83,498 @@ import "../assets/style.scss";
           </div>
         </article>
       </div>
+
+      <!-- Compose: neuen Haupt-Beitrag schreiben -->
       <div id="antwort" class="community-compose">
         <label for="community-message">Deinen Beitrag schreiben</label>
         <textarea id="community-message" class="textarea" rows="5" placeholder="Teile eine Erfahrung oder starte eine Diskussion..."></textarea>
-        <button class="button is-primary community-submit" type="button">Beitrag senden</button>
+        <button class="button is-primary community-submit" type="button" id="community-submit">Beitrag senden</button>
+        <p class="community-compose__feedback" id="compose-feedback" role="status" aria-live="polite"></p>
       </div>
     </section>
   </main>
   <Footer />
+
+  <!-- =====================================================================
+       Client-Logik: Auth, Laden der Beiträge, Posten, Antworten, Löschen.
+       Astro bündelt dieses Modul automatisch (TypeScript erlaubt).
+  ====================================================================== -->
+  <script>
+    import { supabase, isSupabaseConfigured } from "../lib/supabase";
+
+    // ---- DOM-Referenzen -------------------------------------------------
+    const $ = <T extends Element = HTMLElement>(sel: string) =>
+      document.querySelector(sel) as T | null;
+
+    const authBar       = $("#auth-bar");
+    const signedInBox   = $<HTMLElement>(".auth-bar__signed-in");
+    const authForm      = $<HTMLFormElement>("#auth-form");
+    const usernameEl    = $("#auth-username");
+    const emailInput    = $<HTMLInputElement>("#auth-email");
+    const passwordInput = $<HTMLInputElement>("#auth-password");
+    const registerBtn   = $<HTMLButtonElement>("#auth-register-btn");
+    const signoutBtn    = $<HTMLButtonElement>("#auth-signout");
+    const authFeedback  = $("#auth-feedback");
+
+    const configNotice  = $("#config-notice");
+    const list          = $("#discussion-list");
+    const composeArea   = $<HTMLTextAreaElement>("#community-message");
+    const composeBtn    = $<HTMLButtonElement>("#community-submit");
+    const composeFeed   = $("#compose-feedback");
+
+    // Profil-Cache des aktuell angemeldeten Nutzers (id, display_name, rolle)
+    let currentUser: { id: string; display_name: string; rolle: string } | null = null;
+
+    // ---- Hilfsfunktionen ------------------------------------------------
+
+    /** Initialen aus einem Anzeigenamen, z.B. "V. Ivic" -> "VI". */
+    function initials(name: string): string {
+      const parts = name.replace(/·.*$/, "").trim().split(/\s+/).filter(Boolean);
+      const letters = parts.slice(0, 2).map((p) => p[0]).join("");
+      return (letters || name.slice(0, 2)).toUpperCase();
+    }
+
+    /** Relative Zeitangabe auf Deutsch, z.B. "vor 5 Stunden". */
+    function relativeTime(iso: string): string {
+      const then = new Date(iso).getTime();
+      const diff = Math.max(0, Date.now() - then);
+      const min = Math.floor(diff / 60000);
+      if (min < 1) return "gerade eben";
+      if (min < 60) return `vor ${min} ${min === 1 ? "Minute" : "Minuten"}`;
+      const h = Math.floor(min / 60);
+      if (h < 24) return `vor ${h} ${h === 1 ? "Stunde" : "Stunden"}`;
+      const d = Math.floor(h / 24);
+      if (d < 30) return `vor ${d} ${d === 1 ? "Tag" : "Tagen"}`;
+      return new Date(iso).toLocaleDateString("de-CH");
+    }
+
+    /** Text gegen HTML-Injection absichern. */
+    function esc(s: string): string {
+      const div = document.createElement("div");
+      div.textContent = s;
+      return div.innerHTML;
+    }
+
+    /** Anzeigename eines (evtl. gelöschten) Profils. */
+    function authorName(profile: { display_name?: string } | null): string {
+      return profile?.display_name?.trim() || "Gelöschter Nutzer";
+    }
+
+    function setFeedback(el: Element | null, msg: string, isError = false) {
+      if (!el) return;
+      el.textContent = msg;
+      (el as HTMLElement).classList.toggle("is-error", isError);
+    }
+
+    // ---- Rendering ------------------------------------------------------
+
+    type PostRow = {
+      id: string;
+      content: string;
+      created_at: string;
+      deleted_at: string | null;
+      author_id: string | null;
+      parent_post_id: string | null;
+      profiles: { display_name: string; avatar_url: string | null } | null;
+    };
+
+    /** Baut eine einzelne Diskussions-Karte (Haupt-Beitrag oder Antwort). */
+    function buildCard(post: PostRow, isAnswer: boolean): HTMLElement {
+      const card = document.createElement("article");
+      card.className = "discussion-card" + (isAnswer ? " discussion-card--answer" : "");
+      card.dataset.postId = post.id;
+
+      const name = authorName(post.profiles);
+      const deleted = Boolean(post.deleted_at);
+      const isOwn = currentUser && post.author_id === currentUser.id;
+
+      const avatar = document.createElement("div");
+      avatar.className = "discussion-card__avatar";
+      avatar.textContent = initials(name);
+
+      const body = document.createElement("div");
+      const text = deleted ? "(Beitrag gelöscht)" : post.content;
+
+      body.innerHTML = `
+        <div class="discussion-card__meta"><strong>${esc(name)}</strong><span>${relativeTime(post.created_at)}</span></div>
+        <p${deleted ? ' class="is-deleted"' : ""}>${esc(text)}</p>
+      `;
+
+      // Aktionsleiste: Antworten (nur Haupt-Beiträge) + Löschen (eigene Beiträge)
+      const actions = document.createElement("div");
+      actions.className = "discussion-card__actions";
+
+      if (!isAnswer && !deleted) {
+        const replyLink = document.createElement("button");
+        replyLink.type = "button";
+        replyLink.className = "discussion-card__action reply-toggle";
+        replyLink.textContent = "Antworten";
+        replyLink.addEventListener("click", () => toggleReplyBox(card, post.id));
+        actions.appendChild(replyLink);
+      }
+
+      if (isOwn && !deleted) {
+        const delBtn = document.createElement("button");
+        delBtn.type = "button";
+        delBtn.className = "discussion-card__action discussion-card__action--danger";
+        delBtn.textContent = "Löschen";
+        delBtn.addEventListener("click", () => softDelete(post.id));
+        actions.appendChild(delBtn);
+      }
+
+      if (actions.childElementCount > 0) body.appendChild(actions);
+      card.append(avatar, body);
+      return card;
+    }
+
+    /** Lädt alle Threads (Haupt-Beiträge + Antworten) und rendert sie. */
+    async function loadThreads() {
+      if (!supabase || !list) return;
+
+      const { data, error } = await supabase
+        .from("posts")
+        .select("id, content, created_at, deleted_at, author_id, parent_post_id, profiles ( display_name, avatar_url )")
+        .is("deleted_at", null)
+        .order("created_at", { ascending: true })
+        .limit(500);
+
+      if (error) {
+        setFeedback(composeFeed, "Beiträge konnten nicht geladen werden: " + error.message, true);
+        return;
+      }
+
+      const posts = (data ?? []) as unknown as PostRow[];
+      const tops = posts.filter((p) => !p.parent_post_id);
+      const repliesByParent = new Map<string, PostRow[]>();
+      for (const p of posts) {
+        if (p.parent_post_id) {
+          const arr = repliesByParent.get(p.parent_post_id) ?? [];
+          arr.push(p);
+          repliesByParent.set(p.parent_post_id, arr);
+        }
+      }
+
+      // Haupt-Beiträge neueste zuerst
+      tops.sort((a, b) => +new Date(b.created_at) - +new Date(a.created_at));
+
+      list.innerHTML = "";
+      if (tops.length === 0) {
+        const empty = document.createElement("p");
+        empty.className = "discussion-empty";
+        empty.textContent = "Noch keine Beiträge – starte die erste Diskussion!";
+        list.appendChild(empty);
+        return;
+      }
+
+      for (const top of tops) {
+        list.appendChild(buildCard(top, false));
+        const replies = repliesByParent.get(top.id) ?? [];
+        replies.sort((a, b) => +new Date(a.created_at) - +new Date(b.created_at));
+        for (const r of replies) list.appendChild(buildCard(r, true));
+      }
+    }
+
+    /** Blendet unter einer Karte ein Antwort-Eingabefeld ein/aus. */
+    function toggleReplyBox(card: HTMLElement, parentId: string) {
+      const existing = card.querySelector(".reply-box");
+      if (existing) {
+        existing.remove();
+        return;
+      }
+      if (!currentUser) {
+        setFeedback(authFeedback, "Bitte melde dich an, um zu antworten.", true);
+        authBar?.scrollIntoView({ behavior: "smooth", block: "center" });
+        return;
+      }
+
+      const box = document.createElement("div");
+      box.className = "reply-box";
+      box.innerHTML = `
+        <textarea class="textarea reply-input" rows="3" placeholder="Deine Antwort..."></textarea>
+        <button type="button" class="auth-btn auth-btn--primary reply-send">Antwort senden</button>
+        <span class="reply-feedback" role="status" aria-live="polite"></span>
+      `;
+      card.querySelector("div:nth-child(2)")?.appendChild(box);
+
+      const input = box.querySelector<HTMLTextAreaElement>(".reply-input");
+      const send = box.querySelector<HTMLButtonElement>(".reply-send");
+      const fb = box.querySelector(".reply-feedback");
+      send?.addEventListener("click", async () => {
+        const content = input?.value.trim() ?? "";
+        if (!content) { setFeedback(fb, "Bitte gib einen Text ein.", true); return; }
+        send.disabled = true;
+        const ok = await createPost(content, parentId);
+        if (ok) { box.remove(); } else { send.disabled = false; }
+      });
+      input?.focus();
+    }
+
+    // ---- Datenbank-Schreibzugriffe -------------------------------------
+
+    /** Erstellt einen Haupt-Beitrag (parentId=null) oder eine Antwort. */
+    async function createPost(content: string, parentId: string | null): Promise<boolean> {
+      if (!supabase || !currentUser) return false;
+      const { error } = await supabase.from("posts").insert({
+        content,
+        author_id: currentUser.id,
+        parent_post_id: parentId,
+      });
+      if (error) {
+        const fb = parentId ? authFeedback : composeFeed;
+        setFeedback(fb, "Senden fehlgeschlagen: " + error.message, true);
+        return false;
+      }
+      await loadThreads();
+      return true;
+    }
+
+    /** Soft-Delete: setzt deleted_at des eigenen Beitrags. */
+    async function softDelete(postId: string) {
+      if (!supabase || !currentUser) return;
+      if (!confirm("Diesen Beitrag wirklich löschen?")) return;
+      const { error } = await supabase
+        .from("posts")
+        .update({ deleted_at: new Date().toISOString() })
+        .eq("id", postId);
+      if (error) {
+        setFeedback(composeFeed, "Löschen fehlgeschlagen: " + error.message, true);
+        return;
+      }
+      await loadThreads();
+    }
+
+    // ---- Auth -----------------------------------------------------------
+
+    /** Lädt das Profil des angemeldeten Nutzers und schaltet die UI um. */
+    async function refreshSession() {
+      if (!supabase) return;
+      const { data: { session } } = await supabase.auth.getSession();
+
+      if (session?.user) {
+        const { data: profile } = await supabase
+          .from("profiles")
+          .select("id, display_name, rolle")
+          .eq("id", session.user.id)
+          .single();
+        currentUser = profile
+          ? { id: profile.id, display_name: profile.display_name, rolle: profile.rolle }
+          : { id: session.user.id, display_name: session.user.email ?? "Nutzer", rolle: "member" };
+      } else {
+        currentUser = null;
+      }
+      renderAuthState();
+    }
+
+    /** Schaltet zwischen angemeldetem und abgemeldetem UI-Zustand um. */
+    function renderAuthState() {
+      const signedIn = Boolean(currentUser);
+      if (signedInBox) signedInBox.hidden = !signedIn;
+      if (authForm) authForm.hidden = signedIn;
+      if (signedIn && usernameEl) usernameEl.textContent = currentUser!.display_name;
+
+      // Compose nur für Angemeldete aktiv
+      if (composeArea) composeArea.disabled = !signedIn;
+      if (composeBtn) composeBtn.disabled = !signedIn;
+      if (composeArea) {
+        composeArea.placeholder = signedIn
+          ? "Teile eine Erfahrung oder starte eine Diskussion..."
+          : "Bitte melde dich oben an, um einen Beitrag zu schreiben.";
+      }
+    }
+
+    async function handleLogin() {
+      if (!supabase) return;
+      const email = emailInput?.value.trim() ?? "";
+      const password = passwordInput?.value ?? "";
+      if (!email || !password) { setFeedback(authFeedback, "E-Mail und Passwort eingeben.", true); return; }
+      setFeedback(authFeedback, "Anmeldung läuft…");
+      const { error } = await supabase.auth.signInWithPassword({ email, password });
+      if (error) { setFeedback(authFeedback, "Anmeldung fehlgeschlagen: " + error.message, true); return; }
+      setFeedback(authFeedback, "");
+      await refreshSession();
+    }
+
+    async function handleRegister() {
+      if (!supabase) return;
+      const email = emailInput?.value.trim() ?? "";
+      const password = passwordInput?.value ?? "";
+      if (!email || password.length < 6) {
+        setFeedback(authFeedback, "E-Mail und Passwort (min. 6 Zeichen) eingeben.", true);
+        return;
+      }
+      setFeedback(authFeedback, "Registrierung läuft…");
+      const { data, error } = await supabase.auth.signUp({ email, password });
+      if (error) { setFeedback(authFeedback, "Registrierung fehlgeschlagen: " + error.message, true); return; }
+      // Je nach Supabase-Einstellung ist E-Mail-Bestätigung nötig.
+      if (data.session) {
+        setFeedback(authFeedback, "");
+        await refreshSession();
+      } else {
+        setFeedback(authFeedback, "Fast geschafft! Bitte bestätige deine E-Mail-Adresse, dann kannst du dich anmelden.");
+      }
+    }
+
+    async function handleSignout() {
+      if (!supabase) return;
+      await supabase.auth.signOut();
+      currentUser = null;
+      renderAuthState();
+    }
+
+    // ---- Compose (neuer Haupt-Beitrag) ---------------------------------
+    async function handleCompose() {
+      const content = composeArea?.value.trim() ?? "";
+      if (!content) { setFeedback(composeFeed, "Bitte gib einen Text ein.", true); return; }
+      if (!currentUser) { setFeedback(composeFeed, "Bitte melde dich zuerst an.", true); return; }
+      if (composeBtn) composeBtn.disabled = true;
+      const ok = await createPost(content, null);
+      if (ok && composeArea) { composeArea.value = ""; setFeedback(composeFeed, "Beitrag veröffentlicht."); }
+      if (composeBtn) composeBtn.disabled = false;
+    }
+
+    // ---- Initialisierung -----------------------------------------------
+    async function init() {
+      if (!isSupabaseConfigured || !supabase) {
+        // Keine DB konfiguriert: Hinweis zeigen, statische Vorschau belassen.
+        if (configNotice) configNotice.hidden = false;
+        if (composeArea) composeArea.disabled = true;
+        if (composeBtn) composeBtn.disabled = true;
+        return;
+      }
+
+      if (authBar) authBar.hidden = false;
+
+      // Event-Listener
+      authForm?.addEventListener("submit", (e) => { e.preventDefault(); handleLogin(); });
+      registerBtn?.addEventListener("click", handleRegister);
+      signoutBtn?.addEventListener("click", handleSignout);
+      composeBtn?.addEventListener("click", handleCompose);
+
+      // Auth-Statusänderungen (Login, Logout, Token-Refresh, Magic-Link)
+      supabase.auth.onAuthStateChange(() => { refreshSession(); });
+
+      await refreshSession();
+      await loadThreads();
+
+      // Echtzeit: neue/aktualisierte Posts live übernehmen
+      supabase
+        .channel("posts-changes")
+        .on("postgres_changes", { event: "*", schema: "public", table: "posts" }, () => {
+          loadThreads();
+        })
+        .subscribe();
+    }
+
+    init();
+  </script>
+
+  <style>
+    /* --- Auth-Leiste ----------------------------------------------------- */
+    .auth-bar {
+      max-width: 900px;
+      margin: 0 0 28px;
+      padding: 18px 22px;
+      background: #f5f9f9;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+    }
+    .auth-bar__signed-in {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .auth-bar__greeting { color: var(--ink); }
+    .auth-bar__greeting strong { color: var(--aqua-dark); }
+    .auth-bar__hint { margin: 0 0 12px; color: #5b6b70; font-weight: 600; }
+    .auth-bar__fields { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 12px; }
+    .auth-input {
+      flex: 1 1 220px;
+      min-height: 44px;
+      padding: 10px 14px;
+      color: #1f2933;
+      background: #fff;
+      border: 1px solid #d5d9de;
+      border-radius: 10px;
+      font-size: 0.98rem;
+    }
+    .auth-input:focus-visible { outline: 2px solid var(--aqua); border-color: var(--aqua); }
+    .auth-bar__actions { display: flex; flex-wrap: wrap; gap: 10px; }
+    .auth-btn, .auth-link {
+      min-height: 44px;
+      padding: 10px 22px;
+      color: var(--ink);
+      background: #e7eef0;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+    .auth-btn:hover, .auth-link:hover { background: #dce6e8; }
+    .auth-btn--primary {
+      color: #062a31;
+      background: var(--aqua);
+      border-color: var(--aqua);
+    }
+    .auth-btn--primary:hover { background: #40d1db; }
+    .auth-link { background: transparent; }
+    .auth-bar__feedback, .community-compose__feedback, .reply-feedback {
+      margin: 10px 0 0;
+      color: #2c7a3f;
+      font-weight: 600;
+      font-size: 0.92rem;
+    }
+    .auth-bar__feedback.is-error,
+    .community-compose__feedback.is-error,
+    .reply-feedback.is-error { color: #c0392b; }
+    .community-compose__feedback { color: #cfeff3; }
+    .community-compose__feedback.is-error { color: #ffb4a8; }
+
+    /* --- Konfigurations-Hinweis ----------------------------------------- */
+    .config-notice {
+      max-width: 900px;
+      margin: 0 0 24px;
+      padding: 16px 20px;
+      color: #7a5b00;
+      background: #fff7e0;
+      border: 1px solid #f0d98a;
+      border-radius: 14px;
+      line-height: 1.6;
+    }
+    .config-notice code {
+      padding: 2px 6px;
+      background: #fdeec2;
+      border-radius: 6px;
+      font-size: 0.88em;
+    }
+
+    /* --- Diskussions-Aktionen & Antwort-Box ----------------------------- */
+    .discussion-card__actions { display: flex; gap: 16px; margin-top: 4px; }
+    .discussion-card__action {
+      padding: 0;
+      color: var(--aqua-dark);
+      background: none;
+      border: 0;
+      font-weight: 700;
+      font-size: 0.92rem;
+      cursor: pointer;
+    }
+    .discussion-card__action:hover { text-decoration: underline; }
+    .discussion-card__action--danger { color: #c0392b; }
+    .discussion-card p.is-deleted { color: #8a9aa0; font-style: italic; }
+    .discussion-empty { max-width: 900px; color: #5b6b70; }
+
+    .reply-box { display: grid; gap: 10px; margin-top: 14px; }
+    .reply-box .reply-input {
+      background: #fff;
+      color: #1f2933;
+      border: 1px solid #d5d9de;
+      border-radius: 10px;
+      padding: 10px 14px;
+    }
+    .reply-box .reply-send { justify-self: start; }
+  </style>
 </body>
 </html>
