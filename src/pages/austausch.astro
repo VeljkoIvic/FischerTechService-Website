@@ -34,6 +34,7 @@ import "../assets/style.scss";
         <form class="auth-bar__form" id="auth-form" hidden>
           <p class="auth-bar__hint">Melde dich an, um Beiträge zu schreiben.</p>
           <div class="auth-bar__fields">
+            <input type="text" id="auth-username" class="auth-input" placeholder="Benutzername" autocomplete="username" minlength="2" maxlength="30" hidden>
             <input type="email" id="auth-email" class="auth-input" placeholder="E-Mail" autocomplete="email" required>
             <input type="password" id="auth-password" class="auth-input" placeholder="Passwort (min. 6 Zeichen)" autocomplete="current-password" minlength="6" required>
           </div>
@@ -110,9 +111,11 @@ import "../assets/style.scss";
     const signedInBox   = $<HTMLElement>(".auth-bar__signed-in");
     const authForm      = $<HTMLFormElement>("#auth-form");
     const usernameEl    = $("#auth-username");
+    const usernameInput = $<HTMLInputElement>("#auth-username");
     const emailInput    = $<HTMLInputElement>("#auth-email");
     const passwordInput = $<HTMLInputElement>("#auth-password");
     const registerBtn   = $<HTMLButtonElement>("#auth-register-btn");
+    let isRegisterMode  = false;
     const signoutBtn    = $<HTMLButtonElement>("#auth-signout");
     const authFeedback  = $("#auth-feedback");
 
@@ -394,19 +397,40 @@ import "../assets/style.scss";
       await refreshSession();
     }
 
+    function toggleRegisterMode() {
+      isRegisterMode = !isRegisterMode;
+      if (usernameInput) usernameInput.hidden = !isRegisterMode;
+      if (registerBtn) registerBtn.textContent = isRegisterMode ? "Zurück zur Anmeldung" : "Registrieren";
+      if (usernameInput && isRegisterMode) usernameInput.focus();
+      setFeedback(authFeedback, "");
+    }
+
     async function handleRegister() {
+      if (!isRegisterMode) { toggleRegisterMode(); return; }
       if (!supabase) return;
+      const username = usernameInput?.value.trim() ?? "";
       const email = emailInput?.value.trim() ?? "";
       const password = passwordInput?.value ?? "";
+      if (!username || username.length < 2) {
+        setFeedback(authFeedback, "Bitte wähle einen Benutzernamen (min. 2 Zeichen).", true);
+        return;
+      }
       if (!email || password.length < 6) {
         setFeedback(authFeedback, "E-Mail und Passwort (min. 6 Zeichen) eingeben.", true);
         return;
       }
       setFeedback(authFeedback, "Registrierung läuft…");
-      const { data, error } = await supabase.auth.signUp({ email, password });
+      const { data, error } = await supabase.auth.signUp({
+        email,
+        password,
+        options: { data: { display_name: username } },
+      });
       if (error) { setFeedback(authFeedback, "Registrierung fehlgeschlagen: " + error.message, true); return; }
-      // Je nach Supabase-Einstellung ist E-Mail-Bestätigung nötig.
-      if (data.session) {
+      if (data.session && data.user) {
+        await supabase.from("profiles").upsert({
+          id: data.user.id,
+          display_name: username,
+        });
         setFeedback(authFeedback, "");
         await refreshSession();
       } else {
@@ -445,7 +469,11 @@ import "../assets/style.scss";
       if (authBar) authBar.hidden = false;
 
       // Event-Listener
-      authForm?.addEventListener("submit", (e) => { e.preventDefault(); handleLogin(); });
+      authForm?.addEventListener("submit", (e) => {
+        e.preventDefault();
+        if (isRegisterMode) handleRegister();
+        else handleLogin();
+      });
       registerBtn?.addEventListener("click", handleRegister);
       signoutBtn?.addEventListener("click", handleSignout);
       composeBtn?.addEventListener("click", handleCompose);
@@ -500,6 +528,7 @@ import "../assets/style.scss";
       font-size: 0.98rem;
     }
     .auth-input:focus-visible { outline: 2px solid var(--aqua); border-color: var(--aqua); }
+    .auth-input[hidden] { display: none; }
     .auth-bar__actions { display: flex; flex-wrap: wrap; gap: 10px; }
     .auth-btn, .auth-link {
       min-height: 44px;
@@ -551,18 +580,39 @@ import "../assets/style.scss";
     }
 
     /* --- Diskussions-Aktionen & Antwort-Box ----------------------------- */
-    .discussion-card__actions { display: flex; gap: 16px; margin-top: 4px; }
+    .discussion-card__actions { display: flex; gap: 10px; margin-top: 10px; }
     .discussion-card__action {
-      padding: 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 36px;
+      padding: 6px 18px;
       color: var(--aqua-dark);
-      background: none;
-      border: 0;
+      background: var(--aqua-soft, #dff7f7);
+      border: 1px solid var(--aqua, #16b8c8);
+      border-radius: 999px;
       font-weight: 700;
-      font-size: 0.92rem;
+      font-size: 0.85rem;
       cursor: pointer;
+      transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
     }
-    .discussion-card__action:hover { text-decoration: underline; }
-    .discussion-card__action--danger { color: #c0392b; }
+    .discussion-card__action:hover {
+      background: var(--aqua, #16b8c8);
+      color: #062a31;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(22, 184, 200, 0.2);
+    }
+    .discussion-card__action--danger {
+      color: #c0392b;
+      background: #fdeaea;
+      border-color: #e8a9a9;
+    }
+    .discussion-card__action--danger:hover {
+      background: #e74c3c;
+      color: #fff;
+      border-color: #e74c3c;
+      box-shadow: 0 4px 12px rgba(231, 76, 60, 0.2);
+    }
     .discussion-card p.is-deleted { color: #8a9aa0; font-style: italic; }
     .discussion-empty { max-width: 900px; color: #5b6b70; }
 
