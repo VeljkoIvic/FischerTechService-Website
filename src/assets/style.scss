@@ -1994,6 +1994,7 @@ footer.site-footer {
 }
 
 .faq-cta strong {
+  color: #fff;
   font-size: 1.25rem;
 }
 
@@ -2239,5 +2240,292 @@ footer.site-footer {
 
   .community-section article.discussion-card--answer {
     margin-left: 14px;
+  }
+}
+
+// ========================================
+// 5. MOTION & ANIMATIONEN
+// ========================================
+
+// --- Scroll-Fortschrittsbalken (oben am Header) ---
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 100%;
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  background: linear-gradient(90deg, var(--aqua), #58d4dd);
+  z-index: 2000;
+  pointer-events: none;
+  will-change: transform;
+}
+
+// --- Header verdichtet sich beim Scrollen ---
+header {
+  transition: background-color 0.35s ease, box-shadow 0.35s ease, min-height 0.35s ease;
+}
+
+header.is-scrolled {
+  background: rgba(6, 32, 40, 0.98);
+  box-shadow: 0 10px 36px rgba(2, 16, 21, 0.32);
+}
+
+header.is-scrolled .site-header__inner {
+  min-height: 70px;
+}
+
+.site-header__inner {
+  transition: min-height 0.35s ease;
+}
+
+// --- Nav-Links: animierter Unterstrich ---
+header nav > ul > li > a {
+  position: relative;
+}
+
+header nav > ul > li > a::after {
+  content: "";
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  bottom: 6px;
+  height: 2px;
+  background: var(--aqua);
+  border-radius: 2px;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+header nav > ul > li:hover > a::after,
+header nav > ul > li:focus-within > a::after {
+  transform: scaleX(1);
+}
+
+// --- Dropdown gleitet weich auf ---
+header nav .dropdown {
+  transform: translateY(8px);
+  opacity: 0;
+  transition: opacity 0.22s ease, transform 0.22s ease;
+}
+
+header nav li:hover > .dropdown,
+header nav li:focus-within > .dropdown {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+// --- Pfeile in Links wandern beim Hover mit ---
+.project-card__link,
+.partner-card__link,
+.faq-cta a {
+  display: inline-block;
+  transition: transform 0.25s ease, color 0.25s ease;
+}
+
+.project-card:hover .project-card__link,
+.partner-card:hover .partner-card__link {
+  transform: translateX(5px);
+}
+
+// --- Buttons: sanfter Glanz-Hover ---
+.header-cta,
+.button-primary,
+.button-secondary,
+.submit-btn,
+.community-compose .community-submit {
+  position: relative;
+  overflow: hidden;
+}
+
+.header-cta::before,
+.button-primary::before,
+.submit-btn::before,
+.community-compose .community-submit::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, transparent 30%, rgba(255, 255, 255, 0.45) 50%, transparent 70%);
+  transform: translateX(-120%);
+  transition: transform 0.6s ease;
+}
+
+.header-cta:hover::before,
+.button-primary:hover::before,
+.submit-btn:hover::before,
+.community-compose .community-submit:hover::before {
+  transform: translateX(120%);
+}
+
+// --- FAQ: Inhalt klappt weich auf, Marker rotiert ---
+.faq-list summary {
+  position: relative;
+  list-style: none;
+  transition: color 0.25s ease;
+}
+
+.faq-list summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq-list summary::after {
+  content: "+";
+  position: absolute;
+  right: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--aqua-dark);
+  font-size: 1.5rem;
+  font-weight: 400;
+  line-height: 1;
+  transition: transform 0.3s ease;
+}
+
+.faq-list details[open] summary::after {
+  transform: translateY(-50%) rotate(135deg);
+}
+
+// --- Bild-Hover sanfter ---
+.gallery-item figcaption {
+  transform: translateY(0);
+  transition: transform 0.35s ease, background-color 0.35s ease;
+}
+
+// --- Hero: schwebende Glow-Blobs ---
+.hero::after {
+  animation: blob-float 11s ease-in-out infinite;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  width: 360px;
+  height: 360px;
+  left: -140px;
+  bottom: -160px;
+  border-radius: 50%;
+  background: rgba(88, 212, 221, 0.12);
+  filter: blur(10px);
+  animation: blob-float 14s ease-in-out infinite reverse;
+  pointer-events: none;
+}
+
+@keyframes blob-float {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(28px, 34px) scale(1.12);
+  }
+}
+
+// --- Hero-Inhalt: gestaffelte Einblendung beim Laden ---
+.hero > .eyebrow,
+.hero > .hero-title,
+.hero__content,
+.hero__visual {
+  animation: hero-rise 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.hero > .eyebrow {
+  animation-delay: 0.05s;
+}
+.hero > .hero-title {
+  animation-delay: 0.18s;
+}
+.hero__content {
+  animation-delay: 0.32s;
+}
+.hero__visual {
+  animation-delay: 0.42s;
+}
+
+@keyframes hero-rise {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// --- Subpage-Hero (Galerie, Fragen, Projekt …) beim Laden ---
+.subpage-hero > .eyebrow,
+.subpage-hero > h2,
+.subpage-hero > .section-intro,
+.project-intro > .eyebrow,
+.project-intro > h2,
+.project-intro > .section-intro {
+  animation: hero-rise 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.subpage-hero > h2,
+.project-intro > h2 {
+  animation-delay: 0.12s;
+}
+
+.subpage-hero > .section-intro,
+.project-intro > .section-intro {
+  animation-delay: 0.22s;
+}
+
+// --- Scroll-Reveal: Elemente faden/sliden beim Einscrollen ein ---
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(34px);
+  transition: opacity 0.7s cubic-bezier(0.2, 0.7, 0.2, 1),
+    transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
+  transition-delay: var(--reveal-delay, 0s);
+  will-change: opacity, transform;
+}
+
+[data-reveal].is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+// --- Logo dezent pulsierend / Hover ---
+.brand .logo {
+  transition: transform 0.3s ease;
+}
+
+.brand:hover .logo {
+  transform: rotate(-4deg) scale(1.06);
+}
+
+// --- Instagram-Icon dreht beim Hover ---
+.header-instagram svg {
+  transition: transform 0.4s ease;
+}
+
+.header-instagram:hover svg {
+  transform: rotate(8deg) scale(1.1);
+}
+
+// ========================================
+// 6. REDUCED MOTION (Barrierefreiheit)
+// ========================================
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .scroll-progress {
+    display: none;
   }
 }

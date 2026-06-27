@@ -31,3 +31,81 @@ const legalLinks = [
   </div>
   <div class="site-footer__bottom">&copy; 2026 Fisher Tech Service · V. Ivic &amp; D. Ivic</div>
 </footer>
+
+<script>
+  // Bewegungen seitenweit – respektiert prefers-reduced-motion
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function initMotion() {
+    // 1) Scroll-Fortschrittsbalken oben
+    if (!reduce && !document.querySelector('.scroll-progress')) {
+      const bar = document.createElement('div');
+      bar.className = 'scroll-progress';
+      document.body.appendChild(bar);
+      const onScroll = () => {
+        const h = document.documentElement;
+        const max = h.scrollHeight - h.clientHeight;
+        const p = max > 0 ? h.scrollTop / max : 0;
+        bar.style.transform = `scaleX(${p})`;
+      };
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+    }
+
+    // 2) Header verdichtet sich beim Scrollen
+    const header = document.querySelector('header');
+    if (header) {
+      const onHeaderScroll = () => {
+        header.classList.toggle('is-scrolled', window.scrollY > 12);
+      };
+      window.addEventListener('scroll', onHeaderScroll, { passive: true });
+      onHeaderScroll();
+    }
+
+    // 3) Scroll-Reveal mit gestaffeltem Timing
+    const groups = [
+      { sel: 'main > section, main > article > section', stagger: 0 },
+      { sel: '.project-grid > *', stagger: 90 },
+      { sel: '.gallery-grid > *', stagger: 70 },
+      { sel: '.faq-list > *', stagger: 60 },
+      { sel: '.discussion-list > *', stagger: 80 },
+      { sel: '#kennzahlen .box', stagger: 90 },
+      { sel: '.team-layout > *', stagger: 120 },
+      { sel: '.partner-card', stagger: 0 },
+    ];
+
+    const revealEls = new Set<HTMLElement>();
+    groups.forEach(({ sel, stagger }) => {
+      document.querySelectorAll<HTMLElement>(sel).forEach((el, i) => {
+        if (revealEls.has(el)) return;
+        revealEls.add(el);
+        el.setAttribute('data-reveal', '');
+        if (stagger) el.style.setProperty('--reveal-delay', `${i * stagger}ms`);
+      });
+    });
+
+    if (reduce || !('IntersectionObserver' in window)) {
+      revealEls.forEach((el) => el.classList.add('is-visible'));
+      return;
+    }
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            io.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.12, rootMargin: '0px 0px -8% 0px' }
+    );
+    revealEls.forEach((el) => io.observe(el));
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initMotion);
+  } else {
+    initMotion();
+  }
+</script>
