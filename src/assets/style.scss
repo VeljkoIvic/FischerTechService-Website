@@ -1135,6 +1135,44 @@ header nav .dropdown a {
   box-shadow: 0 10px 24px rgba(22, 184, 200, 0.25);
 }
 
+/* Hamburger-Button: nur auf kleinen Screens sichtbar (Mobile-Menü) */
+.nav-toggle {
+  display: none;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+.nav-toggle__bar {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: #d6e7e9;
+  border-radius: 2px;
+  transition: transform 0.25s ease, opacity 0.2s ease;
+}
+
+/* Aus den drei Balken wird beim Öffnen ein X */
+.nav-toggle.is-active .nav-toggle__bar:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.nav-toggle.is-active .nav-toggle__bar:nth-child(2) {
+  opacity: 0;
+}
+
+.nav-toggle.is-active .nav-toggle__bar:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
 .header-auth {
   display: inline-flex;
   align-items: center;
@@ -1701,7 +1739,14 @@ footer.site-footer {
 
   .brand {
     width: 100%;
-    padding-right: 54px;
+    padding-right: 104px;
+  }
+
+  .nav-toggle {
+    display: flex;
+    position: absolute;
+    top: 4px;
+    right: 52px;
   }
 
   .header-instagram {
@@ -1710,18 +1755,56 @@ footer.site-footer {
     right: 0;
   }
 
+  /* Menü ist standardmässig eingeklappt und gleitet beim Öffnen auf */
   header nav {
     width: 100%;
-    overflow-x: auto;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
   }
 
-  header nav ul {
+  header nav.is-open {
+    max-height: 80vh;
+    overflow-y: auto;
+  }
+
+  /* Hauptlinks untereinander statt nebeneinander */
+  header nav > ul {
+    flex-direction: column;
+    align-items: stretch;
     justify-content: flex-start;
-    width: max-content;
+    width: 100%;
+    gap: 2px;
+    padding: 10px 0 4px;
   }
 
+  header nav li {
+    width: 100%;
+  }
+
+  header nav > ul > li > a {
+    display: block;
+    padding: 13px 10px;
+    font-size: 1.05rem;
+    border-radius: 10px;
+  }
+
+  /* Untermenüs dauerhaft eingerückt zeigen, wenn das Menü offen ist */
   header nav .dropdown {
-    display: none !important;
+    display: block !important;
+    position: static;
+    transform: none !important;
+    opacity: 1 !important;
+    margin: 0 0 6px;
+    padding: 0 0 4px 14px;
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+  }
+
+  header nav .dropdown a {
+    padding: 9px 10px;
+    font-size: 0.95rem;
   }
 
   main,

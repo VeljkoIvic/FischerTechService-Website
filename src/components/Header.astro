@@ -13,7 +13,18 @@ const base = '/';
         <small>Service. Präzision. Leidenschaft.</small>
       </span>
     </a>
-    <nav aria-label="Hauptnavigation">
+    <button
+      class="nav-toggle"
+      type="button"
+      aria-label="Menü öffnen"
+      aria-controls="site-nav"
+      aria-expanded="false"
+    >
+      <span class="nav-toggle__bar"></span>
+      <span class="nav-toggle__bar"></span>
+      <span class="nav-toggle__bar"></span>
+    </button>
+    <nav id="site-nav" aria-label="Hauptnavigation">
       <ul class="main-nav">
         <li>
           <a href={base}>Home</a>
@@ -57,3 +68,32 @@ const base = '/';
     <a class="header-cta" href={`${base}#kontakt`}>Service anfragen</a>
   </div>
 </header>
+
+<script>
+  // Mobiles Menü: Hamburger-Button öffnet/schliesst die Navigation.
+  const toggle = document.querySelector<HTMLButtonElement>('.nav-toggle');
+  const nav = document.getElementById('site-nav');
+
+  if (toggle && nav) {
+    const setOpen = (open: boolean) => {
+      nav.classList.toggle('is-open', open);
+      toggle.classList.toggle('is-active', open);
+      toggle.setAttribute('aria-expanded', String(open));
+      toggle.setAttribute('aria-label', open ? 'Menü schliessen' : 'Menü öffnen');
+    };
+
+    toggle.addEventListener('click', () => {
+      setOpen(!nav.classList.contains('is-open'));
+    });
+
+    // Nach Klick auf einen Link das Menü wieder schliessen.
+    nav.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => setOpen(false));
+    });
+
+    // Schliessen via Escape-Taste.
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') setOpen(false);
+    });
+  }
+</script>
