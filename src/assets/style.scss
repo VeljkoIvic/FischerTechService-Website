@@ -1614,6 +1614,7 @@ footer.site-footer {
 .site-footer__brand strong {
   color: #fff;
   font-size: 1rem;
+  font-weight: 800;
   line-height: 1.65;
 }
 
@@ -2353,6 +2354,26 @@ footer.site-footer {
   width: 64px;
   height: 64px;
   object-fit: contain;
+}
+
+/* Text-Logo (Initialen), falls für einen Partner kein Bild-Logo vorliegt.
+   Höhere Spezifität, damit die allgemeine .partner-card__info > span Regel
+   das Badge nicht erfasst. */
+.partner-card .partner-card__logo--text {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  background: var(--night);
+  border-radius: 14px;
+  font-weight: 800;
+  font-size: 1.1rem;
+  letter-spacing: 0.02em;
+}
+
+/* Abstand zwischen mehreren Partner-Karten */
+.partner-card + .partner-card {
+  margin-top: 16px;
 }
 
 .partner-card strong {
