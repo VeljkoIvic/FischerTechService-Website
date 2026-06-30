@@ -98,7 +98,10 @@ const legalLinks = [
           }
         });
       },
-      { threshold: 0.12, rootMargin: '0px 0px -8% 0px' }
+      // threshold 0 = einblenden, sobald das Element den Viewport berührt.
+      // Wichtig für sehr hohe Sections (z. B. lange Rechtstexte/AGB), die den
+      // Anteil von 12 % nie erreichen und sonst unsichtbar (opacity 0) blieben.
+      { threshold: 0, rootMargin: '0px 0px -8% 0px' }
     );
     revealEls.forEach((el) => io.observe(el));
   }

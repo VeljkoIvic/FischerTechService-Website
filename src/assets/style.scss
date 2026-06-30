@@ -1768,43 +1768,66 @@ footer.site-footer {
     overflow-y: auto;
   }
 
-  /* Hauptlinks untereinander statt nebeneinander */
+  /* Hauptlinks untereinander statt nebeneinander – linksbündig & aufgeräumt */
   header nav > ul {
     flex-direction: column;
     align-items: stretch;
     justify-content: flex-start;
     width: 100%;
-    gap: 2px;
-    padding: 10px 0 4px;
+    gap: 0;
+    padding: 6px 4px 8px;
+    text-align: left; /* hebt die von `nav` geerbte zentrierte Ausrichtung auf */
   }
 
   header nav li {
     width: 100%;
   }
 
+  /* Gruppen (Home / Über Uns / Mehr) klar voneinander trennen */
+  header nav > ul > li + li {
+    margin-top: 6px;
+    padding-top: 6px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  /* Hauptlink: kräftig, linksbündig, voller Touch-Bereich */
   header nav > ul > li > a {
     display: block;
-    padding: 13px 10px;
-    font-size: 1.05rem;
+    padding: 13px 12px;
+    color: #fff;
+    font-size: 1.06rem;
+    font-weight: 700;
+    text-align: left;
     border-radius: 10px;
   }
 
-  /* Untermenüs dauerhaft eingerückt zeigen, wenn das Menü offen ist */
+  /* Animierter Desktop-Unterstrich im Mobilmenü ausblenden */
+  header nav > ul > li > a::after {
+    content: none;
+  }
+
+  /* Untermenüs dauerhaft zeigen – eingerückt mit Führungslinie */
   header nav .dropdown {
     display: block !important;
     position: static;
     transform: none !important;
     opacity: 1 !important;
-    margin: 0 0 6px;
-    padding: 0 0 4px 14px;
+    margin: 2px 0 4px 12px;
+    padding: 2px 0 2px 14px;
     background: transparent;
     border: 0;
+    border-left: 2px solid rgba(255, 255, 255, 0.14);
     box-shadow: none;
   }
 
   header nav .dropdown a {
-    padding: 9px 10px;
-    font-size: 0.95rem;
+    display: block;
+    padding: 10px 12px;
+    color: #c8dde0;
+    font-size: 0.97rem;
+    font-weight: 500;
+    text-align: left;
+    border-radius: 8px;
   }
 
   main,
