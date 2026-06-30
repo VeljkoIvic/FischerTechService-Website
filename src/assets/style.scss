@@ -1833,18 +1833,8 @@ footer.site-footer {
   }
 
   .team-layout,
-  .services-layout,
-  .project-split {
+  .services-layout {
     grid-template-columns: 1fr;
-  }
-
-  .project-split .project-visual {
-    height: auto;
-  }
-
-  .project-split .project-visual img {
-    height: clamp(220px, 50vw, 320px);
-    min-height: 0;
   }
 
   .team-portrait,
@@ -1942,6 +1932,23 @@ footer.site-footer {
 .project-split .project-visual img {
   height: 100%;
   min-height: clamp(240px, 30vw, 360px);
+}
+
+/* Mobil: Projekt-Intro einspaltig – Text über Bild.
+   Steht bewusst NACH der Basis-Regel, damit der Umbruch greift. */
+@media (max-width: 768px) {
+  .project-split {
+    grid-template-columns: 1fr;
+  }
+
+  .project-split .project-visual {
+    height: auto;
+  }
+
+  .project-split .project-visual img {
+    height: clamp(220px, 50vw, 320px);
+    min-height: 0;
+  }
 }
 
 .project-grid {
